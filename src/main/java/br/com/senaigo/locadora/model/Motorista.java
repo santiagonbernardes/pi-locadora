@@ -3,8 +3,8 @@ package br.com.senaigo.locadora.model;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 import java.util.Date;
 
-public class Funcionario implements PersisteDados {
-
+public class Motorista implements PersisteDados {
+    
     //Atributos
     private int id;
     private String nome;
@@ -14,11 +14,21 @@ public class Funcionario implements PersisteDados {
     private Telefone telefonePrincipal;
     private Telefone telefoneAlternativo;
     private String email;
-    private String rg;
-    private String carteiraDeTrabalho;
-    private String login;
-    private String senha;
+    private String cnh;
     
+    //Construtores
+    public Motorista() {
+        this.id = 0;
+        this.nome = "";
+        this.dataNascimento = null;
+        this.cpf = "";
+        this.endereco = null;
+        this.telefonePrincipal = null;
+        this.telefoneAlternativo = null;
+        this.email = "";
+        this.cnh = "";        
+    }
+
     //Getters e Setters
     public int getId() {
         return id;
@@ -84,41 +94,17 @@ public class Funcionario implements PersisteDados {
         this.email = email;
     }
 
-    public String getRg() {
-        return rg;
+    public String getCnh() {
+        return cnh;
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    public String getCarteiraDeTrabalho() {
-        return carteiraDeTrabalho;
-    }
-
-    public void setCarteiraDeTrabalho(String carteiraDeTrabalho) {
-        this.carteiraDeTrabalho = carteiraDeTrabalho;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setCnh(String cnh) {    
+        this.cnh = cnh;
     }
     
     //Métodos Próprios
     
-    //Métodos Herdados    
+    //Métodos Herdados
     @Override
     public Object monteObjeto(String dadosDoObjeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -127,5 +113,6 @@ public class Funcionario implements PersisteDados {
     @Override
     public String desmonteObjeto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+    }
+    
 }

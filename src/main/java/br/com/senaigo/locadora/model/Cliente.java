@@ -3,28 +3,42 @@ package br.com.senaigo.locadora.model;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 import java.util.Date;
 
-public class Funcionario implements PersisteDados {
-
+public class Cliente implements PersisteDados {
+    
     //Atributos
     private int id;
     private String nome;
+    private String razaoSocial;
+    private String nomeFantasia;
     private Date dataNascimento;
     private String cpf;
+    private String cnpj;
     private Endereco endereco;
     private Telefone telefonePrincipal;
     private Telefone telefoneAlternativo;
     private String email;
-    private String rg;
-    private String carteiraDeTrabalho;
-    private String login;
-    private String senha;
     
-    //Getters e Setters
+    //Construtores
+    public Cliente() {
+        this.id = 0;
+        this.nome = "";
+        this.razaoSocial = "";
+        this.nomeFantasia = "";
+        this.dataNascimento = null;
+        this.cpf = "";
+        this.cnpj = "";
+        this.endereco = null;
+        this.telefonePrincipal = null;
+        this.telefoneAlternativo = null;
+        this.email = "";
+    }
+    
+     //Getters e Setters
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id) {    
         this.id = id;
     }
 
@@ -34,6 +48,22 @@ public class Funcionario implements PersisteDados {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     public Date getDataNascimento() {
@@ -50,6 +80,14 @@ public class Funcionario implements PersisteDados {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public Endereco getEndereco() {
@@ -83,42 +121,11 @@ public class Funcionario implements PersisteDados {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    public String getCarteiraDeTrabalho() {
-        return carteiraDeTrabalho;
-    }
-
-    public void setCarteiraDeTrabalho(String carteiraDeTrabalho) {
-        this.carteiraDeTrabalho = carteiraDeTrabalho;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+    
     
     //Métodos Próprios
     
-    //Métodos Herdados    
+    //Métodos herdados
     @Override
     public Object monteObjeto(String dadosDoObjeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -127,5 +134,6 @@ public class Funcionario implements PersisteDados {
     @Override
     public String desmonteObjeto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+    }
+    
 }
