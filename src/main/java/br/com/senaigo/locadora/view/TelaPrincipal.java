@@ -5,6 +5,8 @@
  */
 package br.com.senaigo.locadora.view;
 
+import javax.swing.*;
+
 /**
  *
  * @author pfellype
@@ -105,9 +107,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         jDesktopPane1.removeAll();
-        TelaMarca marca = new TelaMarca();
-        jDesktopPane1.add(marca);
-        marca.setVisible(true);
+        try{
+            TelaMarca marca = new TelaMarca();
+            jDesktopPane1.add(marca);
+            marca.setVisible(true);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, "Erro ao abrir tela Marcas: " + erro.getMessage());
+        }
+
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

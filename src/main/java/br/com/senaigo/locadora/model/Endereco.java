@@ -2,10 +2,9 @@ package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 
-public class Endereco implements PersisteDados{
+public class Endereco extends PersisteDados {
     
     //Atributos
-    private int id;
     private String logradouro;
     private String numero;
     private String complemento;
@@ -14,7 +13,7 @@ public class Endereco implements PersisteDados{
     
     //Construtores
     public Endereco() {
-        this.id = 0;
+        super();
         this.logradouro = "";
         this.numero = "";
         this.complemento = "";
@@ -23,14 +22,6 @@ public class Endereco implements PersisteDados{
     }
     
     //Getters e Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getLogradouro() {
         return logradouro;
     }
@@ -75,12 +66,12 @@ public class Endereco implements PersisteDados{
     
     //Métodos herdados
     @Override
-    public Object monteObjeto(String dadosDoObjeto) {
+    public void monteObjeto(String dadosDoObjeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String desmonteObjeto() {
+    public String desmonteObjeto(boolean comParametro) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
 }

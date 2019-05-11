@@ -5,17 +5,23 @@
  */
 package br.com.senaigo.locadora.view;
 
+import br.com.senaigo.locadora.controller.ClienteTcpController;
+import br.com.senaigo.locadora.model.Marca;
+
+import javax.swing.*;
+import java.io.IOException;
+
 /**
  *
  * @author pfellype
  */
 public class TelaMarca extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaMarca
-     */
-    public TelaMarca() {
+    ClienteTcpController controller;
+
+    public TelaMarca() throws IOException {
         initComponents();
+        controller = new ClienteTcpController();
     }
 
     /**
@@ -53,6 +59,11 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jLabelNome.setText("Nome");
 
         jButtonIncluir.setText("Incluir");
+        jButtonIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIncluirActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
 
@@ -119,9 +130,6 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jTableListagemIdENome.setEnabled(false);
         jTableListagemIdENome.setGridColor(new java.awt.Color(255, 255, 255));
         jTableListagemIdENome.setRowSelectionAllowed(false);
-        jTableListagemIdENome.setShowGrid(true);
-        jTableListagemIdENome.setShowHorizontalLines(true);
-        jTableListagemIdENome.setShowVerticalLines(true);
         jScrollPaneTabela.setViewportView(jTableListagemIdENome);
         if (jTableListagemIdENome.getColumnModel().getColumnCount() > 0) {
             jTableListagemIdENome.getColumnModel().getColumn(0).setResizable(false);
@@ -184,6 +192,22 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
+        try {
+            String nome = jFormattedTextFieldDescricao.getText();
+
+            Marca marca = new Marca();
+            marca.setNome(nome);
+
+            controller.incluir(marca, 1);
+
+            //Atualizar grid
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao incluir Marca: " + erro.getMessage());
+        }
+
+    }//GEN-LAST:event_jButtonIncluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,10 +3,9 @@ package br.com.senaigo.locadora.model;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 import java.util.Date;
 
-public class Cliente implements PersisteDados {
+public class Cliente extends PersisteDados {
     
     //Atributos
-    private int id;
     private String nome;
     private String razaoSocial;
     private String nomeFantasia;
@@ -20,7 +19,7 @@ public class Cliente implements PersisteDados {
     
     //Construtores
     public Cliente() {
-        this.id = 0;
+        super();
         this.nome = "";
         this.razaoSocial = "";
         this.nomeFantasia = "";
@@ -34,14 +33,6 @@ public class Cliente implements PersisteDados {
     }
     
      //Getters e Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {    
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -127,12 +118,12 @@ public class Cliente implements PersisteDados {
     
     //Métodos herdados
     @Override
-    public Object monteObjeto(String dadosDoObjeto) {
+    public void monteObjeto(String dadosDoObjeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String desmonteObjeto() {
+    public String desmonteObjeto(boolean comParametro) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

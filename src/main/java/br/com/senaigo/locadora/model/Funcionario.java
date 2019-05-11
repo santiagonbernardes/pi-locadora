@@ -3,10 +3,9 @@ package br.com.senaigo.locadora.model;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 import java.util.Date;
 
-public class Funcionario implements PersisteDados {
+public class Funcionario extends PersisteDados {
 
     //Atributos
-    private int id;
     private String nome;
     private Date dataNascimento;
     private String cpf;
@@ -18,16 +17,23 @@ public class Funcionario implements PersisteDados {
     private String carteiraDeTrabalho;
     private String login;
     private String senha;
+
+    public Funcionario() {
+        super();
+        this.nome = "";
+        this.dataNascimento = null;
+        this.cpf = "";
+        this.endereco = null;
+        this.telefonePrincipal = null;
+        this.telefoneAlternativo = null;
+        this.email = "";
+        this.rg = "";
+        this.carteiraDeTrabalho = "";
+        this.login = "";
+        this.senha = "";
+    }
     
     //Getters e Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -120,12 +126,12 @@ public class Funcionario implements PersisteDados {
     
     //Métodos Herdados    
     @Override
-    public Object monteObjeto(String dadosDoObjeto) {
+    public void monteObjeto(String dadosDoObjeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String desmonteObjeto() {
+    public String desmonteObjeto(boolean comParametro) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }   
 }
