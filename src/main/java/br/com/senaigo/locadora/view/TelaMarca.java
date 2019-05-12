@@ -14,6 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JInternalFrame;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 /**
  * @author pfellype
  */
@@ -36,6 +39,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jPanelIncluir = new javax.swing.JPanel();
         jLabelID = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
@@ -52,7 +56,22 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jButtonExcluir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setForeground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1071, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 669, Short.MAX_VALUE)
+        );
 
         jPanelIncluir.setBackground(new java.awt.Color(255, 255, 255));
         jPanelIncluir.setForeground(new java.awt.Color(255, 255, 255));
@@ -74,8 +93,8 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jPanelIncluir.setLayout(jPanelIncluirLayout);
         jPanelIncluirLayout.setHorizontalGroup(
             jPanelIncluirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelIncluirLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+            .addGroup(jPanelIncluirLayout.createSequentialGroup()
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(jPanelIncluirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelNome)
                     .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,29 +105,32 @@ public class TelaMarca extends javax.swing.JInternalFrame {
                             .addComponent(jButtonCancelar))
                         .addComponent(jFormattedTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelID))
-                .addGap(36, 36, 36))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanelIncluirLayout.setVerticalGroup(
             jPanelIncluirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelIncluirLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabelID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addComponent(jLabelNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jFormattedTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanelIncluirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonIncluir))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanelTabela.setBackground(new java.awt.Color(255, 255, 255));
         jPanelTabela.setForeground(new java.awt.Color(255, 255, 255));
-        jPanelTabela.setLayout(new java.awt.GridLayout(1, 0));
+        jPanelTabela.setLayout(new java.awt.GridLayout(1, 2));
+
+        jScrollPaneDados.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPaneDados.setForeground(new java.awt.Color(255, 255, 255));
 
         jTableDadosMarcas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,6 +155,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             jTableDadosMarcas.getColumnModel().getColumn(0).setResizable(false);
             jTableDadosMarcas.getColumnModel().getColumn(1).setResizable(false);
         }
+        jTableDadosMarcas.getColumnModel().getColumn(0).setPreferredWidth(50);
 
         jPanelTabela.add(jScrollPaneDados);
 
@@ -150,23 +173,23 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jPanelBotoesConsultarAlterarExcluirLayout.setHorizontalGroup(
             jPanelBotoesConsultarAlterarExcluirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBotoesConsultarAlterarExcluirLayout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConsultar)
-                .addGap(295, 295, 295)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonExcluir)
-                .addGap(104, 104, 104))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelBotoesConsultarAlterarExcluirLayout.setVerticalGroup(
             jPanelBotoesConsultarAlterarExcluirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBotoesConsultarAlterarExcluirLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanelBotoesConsultarAlterarExcluirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConsultar)
                     .addComponent(jButtonAlterar)
                     .addComponent(jButtonExcluir))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,15 +199,19 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             .addComponent(jPanelIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelBotoesConsultarAlterarExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanelBotoesConsultarAlterarExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,6 +263,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldDescricao;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelNome;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelBotoesConsultarAlterarExcluir;
     private javax.swing.JPanel jPanelIncluir;
     private javax.swing.JPanel jPanelTabela;

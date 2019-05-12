@@ -5,6 +5,10 @@
  */
 package br.com.senaigo.locadora.view;
 
+import java.beans.PropertyVetoException;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import javax.swing.*;
 
 /**
@@ -18,6 +22,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -30,38 +35,58 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jDesktopPanePainelPrincipal = new javax.swing.JDesktopPane();
+        jMenuBarMenuPrincipal = new javax.swing.JMenuBar();
+        jMenuFuncionario = new javax.swing.JMenu();
+        jMenuCliente = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuVeiculo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuLacacao = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(300, 400));
+        setSize(new java.awt.Dimension(0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1600, Short.MAX_VALUE)
+            .addComponent(jDesktopPanePainelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1600, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+            .addComponent(jDesktopPanePainelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Funcionário");
-        jMenuBar1.add(jMenu1);
+        jMenuBarMenuPrincipal.setBackground(new java.awt.Color(255, 204, 0));
 
-        jMenu2.setText("Cliente");
-        jMenuBar1.add(jMenu2);
+        jMenuFuncionario.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuFuncionario.setText("Funcionário");
+        jMenuBarMenuPrincipal.add(jMenuFuncionario);
 
-        jMenu3.setText("Veículo");
+        jMenuCliente.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuCliente.setText("Cliente");
+
+        jMenuItem5.setText("Pessoa Física");
+        jMenuCliente.add(jMenuItem5);
+
+        jMenuItem6.setText("Pessoa Jurídica");
+        jMenuCliente.add(jMenuItem6);
+
+        jMenuItem7.setText("Motorista");
+        jMenuCliente.add(jMenuItem7);
+
+        jMenuBarMenuPrincipal.add(jMenuCliente);
+
+        jMenuVeiculo.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuVeiculo.setText("Veículo");
 
         jMenuItem1.setText("Marca");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -69,26 +94,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenuVeiculo.add(jMenuItem1);
 
         jMenuItem3.setText("Modelo");
-        jMenu3.add(jMenuItem3);
+        jMenuVeiculo.add(jMenuItem3);
 
         jMenuItem2.setText("Categoria");
-        jMenu3.add(jMenuItem2);
+        jMenuVeiculo.add(jMenuItem2);
 
         jMenuItem4.setText("Carro");
-        jMenu3.add(jMenuItem4);
+        jMenuVeiculo.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBarMenuPrincipal.add(jMenuVeiculo);
 
-        jMenu4.setText("Locação");
-        jMenuBar1.add(jMenu4);
+        jMenuLacacao.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuLacacao.setText("Locação");
+        jMenuBarMenuPrincipal.add(jMenuLacacao);
 
+        jMenu5.setForeground(new java.awt.Color(0, 0, 0));
         jMenu5.setText("jMenu5");
-        jMenuBar1.add(jMenu5);
+        jMenuBarMenuPrincipal.add(jMenu5);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBarMenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,20 +129,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        jDesktopPane1.removeAll();
-        try{
-            TelaMarca marca = new TelaMarca();
-            jDesktopPane1.add(marca);
-            marca.setVisible(true);
+
+        try {
+			jDesktopPanePainelPrincipal.removeAll();
+			TelaMarca marca = new TelaMarca();
+			jDesktopPanePainelPrincipal.add(marca);
+			marca.setVisible(true);
+            marca.setMaximum(true);
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(this, "Erro ao abrir tela Marcas: " + erro.getMessage());
-        }
-
-
+			JOptionPane.showMessageDialog(this, "Erro ao abrir tela Marcas: " + erro.getMessage());
+		}
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
@@ -154,17 +182,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JDesktopPane jDesktopPanePainelPrincipal;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBarMenuPrincipal;
+    private javax.swing.JMenu jMenuCliente;
+    private javax.swing.JMenu jMenuFuncionario;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenu jMenuLacacao;
+    private javax.swing.JMenu jMenuVeiculo;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
