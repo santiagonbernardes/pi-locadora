@@ -1,9 +1,15 @@
 package br.com.senaigo.locadora.controller;
 
 import br.com.senaigo.locadora.comunicacao.ClienteTcp;
+import br.com.senaigo.locadora.factory.PersisteDadosFactory;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.persistencia.Operacao;
+import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ClienteTcpController {
 
@@ -13,16 +19,44 @@ public class ClienteTcpController {
 		conexaoComCliente = new ClienteTcp("127.0.0.1", 7777);
 	}
 
-	public void incluir(Object objeto, int operacao) throws IOException {
+	public String execute(Object objeto, Operacao operacao) throws IOException {
 		try {
 			PersisteDados dados = (PersisteDados) objeto;
-			String mensagem = operacao + "|" + dados.desmonteObjeto(true);
+			String mensagem = operacao.getValor() + "|" + dados.desmonteObjeto(true);
 			System.out.println("Enviando requisição: " + mensagem);
 			conexaoComCliente.enviarMensagem(mensagem);
 			String resposta = conexaoComCliente.receberMensagem();
-			System.out.println(resposta);
+			return resposta;
 		} catch (Exception erro) {
 			throw erro;
 		}
+	}
+
+	public String execute(String nomeEntidade, Operacao operacao) throws IOException {
+		//TODO buscar solução melhor que passar String
+		try {
+			String mensagem = operacao.getValor() + "|" + nomeEntidade;
+			System.out.println("Enviando requisição: " + mensagem);
+			conexaoComCliente.enviarMensagem(mensagem);
+			String resposta = conexaoComCliente.receberMensagem();
+			return resposta;
+		} catch (Exception erro) {
+			throw erro;
+		}
+	}
+
+	public List<? extends PersisteDados> liste(String nomeEntidade) throws IOException {
+		String dados = execute(nomeEntidade, Operacao.LISTAR);
+		List<String> dadosObjetos = Arrays.asList(dados.split("\n"));
+		PersisteDados objeto;
+		List<PersisteDados> listaDeObjetos = new ArrayList<>();
+
+		for (String dadosDeUmObjeto : dadosObjetos) {
+			objeto = PersisteDadosFactory.obtenhaInstancia(nomeEntidade);
+			objeto.monteObjeto(dadosDeUmObjeto);
+			listaDeObjetos.add(objeto);
+		}
+		return listaDeObjetos;
+
 	}
 }

@@ -2,9 +2,7 @@ package br.com.senaigo.locadora.persistencia;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Repositorio {
 
@@ -31,6 +29,21 @@ public class Repositorio {
 		BufferedWriter escritoTexto = new BufferedWriter(escritorArquivo);
 		escritoTexto.write(dadosParaIncluir);
 		escritoTexto.close();
+	}
+
+	public String listar() throws IOException {
+		FileReader fr = new FileReader(caminhoParaArquivoEntidade);
+		BufferedReader br  = new BufferedReader(fr);
+		StringBuilder dados = new StringBuilder();
+		String linha = "";
+
+		while((linha = br.readLine()) != null){
+			dados.append(linha).append("\n");
+		}
+
+		br.close();
+
+		return dados.toString();
 	}
 
 }

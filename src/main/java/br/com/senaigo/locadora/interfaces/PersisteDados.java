@@ -28,13 +28,13 @@ public abstract class PersisteDados {
 
     public abstract String desmonteObjeto(boolean comParametro);
 
-    protected String obtenhaAssinatura() {
-        StringBuilder assinatura = new StringBuilder();
+    protected String obtenhaParametros() {
+        StringBuilder parametros = new StringBuilder();
 
-        assinatura.append(this.getClass().getSimpleName());
-        assinatura.append("|");
+        parametros.append(this.getClass().getSimpleName());
+        parametros.append("|");
 
-        return assinatura.toString();
+        return parametros.toString();
     }
     
 }

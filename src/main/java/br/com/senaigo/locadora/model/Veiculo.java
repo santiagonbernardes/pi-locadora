@@ -2,8 +2,6 @@ package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static br.com.senaigo.locadora.utils.Utils.*;
@@ -118,7 +116,7 @@ public class Veiculo extends PersisteDados {
 	public String desmonteObjeto(boolean comParametro) {
 		StringBuilder dadosSeparadosPontoVirgula = new StringBuilder();
 
-		dadosSeparadosPontoVirgula.append(this.obtenhaAssinatura());
+		dadosSeparadosPontoVirgula.append(this.obtenhaParametros());
 		dadosSeparadosPontoVirgula.append(this.id).append(";");
 		dadosSeparadosPontoVirgula.append(this.placa).append(";");
 		dadosSeparadosPontoVirgula.append(this.renavam).append(";");

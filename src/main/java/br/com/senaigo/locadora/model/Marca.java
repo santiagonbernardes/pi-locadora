@@ -41,7 +41,7 @@ public class Marca extends PersisteDados {
         StringBuilder dadosSeparadosPorVirgula = new StringBuilder();
 
         if(comParametro) {
-            dadosSeparadosPorVirgula.append(obtenhaAssinatura());
+            dadosSeparadosPorVirgula.append(obtenhaParametros());
         }
 
         dadosSeparadosPorVirgula.append(this.id).append(";");

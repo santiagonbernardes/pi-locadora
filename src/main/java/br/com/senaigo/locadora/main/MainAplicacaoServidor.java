@@ -12,13 +12,15 @@ public class MainAplicacaoServidor {
 		ServidorTcp servidor = new ServidorTcp(7777);
 
 		while (true) {
-			String requisicao = servidor.receberMensagem();
-			System.out.println("Solicitação do cliente:" + requisicao);
-			ServerTcpController controller = new ServerTcpController();
-			controller.atendaRequisicao(requisicao);
-
-			servidor.enviarMensagem("Feito.");
-
+			try {
+				String requisicao = servidor.receberMensagem();
+				System.out.println("Solicitação do cliente:" + requisicao);
+				ServerTcpController controller = new ServerTcpController();
+				String resposta = controller.atendaRequisicao(requisicao);
+				servidor.enviarMensagem(resposta);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
