@@ -10,3 +10,6 @@
 10;Toyota
 11;Rolls Royce
 12;Toyota
+14;Fiat
+15;Mercedes Benz
+16;Tucson

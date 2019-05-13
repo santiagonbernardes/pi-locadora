@@ -1,10 +1,9 @@
 package br.com.senaigo.locadora.controller;
 
 import br.com.senaigo.locadora.comunicacao.ClienteTcp;
-import br.com.senaigo.locadora.factory.PersisteDadosFactory;
+import br.com.senaigo.locadora.model.PersisteDadosFactory;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 import br.com.senaigo.locadora.persistencia.Operacao;
-import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;

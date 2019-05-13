@@ -6,6 +6,7 @@
 package br.com.senaigo.locadora.view;
 
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -132,13 +133,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        jDesktopPanePainelPrincipal.removeAll();
-        TelaMarca marca = new TelaMarca();
-        jDesktopPanePainelPrincipal.add(marca);
-        marca.setVisible(true);
         try {
+            jDesktopPanePainelPrincipal.removeAll();
+            TelaMarca marca = new TelaMarca();
+            jDesktopPanePainelPrincipal.add(marca);
+            marca.setVisible(true);
             marca.setMaximum(true);
-        } catch (PropertyVetoException e) {
+        } catch (Exception erro) {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

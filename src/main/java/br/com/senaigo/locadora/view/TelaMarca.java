@@ -5,8 +5,14 @@
  */
 package br.com.senaigo.locadora.view;
 
+import br.com.senaigo.locadora.controller.ClienteTcpController;
 import br.com.senaigo.locadora.model.Marca;
+import br.com.senaigo.locadora.persistencia.Operacao;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,32 +20,16 @@ import javax.swing.table.DefaultTableModel;
  * @author pfellype
  */
 public class TelaMarca extends javax.swing.JInternalFrame {
-    ArrayList<Marca> ListaMarca;
-    String modo;
-    
-    public void LoadTableMarca(){
-        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"ID", "Nome"},0);
-        for(int i = 0; i < ListaMarca.size(); i++){
-            Object linha[] = new Object[]{ListaMarca.get(i).getId(),
-                                          ListaMarca.get(i).getNome()};
-            modelo.addRow(linha);
-            System.out.println("\n"+linha);
-            }
-        jTableLista.setModel(modelo);
-        jTableLista.getColumnModel().getColumn(0).setPreferredWidth(70);
-        jTableLista.getColumnModel().getColumn(1).setPreferredWidth(631);
-        }
+    private ClienteTcpController controller;
+    private String modo;
 
-    /**
-     * Creates new form TelaMarca
-     */
     
-    public TelaMarca() {
+    public TelaMarca() throws IOException {
         initComponents();
-        ListaMarca = new ArrayList();
         modo = "Navegar";
+        controller = new ClienteTcpController();
         ManipulaInterface();
-        
+        preenchaGrid();
     }
     
     public void ManipulaInterface(){
@@ -322,56 +312,34 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
-        int id = Integer.parseInt(jTextFieldID.getText());
-        String nome = jTextFieldNome.getText();
-        if (modo.equals("Novo")){
-            Marca marca = new Marca();
-            marca.setId(id);
-            marca.setNome(nome);
-            Marca m = new Marca(id, nome);
-            ListaMarca.add(m);
-            LoadTableMarca();
-        }
-        else if(modo.equals("Editar")){
-            int index = jTableLista.getSelectedRow();
-            ListaMarca.get(index).setId(id);
-            ListaMarca.get(index).setNome(nome);
-        }
+		//TODO validar a entrada
+        try {
+            //TODO validar a entrada
+            String nome = jTextFieldNome.getText();
 
-//        DefaultTableModel modelo = (DefaultTableModel) jTableLista.getModel();
-//        modelo.addRow(new String[]{id, nome});
-//      
-        modo = "Navegar";
-        ManipulaInterface();
-        jTextFieldID.setText("");
-        jTextFieldNome.setText("");
+            Marca marca = new Marca();
+            marca.setNome(nome);
+
+            controller.execute(marca, Operacao.INCLUIR);
+            preenchaGrid();
+            jTextFieldNome.setText("");
+            modo = "Navegar";
+            ManipulaInterface();
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
-        int index = jTableLista.getSelectedRow();
-        if(index >= 0 && index < ListaMarca.size()){
-            ListaMarca.remove(index);
-        }
-        LoadTableMarca();
         modo = "Navegar";
         ManipulaInterface();
-        jTextFieldID.setText("");
-        jTextFieldNome.setText("");
-        
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
         // TODO add your handling code here
-        int index = jTableLista.getSelectedRow();
-        if(index >= 0 && index < ListaMarca.size()){
-            Marca m = ListaMarca.get(index);
-            jTextFieldID.setText(String.valueOf(m.getId()));
-            jTextFieldNome.setText(m.getNome());
-            modo = "Selecao";
-            ManipulaInterface();
-        }
+
     }//GEN-LAST:event_jTableListaMouseClicked
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
@@ -379,6 +347,23 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         modo = "Editar";
         ManipulaInterface();
     }//GEN-LAST:event_jButtonEditarActionPerformed
+
+	private void preenchaGrid() {
+		try {
+			List<Marca> marcas = (List<Marca>) controller.liste("Marca");
+			DefaultTableModel tabela = (DefaultTableModel) jTableLista.getModel();
+			tabela.setRowCount(0);
+			for (Marca marca : marcas) {
+				Object[] campos = {
+						marca.getId(),
+						marca.getNome()
+				};
+				tabela.addRow(campos);
+			}
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Marca: " + erro.getMessage());
+		}
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

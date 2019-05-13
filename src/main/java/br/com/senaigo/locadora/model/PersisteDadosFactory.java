@@ -1,8 +1,6 @@
-package br.com.senaigo.locadora.factory;
+package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
-import br.com.senaigo.locadora.model.*;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 
 public enum  PersisteDadosFactory {
 	CATEGORIA {
