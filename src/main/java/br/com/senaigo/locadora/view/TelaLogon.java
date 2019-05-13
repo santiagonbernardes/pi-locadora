@@ -8,7 +8,6 @@ package br.com.senaigo.locadora.view;
 import java.text.ParseException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.text.MaskFormatter;
 
 /**
