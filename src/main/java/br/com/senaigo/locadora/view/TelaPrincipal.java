@@ -6,10 +6,6 @@
 package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.utils.PosicaoFormulario;
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -41,11 +37,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBarMenuPrincipal = new javax.swing.JMenuBar();
         jMenuFuncionario = new javax.swing.JMenu();
         jMenuCliente = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItemPessoaFisica = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuVeiculo = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemMarca = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -76,8 +72,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuCliente.setForeground(new java.awt.Color(0, 0, 0));
         jMenuCliente.setText("Cliente");
 
-        jMenuItem5.setText("Pessoa Física");
-        jMenuCliente.add(jMenuItem5);
+        jMenuItemPessoaFisica.setText("Pessoa Física");
+        jMenuItemPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPessoaFisicaActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuItemPessoaFisica);
 
         jMenuItem6.setText("Pessoa Jurídica");
         jMenuCliente.add(jMenuItem6);
@@ -90,13 +91,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuVeiculo.setForeground(new java.awt.Color(0, 0, 0));
         jMenuVeiculo.setText("Veículo");
 
-        jMenuItem1.setText("Marca");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemMarca.setText("Marca");
+        jMenuItemMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemMarcaActionPerformed(evt);
             }
         });
-        jMenuVeiculo.add(jMenuItem1);
+        jMenuVeiculo.add(jMenuItemMarca);
 
         jMenuItem3.setText("Modelo");
         jMenuVeiculo.add(jMenuItem3);
@@ -134,7 +135,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMarcaActionPerformed
         // TODO add your handling code here:
         try {
 //            jDesktopPanePainelPrincipal.removeAll();
@@ -147,7 +148,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
             
         } catch (Exception erro) {
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemMarcaActionPerformed
+
+    private void jMenuItemPessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPessoaFisicaActionPerformed
+        // TODO add your handling code here:
+        try {
+            jDesktopPanePainelPrincipal.removeAll();
+            TelaPessoaFisica pf = new TelaPessoaFisica();
+            jDesktopPanePainelPrincipal.add(pf);
+            pf.setVisible(true);
+            pf.setMaximum(true);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jMenuItemPessoaFisicaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,13 +203,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBarMenuPrincipal;
     private javax.swing.JMenu jMenuCliente;
     private javax.swing.JMenu jMenuFuncionario;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItemMarca;
+    private javax.swing.JMenuItem jMenuItemPessoaFisica;
     private javax.swing.JMenu jMenuLacacao;
     private javax.swing.JMenu jMenuVeiculo;
     private javax.swing.JPanel jPanel1;
