@@ -106,6 +106,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
+        setClosable(true);
 
         jPanelBase.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -180,7 +181,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldNome))
                 .addContainerGap())
             .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                .addContainerGap(225, Short.MAX_VALUE)
+                .addContainerGap(214, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(217, 217, 217)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,9 +199,9 @@ public class TelaMarca extends javax.swing.JInternalFrame {
                     .addComponent(jLabelNome)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalvar)
-                    .addComponent(jButtonCancelar))
+                .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonSalvar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -269,7 +270,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonExcluir))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

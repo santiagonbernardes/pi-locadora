@@ -36,7 +36,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanelBase = new javax.swing.JPanel();
         jDesktopPanePainelPrincipal = new javax.swing.JDesktopPane();
         jMenuBarMenuPrincipal = new javax.swing.JMenuBar();
         jMenuFuncionario = new javax.swing.JMenu();
@@ -56,14 +56,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(300, 400));
         setSize(new java.awt.Dimension(0, 0));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelBaseLayout = new javax.swing.GroupLayout(jPanelBase);
+        jPanelBase.setLayout(jPanelBaseLayout);
+        jPanelBaseLayout.setHorizontalGroup(
+            jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPanePainelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1600, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelBaseLayout.setVerticalGroup(
+            jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPanePainelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
         );
 
@@ -85,6 +85,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuCliente.add(jMenuItemPessoaFisica);
 
         jMenuItem6.setText("Pessoa Jurídica");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenuCliente.add(jMenuItem6);
 
         jMenuItem7.setText("Motorista");
@@ -128,11 +133,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -165,6 +170,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jMenuItemPessoaFisicaActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        try {
+            jDesktopPanePainelPrincipal.removeAll();
+            TelaPessoaJuridica pj = new TelaPessoaJuridica();
+            jDesktopPanePainelPrincipal.add(pj);
+            pj.setVisible(true);
+            pj.setMaximum(true);
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +234,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemPessoaFisica;
     private javax.swing.JMenu jMenuLacacao;
     private javax.swing.JMenu jMenuVeiculo;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelBase;
     // End of variables declaration//GEN-END:variables
 }
