@@ -6,6 +6,10 @@
 package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.utils.PosicaoFormulario;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
