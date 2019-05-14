@@ -10,7 +10,6 @@ import br.com.senaigo.locadora.model.Marca;
 import br.com.senaigo.locadora.persistencia.Operacao;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +36,6 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             case "Navegar":
                 jButtonSalvar.setEnabled(false);
                 jButtonCancelar.setEnabled(false);
-                jTextFieldID.setEditable(false);
                 jTextFieldNome.setEditable(false);
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(false);
@@ -47,7 +45,6 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             case "Novo":
                 jButtonSalvar.setEnabled(true);
                 jButtonCancelar.setEnabled(true);
-                jTextFieldID.setEditable(true);
                 jTextFieldNome.setEditable(true);
                 jButtonNovo.setEnabled(false);
                 jButtonEditar.setEnabled(false);
@@ -57,7 +54,6 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             case "Editar":
                 jButtonSalvar.setEnabled(true);
                 jButtonCancelar.setEnabled(true);
-                jTextFieldID.setEditable(true);
                 jTextFieldNome.setEditable(true);
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(false);
@@ -67,7 +63,6 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             case "Excluir":
                 jButtonSalvar.setEnabled(false);
                 jButtonCancelar.setEnabled(false);
-                jTextFieldID.setEditable(false);
                 jTextFieldNome.setEditable(false);
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(false);
@@ -77,7 +72,6 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             case "Selecao":
                 jButtonSalvar.setEnabled(false);
                 jButtonCancelar.setEnabled(false);
-                jTextFieldID.setEditable(false);
                 jTextFieldNome.setEditable(false);
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(true);
@@ -148,6 +142,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jLabelNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabelNome.setText("Nome:");
 
+        jTextFieldID.setEditable(false);
         jTextFieldID.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -185,11 +180,11 @@ public class TelaMarca extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldNome))
                 .addContainerGap())
             .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                .addGap(216, 216, 216)
+                .addContainerGap(225, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(217, 217, 217)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addGap(224, 224, 224))
         );
         jPanelMarcaLayout.setVerticalGroup(
             jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +238,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableLista);
         if (jTableLista.getColumnModel().getColumnCount() > 0) {
             jTableLista.getColumnModel().getColumn(0).setPreferredWidth(70);
-            jTableLista.getColumnModel().getColumn(1).setPreferredWidth(631);
+            jTableLista.getColumnModel().getColumn(1).setPreferredWidth(870);
         }
 
         javax.swing.GroupLayout jPanelBaseLayout = new javax.swing.GroupLayout(jPanelBase);
@@ -251,43 +246,42 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jPanelBaseLayout.setHorizontalGroup(
             jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBaseLayout.createSequentialGroup()
-                .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelBaseLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelBaseLayout.createSequentialGroup()
-                                .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(172, 172, 172)
-                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanelMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBaseLayout.createSequentialGroup()
+                        .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(278, 278, 278)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanelBaseLayout.setVerticalGroup(
             jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBaseLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jPanelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNovo)
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonExcluir))
-                .addGap(39, 39, 39)
-                .addComponent(jPanelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
