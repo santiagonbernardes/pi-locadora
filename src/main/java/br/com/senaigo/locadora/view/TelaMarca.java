@@ -11,6 +11,7 @@ import br.com.senaigo.locadora.persistencia.Operacao;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,8 +20,10 @@ import javax.swing.table.DefaultTableModel;
  * @author pfellype
  */
 public class TelaMarca extends javax.swing.JInternalFrame {
+
     private ClienteTcpController controller;
     private String modo;
+    private List<Marca> fonteDeDados;
 
     
     public TelaMarca() throws IOException {
@@ -216,7 +219,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false
@@ -310,6 +313,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 		//TODO validar a entrada
         try {
             //TODO validar a entrada
+			//Verificar se o campo id está preenchido. Se tiver, chamar o método que irá salvar
             String nome = jTextFieldNome.getText();
 
             Marca marca = new Marca();
@@ -333,22 +337,25 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
-        // TODO add your handling code here
-
+		modo="Selecao";
+		ManipulaInterface();
     }//GEN-LAST:event_jTableListaMouseClicked
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+		Vector dados = (Vector) obtenhaGrid().getDataVector().elementAt(jTableLista.getSelectedRow());
+		//Converter os dados, separando-os com ;
+		//Montar o objeto
+		//Preencher os dados nos jtext field
         modo = "Editar";
         ManipulaInterface();
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
 	private void preenchaGrid() {
 		try {
-			List<Marca> marcas = (List<Marca>) controller.liste("Marca");
-			DefaultTableModel tabela = (DefaultTableModel) jTableLista.getModel();
+            atualizeFonteDeDados();
+			DefaultTableModel tabela = obtenhaGrid();
 			tabela.setRowCount(0);
-			for (Marca marca : marcas) {
+			for (Marca marca : fonteDeDados) {
 				Object[] campos = {
 						marca.getId(),
 						marca.getNome()
@@ -359,6 +366,14 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Marca: " + erro.getMessage());
 		}
 	}
+
+	private void atualizeFonteDeDados() throws IOException {
+        fonteDeDados = (List<Marca>) controller.liste("Marca");
+    }
+
+    private DefaultTableModel obtenhaGrid() {
+        return (DefaultTableModel) jTableLista.getModel();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
