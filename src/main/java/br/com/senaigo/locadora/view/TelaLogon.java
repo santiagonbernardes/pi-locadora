@@ -32,7 +32,7 @@ public class TelaLogon extends javax.swing.JFrame {
      */
     
     public boolean checkLogin (String login, String senha){
-        return login.equals("Admin") && senha.equals("123");
+        return login.equals("") && senha.equals("");
     }
     
     private MaskFormatter setMascara(String mascara){
