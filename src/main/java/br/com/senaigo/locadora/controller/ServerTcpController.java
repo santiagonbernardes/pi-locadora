@@ -61,12 +61,25 @@ public class ServerTcpController {
 		return repositorio.listar();
 	}
 
-	private String alterar(List<String> parametros) {
-		return null;
-
+	private String alterar(List<String> parametros) throws IOException {
+		String nomeEntidade = parametros.get(1);
+		String campoAlterado = parametros.get(2);
+		String id = Utils.obtenhaCampos(campoAlterado).get(0);
+		String regex = "(?<!.)" + id + ";.*";
+		Repositorio repositorio = new Repositorio(nomeEntidade);
+		String dadosAtuais = repositorio.listar();
+		String dadosNovos = dadosAtuais.replaceFirst(regex, campoAlterado);
+		repositorio.alterar(dadosNovos);
+		return "Dados Alterados com sucesso!";
 	}
 
-	private String excluir(List <String> parametros) {
-		return null;
+	private String excluir(List<String> parametros) throws IOException {
+		String nomeEntidade = parametros.get(1);
+		String campoExcluir = parametros.get(2);
+		Repositorio repositorio = new Repositorio(nomeEntidade);
+		String dadosAtuais = repositorio.listar();
+		String dadosNovos = dadosAtuais.replaceFirst(campoExcluir + "\n", "");
+		repositorio.alterar(dadosNovos);
+		return "Dados Alterados com sucesso!";
 	}
 }

@@ -8,6 +8,7 @@ package br.com.senaigo.locadora.view;
 import br.com.senaigo.locadora.controller.ClienteTcpController;
 import br.com.senaigo.locadora.model.Marca;
 import br.com.senaigo.locadora.persistencia.Operacao;
+import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.IOException;
 import java.util.List;
@@ -315,11 +316,18 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             //TODO validar a entrada
 			//Verificar se o campo id está preenchido. Se tiver, chamar o método que irá salvar
             String nome = jTextFieldNome.getText();
-
+            String id = jTextFieldID.getText();
             Marca marca = new Marca();
+
             marca.setNome(nome);
 
-            controller.execute(marca, Operacao.INCLUIR);
+            if (id.equals("")) {
+                controller.execute(marca, Operacao.INCLUIR);
+            } else {
+                marca.setId(Utils.convertaParaInt(id));
+                controller.execute(marca, Operacao.ALTERAR);
+            }
+
             preenchaGrid();
             jTextFieldNome.setText("");
             modo = "Navegar";
@@ -331,9 +339,16 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
-        modo = "Navegar";
-        ManipulaInterface();
+        try {
+            int indexDoObjeto = jTableLista.getSelectedRow();
+            Marca marca = fonteDeDados.get(indexDoObjeto);
+            controller.execute(marca, Operacao.EXCLUIR);
+            preenchaGrid();
+            modo = "Navegar";
+            ManipulaInterface();
+        } catch (Exception e){
+            //Adicionar tratamento
+        }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
@@ -342,10 +357,10 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableListaMouseClicked
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-		Vector dados = (Vector) obtenhaGrid().getDataVector().elementAt(jTableLista.getSelectedRow());
-		//Converter os dados, separando-os com ;
-		//Montar o objeto
-		//Preencher os dados nos jtext field
+		int indexDoObjeto = jTableLista.getSelectedRow();
+		Marca marca = fonteDeDados.get(indexDoObjeto);
+		jTextFieldID.setText(String.valueOf(marca.getId()));
+		jTextFieldNome.setText(marca.getNome());
         modo = "Editar";
         ManipulaInterface();
     }//GEN-LAST:event_jButtonEditarActionPerformed
