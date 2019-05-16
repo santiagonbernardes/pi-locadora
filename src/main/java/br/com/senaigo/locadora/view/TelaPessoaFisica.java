@@ -5,6 +5,16 @@
  */
 package br.com.senaigo.locadora.view;
 
+import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.model.Cliente;
+import br.com.senaigo.locadora.model.Endereco;
+import br.com.senaigo.locadora.model.PersisteDadosFactory;
+import br.com.senaigo.locadora.model.Telefone;
+
+import javax.swing.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author pfellype
@@ -588,7 +598,47 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
+        try{
+            String nome = jTextFieldNome.getText();
+            String cpf = jTextFieldCPF.getText();
+            String dataNascimento = jTextFieldAniversario.getText();
+            String cep = jTextFieldCEP.getText();
+            String logradouro = jTextFieldLogradouro.getText();
+            String complemento = jTextFieldComplemento.getText();
+            String bairro = jTextFieldBairro.getText();
+            String numero = jTextFieldNumero.getText();
+            String cidade = jTextFieldCidade.getText();
+            String uf = (String) jComboBoxUF.getSelectedItem();
+            String telefonePrincipal = jTextFieldTelefone.getText();
+            String telefoneAlternativo = jTextFieldTelefoneCel.getText();
+            String email = jTextFieldEmail.getText();
+
+            Cliente cliente = (Cliente) PersisteDadosFactory.obtenhaInstancia("Cliente");
+            cliente.setNome(nome);
+            cliente.setCpf(cpf);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+            LocalDate data = LocalDate.parse(dataNascimento, formatter);
+            cliente.setDataNascimento(data);
+            Endereco endereco = (Endereco) PersisteDadosFactory.obtenhaInstancia("Endereco");
+            endereco.setLogradouro(logradouro);
+            endereco.setBairro(bairro);
+            endereco.setComplemento(complemento);
+            endereco.setNumero(numero);
+            endereco.setCep(cep);
+            Telefone telefonePrincipalObjeto = Telefone.obtenhaInstancia(telefonePrincipal);
+            Telefone telefoneAlternativoObjeto = Telefone.obtenhaInstancia(telefoneAlternativo);
+            cliente.setEndereco(endereco);
+            cliente.setTelefonePrincipal(telefonePrincipalObjeto);
+            cliente.setTelefoneAlternativo(telefoneAlternativoObjeto);
+            cliente.setEmail(email);
+
+            String dados = cliente.desmonteObjeto(true);
+            System.out.println(dados);
+
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagarActionPerformed
