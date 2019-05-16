@@ -46,4 +46,11 @@ public class Repositorio {
 		return dados.toString();
 	}
 
+	public void alterar(String novosDados) throws IOException {
+		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivoEntidade, false);
+		BufferedWriter escritoTexto = new BufferedWriter(escritorArquivo);
+		escritoTexto.write(novosDados);
+		escritoTexto.close();
+	}
+
 }
