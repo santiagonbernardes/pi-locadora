@@ -50,7 +50,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuLacacao = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(300, 400));
@@ -123,10 +122,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuLacacao.setText("Locação");
         jMenuBarMenuPrincipal.add(jMenuLacacao);
 
-        jMenu5.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu5.setText("jMenu5");
-        jMenuBarMenuPrincipal.add(jMenu5);
-
         setJMenuBar(jMenuBarMenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,6 +148,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //            marca.setVisible(true);
 //            marca.setMaximum(true);
             TelaMarca tela = new TelaMarca();
+            jDesktopPanePainelPrincipal.removeAll();
             form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
             
         } catch (Exception erro) {
@@ -221,7 +217,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPanePainelPrincipal;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBarMenuPrincipal;
     private javax.swing.JMenu jMenuCliente;
     private javax.swing.JMenu jMenuFuncionario;
