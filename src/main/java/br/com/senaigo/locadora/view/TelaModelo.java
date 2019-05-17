@@ -7,14 +7,15 @@ package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.controller.ClienteTcpController;
 import br.com.senaigo.locadora.model.Marca;
+import br.com.senaigo.locadora.model.Modelo;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.utils.Utils;
 import java.io.File;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,14 +23,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author pfellype
  */
-public class TelaMarca extends javax.swing.JInternalFrame {
-
+public class TelaModelo extends javax.swing.JInternalFrame {
+    
     private ClienteTcpController controller;
     private String modo;
-    private List<Marca> fonteDeDados;
+    private List<Modelo> fonteDeDados;
 
-    
-    public TelaMarca() throws IOException {
+    /**
+     * Creates new form TelaModelo
+     */
+    public TelaModelo() throws IOException {
         initComponents();
         modo = "Navegar";
         controller = new ClienteTcpController();
@@ -127,9 +130,6 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jButtonArquivo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLista = new javax.swing.JTable();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(null);
 
         jPanelBase.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -232,7 +232,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
                         .addComponent(jButtonArquivo)))
                 .addContainerGap())
             .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                .addContainerGap(203, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(217, 217, 217)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,31 +306,31 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         jPanelBaseLayout.setHorizontalGroup(
             jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBaseLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanelMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBaseLayout.createSequentialGroup()
                         .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(278, 278, 278)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelBaseLayout.setVerticalGroup(
             jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBaseLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNovo)
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonExcluir))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -351,36 +351,49 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jTextFieldID.setText("");
         jTextFieldNome.setText("");
-        
+
         modo = "Novo";
         ManipulaInterface();
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
-        modo = "Navegar";
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        int indexDoObjeto = jTableLista.getSelectedRow();
+        Modelo modelo = fonteDeDados.get(indexDoObjeto);
+        jTextFieldID.setText(String.valueOf(modelo.getId()));
+        jTextFieldNome.setText(modelo.getNome());
+        modo = "Editar";
         ManipulaInterface();
-        jTextFieldID.setText("");
-        jTextFieldNome.setText("");
-        
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        try {
+            int indexDoObjeto = jTableLista.getSelectedRow();
+            Modelo modelo = fonteDeDados.get(indexDoObjeto);
+            controller.execute(modelo, Operacao.EXCLUIR);
+            preenchaGrid();
+            modo = "Navegar";
+            ManipulaInterface();
+        } catch (Exception e){
+            //Adicionar tratamento
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-		//TODO validar a entrada
+        //TODO validar a entrada
         try {
             //TODO validar a entrada
-			//Verificar se o campo id está preenchido. Se tiver, chamar o método que irá salvar
+            //Verificar se o campo id está preenchido. Se tiver, chamar o método que irá salvar
             String nome = jTextFieldNome.getText();
             String id = jTextFieldID.getText();
-            Marca marca = new Marca();
+            Modelo modelo = new Modelo();
 
-            marca.setNome(nome);
+            modelo.setNome(nome);
 
             if (id.equals("")) {
-                controller.execute(marca, Operacao.INCLUIR);
+                controller.execute(modelo, Operacao.INCLUIR);
             } else {
-                marca.setId(Utils.convertaParaInt(id));
-                controller.execute(marca, Operacao.ALTERAR);
+                modelo.setId(Utils.convertaParaInt(id));
+                controller.execute(modelo, Operacao.ALTERAR);
             }
 
             preenchaGrid();
@@ -393,32 +406,14 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        try {
-            int indexDoObjeto = jTableLista.getSelectedRow();
-            Marca marca = fonteDeDados.get(indexDoObjeto);
-            controller.execute(marca, Operacao.EXCLUIR);
-            preenchaGrid();
-            modo = "Navegar";
-            ManipulaInterface();
-        } catch (Exception e){
-            //Adicionar tratamento
-        }
-    }//GEN-LAST:event_jButtonExcluirActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        modo = "Navegar";
+        ManipulaInterface();
+        jTextFieldID.setText("");
+        jTextFieldNome.setText("");
 
-    private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
-		modo="Selecao";
-		ManipulaInterface();
-    }//GEN-LAST:event_jTableListaMouseClicked
-
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-		int indexDoObjeto = jTableLista.getSelectedRow();
-		Marca marca = fonteDeDados.get(indexDoObjeto);
-		jTextFieldID.setText(String.valueOf(marca.getId()));
-		jTextFieldNome.setText(marca.getNome());
-                modo = "Editar";
-                ManipulaInterface();
-    }//GEN-LAST:event_jButtonEditarActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArquivoActionPerformed
         // TODO add your handling code here:
@@ -434,20 +429,25 @@ public class TelaMarca extends javax.swing.JInternalFrame {
                 jTextFieldCaminhoArquivo.setText(file.getPath());
                 jLabelIcone.setIcon(new ImageIcon(file.getPath()));
             }
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonArquivoActionPerformed
 
-	private void preenchaGrid() {
+    private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
+        modo="Selecao";
+        ManipulaInterface();
+    }//GEN-LAST:event_jTableListaMouseClicked
+    
+    private void preenchaGrid() {
 		try {
             atualizeFonteDeDados();
 			DefaultTableModel tabela = obtenhaGrid();
 			tabela.setRowCount(0);
-			for (Marca marca : fonteDeDados) {
+			for (Modelo modelo : fonteDeDados) {
 				Object[] campos = {
-						marca.getId(),
-						marca.getNome()
+						modelo.getId(),
+						modelo.getNome()
 				};
 				tabela.addRow(campos);
 			}
@@ -457,13 +457,12 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 	}
 
 	private void atualizeFonteDeDados() throws IOException {
-        fonteDeDados = (List<Marca>) controller.liste("Marca");
+        fonteDeDados = (List<Modelo>) controller.liste("Modelo");
     }
 
     private DefaultTableModel obtenhaGrid() {
         return (DefaultTableModel) jTableLista.getModel();
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonArquivo;
