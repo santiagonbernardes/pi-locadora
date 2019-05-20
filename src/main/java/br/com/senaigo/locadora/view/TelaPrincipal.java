@@ -69,6 +69,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBarMenuPrincipal.setBackground(new java.awt.Color(255, 204, 0));
 
         jMenuFuncionario.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuFuncionario.setIcon(new javax.swing.ImageIcon("arquivo/imagens/user_1.png"));
         jMenuFuncionario.setText("Funcionário");
         jMenuBarMenuPrincipal.add(jMenuFuncionario);
 
