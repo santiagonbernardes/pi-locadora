@@ -1,7 +1,6 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
-import br.com.senaigo.locadora.utils.Utils;
 
 public class Categoria implements PersisteDados {
 
@@ -54,9 +53,11 @@ public class Categoria implements PersisteDados {
 	public String desmonteObjeto() {
 		StringBuilder dadosDoObjeto = new StringBuilder();
 
-		String nomeDaClasse;
+		String nomeDaClasse = this.getClass().getSimpleName();
 
-		dadosDoObjeto.append(this.id);
+		dadosDoObjeto.append(nomeDaClasse).append(";");
+		dadosDoObjeto.append(this.id).append(";");
+		dadosDoObjeto.append(this.valorDiarioLocacao);
 
 		return dadosDoObjeto.toString();
 	}

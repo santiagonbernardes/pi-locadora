@@ -52,7 +52,16 @@ public class Modelo implements PersisteDados {
 
 	@Override
 	public String desmonteObjeto() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		StringBuilder dadosDoObjeto = new StringBuilder();
+
+		String nomeDaClasse = this.getClass().getSimpleName();
+
+		dadosDoObjeto.append(nomeDaClasse).append(";");
+		dadosDoObjeto.append(this.id).append(";");
+		dadosDoObjeto.append(this.nome).append(";");
+		dadosDoObjeto.append(this.marca.getId());
+
+		return dadosDoObjeto.toString();
 	}
 
 

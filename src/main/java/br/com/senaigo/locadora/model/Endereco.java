@@ -13,7 +13,9 @@ public class Endereco implements PersisteDados {
 	private String numero;
 	private String complemento;
 	private String bairro;
+	private String cidade;
 	private String cep;
+	private EstadosBrasil estado;
 
 	//Construtores
 	public Endereco() {
@@ -22,7 +24,9 @@ public class Endereco implements PersisteDados {
 		this.numero = "";
 		this.complemento = "";
 		this.bairro = "";
+		this.cidade = "";
 		this.cep = "";
+		this.estado = null;
 	}
 
 	//Getters e Setters
@@ -66,12 +70,28 @@ public class Endereco implements PersisteDados {
 		this.bairro = bairro;
 	}
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
 	public String getCep() {
 		return cep;
 	}
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public EstadosBrasil getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadosBrasil estado) {
+		this.estado = estado;
 	}
 
 	//Métodos Próprios
@@ -90,14 +110,20 @@ public class Endereco implements PersisteDados {
 
 	@Override
 	public String desmonteObjeto() {
-		StringBuilder dadosSeparadosPorPontoVirgula = new StringBuilder();
+		StringBuilder dadosDoObjeto = new StringBuilder();
 
-		dadosSeparadosPorPontoVirgula.append(this.logradouro).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.numero).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.complemento).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.bairro).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.cep);
+		String nomeDaClasse = this.getClass().getSimpleName();
 
-		return dadosSeparadosPorPontoVirgula.toString();
+		dadosDoObjeto.append(nomeDaClasse).append(";");
+		dadosDoObjeto.append(this.id).append(";");
+		dadosDoObjeto.append(this.logradouro).append(";");
+		dadosDoObjeto.append(this.numero).append(";");
+		dadosDoObjeto.append(this.complemento).append(";");
+		dadosDoObjeto.append(this.bairro).append(";");
+		dadosDoObjeto.append(this.cidade).append(";");
+		dadosDoObjeto.append(this.cep).append(";");
+		dadosDoObjeto.append(this.estado.getValor());
+
+		return dadosDoObjeto.toString();
 	}
 }

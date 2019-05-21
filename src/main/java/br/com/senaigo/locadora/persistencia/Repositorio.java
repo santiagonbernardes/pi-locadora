@@ -20,11 +20,10 @@ public class Repositorio {
 		return "Persistência/" + nomeEntidade + ".txt";
 	}
 
-	public void incluir(PersisteDados objeto) throws IOException {
+	public void incluir(String dadosDoObjeto) throws IOException {
 		int id = geradorId.getUltimaIdGerada();
-		objeto.setId(id);
 		geradorId.finalize();
-		String dadosParaIncluir = objeto.desmonteObjeto(false) + "\n";
+		String dadosParaIncluir = objeto.desmonteObjeto() + "\n";
 		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivoEntidade, true);
 		BufferedWriter escritoTexto = new BufferedWriter(escritorArquivo);
 		escritoTexto.write(dadosParaIncluir);

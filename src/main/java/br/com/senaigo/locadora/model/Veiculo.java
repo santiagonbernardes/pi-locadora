@@ -123,17 +123,21 @@ public class Veiculo implements PersisteDados {
 
 	@Override
 	public String desmonteObjeto() {
-		StringBuilder dadosSeparadosPontoVirgula = new StringBuilder();
-		dadosSeparadosPontoVirgula.append(this.id).append(";");
-		dadosSeparadosPontoVirgula.append(this.placa).append(";");
-		dadosSeparadosPontoVirgula.append(this.renavam).append(";");
-		dadosSeparadosPontoVirgula.append((this.anoFabricacao)).append(";");
-		dadosSeparadosPontoVirgula.append(this.valorCompra).append(";");
-		dadosSeparadosPontoVirgula.append(this.kmAtual).append(";");
-		dadosSeparadosPontoVirgula.append(this.categoria.getNome()).append(";");
-		dadosSeparadosPontoVirgula.append(this.estado).append(";");
-		dadosSeparadosPontoVirgula.append(this.modelo.getNome());
+		StringBuilder dadosDoObjeto = new StringBuilder();
 
-		return dadosSeparadosPontoVirgula.toString();
+		String nomeDaClasse = this.getClass().getSimpleName();
+
+		dadosDoObjeto.append(nomeDaClasse).append(";");
+		dadosDoObjeto.append(this.id).append(";");
+		dadosDoObjeto.append(this.placa).append(";");
+		dadosDoObjeto.append(this.renavam).append(";");
+		dadosDoObjeto.append(this.anoFabricacao).append(";");
+		dadosDoObjeto.append(this.valorCompra).append(";");
+		dadosDoObjeto.append(this.kmAtual).append(";");
+		dadosDoObjeto.append(this.categoria.getId()).append(";");
+		dadosDoObjeto.append(this.estado.getValor()).append(";");
+		dadosDoObjeto.append(this.modelo.getId());
+
+		return dadosDoObjeto.toString();
 	}
 }
