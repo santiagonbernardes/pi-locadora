@@ -1,137 +1,147 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+
 import java.util.Date;
 
-public class Funcionario extends PersisteDados {
+public class Funcionario implements PersisteDados {
 
-    //Atributos
-    private String nome;
-    private Date dataNascimento;
-    private String cpf;
-    private Endereco endereco;
-    private Telefone telefonePrincipal;
-    private Telefone telefoneAlternativo;
-    private String email;
-    private String rg;
-    private String carteiraDeTrabalho;
-    private String login;
-    private String senha;
+	//Atributos
+	private int id;
+	private String nome;
+	private Date dataNascimento;
+	private String cpf;
+	private Endereco endereco;
+	private Telefone telefonePrincipal;
+	private Telefone telefoneAlternativo;
+	private String email;
+	private String rg;
+	private String carteiraDeTrabalho;
+	private String login;
+	private String senha;
 
-    public Funcionario() {
-        super();
-        this.nome = "";
-        this.dataNascimento = null;
-        this.cpf = "";
-        this.endereco = null;
-        this.telefonePrincipal = null;
-        this.telefoneAlternativo = null;
-        this.email = "";
-        this.rg = "";
-        this.carteiraDeTrabalho = "";
-        this.login = "";
-        this.senha = "";
-    }
-    
-    //Getters e Setters
-    public String getNome() {
-        return nome;
-    }
+	public Funcionario() {
+		this.id = 0;
+		this.nome = "";
+		this.dataNascimento = null;
+		this.cpf = "";
+		this.endereco = null;
+		this.telefonePrincipal = null;
+		this.telefoneAlternativo = null;
+		this.email = "";
+		this.rg = "";
+		this.carteiraDeTrabalho = "";
+		this.login = "";
+		this.senha = "";
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	//Getters e Setters
+	public int getId() {
+		return id;
+	}
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public Telefone getTelefonePrincipal() {
-        return telefonePrincipal;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public void setTelefonePrincipal(Telefone telefonePrincipal) {
-        this.telefonePrincipal = telefonePrincipal;
-    }
+	public Endereco getEndereco() {
+		return endereco;
+	}
 
-    public Telefone getTelefoneAlternativo() {
-        return telefoneAlternativo;
-    }
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 
-    public void setTelefoneAlternativo(Telefone telefoneAlternativo) {
-        this.telefoneAlternativo = telefoneAlternativo;
-    }
+	public Telefone getTelefonePrincipal() {
+		return telefonePrincipal;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setTelefonePrincipal(Telefone telefonePrincipal) {
+		this.telefonePrincipal = telefonePrincipal;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public Telefone getTelefoneAlternativo() {
+		return telefoneAlternativo;
+	}
 
-    public String getRg() {
-        return rg;
-    }
+	public void setTelefoneAlternativo(Telefone telefoneAlternativo) {
+		this.telefoneAlternativo = telefoneAlternativo;
+	}
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getCarteiraDeTrabalho() {
-        return carteiraDeTrabalho;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setCarteiraDeTrabalho(String carteiraDeTrabalho) {
-        this.carteiraDeTrabalho = carteiraDeTrabalho;
-    }
+	public String getRg() {
+		return rg;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public String getCarteiraDeTrabalho() {
+		return carteiraDeTrabalho;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public void setCarteiraDeTrabalho(String carteiraDeTrabalho) {
+		this.carteiraDeTrabalho = carteiraDeTrabalho;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    
-    //Métodos Próprios
-    
-    //Métodos Herdados    
-    @Override
-    public void monteObjeto(String dadosDoObjeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    @Override
-    public String desmonteObjeto(boolean comParametro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	//Métodos Próprios
+
+	//Métodos Herdados
+	@Override
+	public void monteObjeto(String dadosDoObjeto) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public String desmonteObjeto() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 }

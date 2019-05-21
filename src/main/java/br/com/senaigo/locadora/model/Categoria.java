@@ -1,47 +1,63 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.utils.Utils;
 
-public class Categoria extends PersisteDados {
+public class Categoria implements PersisteDados {
 
-    //Atributos
-    private String nome;
-    private float valorDiarioLocacao;
-    
-    //Construtores
-    public Categoria() {
-        super();
-        this.nome = "";
-        this.valorDiarioLocacao = 0;
-    }
-    
-    //Getters e Setters
-    public String getNome() {
-        return nome;
-    }
+	//Atributos
+	private int id;
+	private String nome;
+	private float valorDiarioLocacao;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	//Construtores
+	public Categoria() {
+		this.id = 0;
+		this.nome = "";
+		this.valorDiarioLocacao = 0;
+	}
 
-    public float getValorDiarioLocacao() {
-        return valorDiarioLocacao;
-    }
+	//Getters e Setters
+	public int getId() {
+		return id;
+	}
 
-    public void setValorDiarioLocacao(float valorDiarioLocacao) {
-        this.valorDiarioLocacao = valorDiarioLocacao;
-    }
-    
-    //Métodos Próprios
-    
-    //Métodos Herdados    
-    @Override
-    public void monteObjeto(String dadosDoObjeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    @Override
-    public String desmonteObjeto(boolean comParametro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public float getValorDiarioLocacao() {
+		return valorDiarioLocacao;
+	}
+
+	public void setValorDiarioLocacao(float valorDiarioLocacao) {
+		this.valorDiarioLocacao = valorDiarioLocacao;
+	}
+
+	//Métodos Próprios
+
+	//Métodos Herdados
+	@Override
+	public void monteObjeto(String dadosDoObjeto) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public String desmonteObjeto() {
+		StringBuilder dadosDoObjeto = new StringBuilder();
+
+		String nomeDaClasse;
+
+		dadosDoObjeto.append(this.id);
+
+		return dadosDoObjeto.toString();
+	}
 }

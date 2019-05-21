@@ -21,7 +21,7 @@ public class ClienteTcpController {
 	public String execute(Object objeto, Operacao operacao) throws IOException {
 		try {
 			PersisteDados dados = (PersisteDados) objeto;
-			String mensagem = operacao.getValor() + "|" + dados.desmonteObjeto(true);
+			String mensagem = operacao.getValor() + "|" + dados.desmonteObjeto();
 			System.out.println("Enviando requisição: " + mensagem);
 			conexaoComCliente.enviarMensagem(mensagem);
 			String resposta = conexaoComCliente.receberMensagem();

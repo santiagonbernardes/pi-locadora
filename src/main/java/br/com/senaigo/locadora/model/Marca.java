@@ -5,49 +5,53 @@ import br.com.senaigo.locadora.utils.Utils;
 
 import java.util.List;
 
-public class Marca extends PersisteDados {
-    
-    //Atributos
-    private String nome;
-    
-    //Construtores
-    public Marca() {
-        super();
-        this.nome = "";
-    }
-    
-    //Getters e Setters
-    public String getNome() {
-        return nome;
-    }
+public class Marca implements PersisteDados {
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
-    //Métodos Próprios
-    
-    //Métodos Herdados
-    @Override
-    public void monteObjeto(String dadosDoObjeto) {
-        List<String> campos = Utils.obtenhaCampos(dadosDoObjeto);
+	//Atributos
+	private int id;
+	private String nome;
 
-        this.id = Utils.convertaParaInt(campos.get(0));
-        this.nome = campos.get(1);
-    }
+	//Construtores
+	public Marca() {
+		this.id = 0;
+		this.nome = "";
+	}
 
-    @Override
-    public String desmonteObjeto(boolean comParametro) {
-        StringBuilder dadosSeparadosPorPontoVirgula = new StringBuilder();
+	//Getters e Setters
+	public int getId() {
+		return id;
+	}
 
-        if(comParametro) {
-            dadosSeparadosPorPontoVirgula.append(obtenhaParametros());
-        }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-        dadosSeparadosPorPontoVirgula.append(this.id).append(";");
-        dadosSeparadosPorPontoVirgula.append(this.nome);
+	public String getNome() {
+		return nome;
+	}
 
-        return dadosSeparadosPorPontoVirgula.toString();
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	//Métodos Próprios
+
+	//Métodos Herdados
+	@Override
+	public void monteObjeto(String dadosDoObjeto) {
+		List<String> campos = Utils.obtenhaCampos(dadosDoObjeto);
+
+		this.id = Utils.convertaParaInt(campos.get(0));
+		this.nome = campos.get(1);
+	}
+
+	@Override
+	public String desmonteObjeto() {
+		StringBuilder dadosSeparadosPorPontoVirgula = new StringBuilder();
+		dadosSeparadosPorPontoVirgula.append(this.id).append(";");
+		dadosSeparadosPorPontoVirgula.append(this.nome);
+
+		return dadosSeparadosPorPontoVirgula.toString();
+	}
 
 }
