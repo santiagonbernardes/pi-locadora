@@ -1,15 +1,16 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.utils.DataUtils;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Funcionario implements PersisteDados {
 
 	//Atributos
 	private int id;
 	private String nome;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	private String cpf;
 	private Endereco endereco;
 	private Telefone telefonePrincipal;
@@ -52,11 +53,11 @@ public class Funcionario implements PersisteDados {
 		this.nome = nome;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -142,6 +143,25 @@ public class Funcionario implements PersisteDados {
 
 	@Override
 	public String desmonteObjeto() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		StringBuilder dadosDoObjeto = new StringBuilder();
+
+		String nomeDaClasse = this.getClass().getSimpleName();
+
+		dadosDoObjeto.append(nomeDaClasse).append(";");
+		dadosDoObjeto.append(this.id).append(";");
+		dadosDoObjeto.append(this.nome).append(";");
+		String dataNascimentoFormatada = DataUtils.convertaLocalDateParaStringFormatada(this.dataNascimento);
+		dadosDoObjeto.append(dataNascimentoFormatada).append(";");
+		dadosDoObjeto.append(this.cpf).append(";");
+		dadosDoObjeto.append(this.endereco.getId()).append(";");
+		dadosDoObjeto.append(this.telefonePrincipal.toString()).append(";");
+		dadosDoObjeto.append(this.telefoneAlternativo.toString()).append(";");
+		dadosDoObjeto.append(this.email).append(";");
+		dadosDoObjeto.append(this.rg).append(";");
+		dadosDoObjeto.append(this.carteiraDeTrabalho).append(";");
+		dadosDoObjeto.append(this.login).append(";");
+		dadosDoObjeto.append(this.senha);
+
+		return dadosDoObjeto.toString();
 	}
 }

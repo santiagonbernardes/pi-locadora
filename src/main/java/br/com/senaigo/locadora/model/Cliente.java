@@ -1,10 +1,10 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.utils.DataUtils;
 import br.com.senaigo.locadora.utils.Utils;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class Cliente implements PersisteDados {
@@ -155,19 +155,25 @@ public class Cliente implements PersisteDados {
 
 	@Override
 	public String desmonteObjeto() {
-		StringBuilder dadosSeparadosPorPontoVirgula = new StringBuilder();
+		StringBuilder dadosDoObjeto = new StringBuilder();
 
-		dadosSeparadosPorPontoVirgula.append(this.id).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.nome).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.razaoSocial).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.dataNascimento.toString()).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.cpf).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.cnpj).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.endereco.desmonteObjeto()).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.email);
+		String nomeDaClasse = this.getClass().getSimpleName();
 
+		dadosDoObjeto.append(nomeDaClasse).append(";");
+		dadosDoObjeto.append(this.id).append(";");
+		dadosDoObjeto.append(this.nome).append(";");
+		dadosDoObjeto.append(this.razaoSocial).append(";");
+		dadosDoObjeto.append(this.nomeFantasia).append(";");
+		String dataFormatada = DataUtils.convertaLocalDateParaStringFormatada(this.dataNascimento);
+		dadosDoObjeto.append(dataFormatada).append(";");
+		dadosDoObjeto.append(this.cpf).append(";");
+		dadosDoObjeto.append(this.cnpj).append(";");
+		dadosDoObjeto.append(this.endereco.getId()).append(";");
+		dadosDoObjeto.append(this.telefonePrincipal.toString()).append(";");
+		dadosDoObjeto.append(this.telefoneAlternativo.toString()).append(";");
+		dadosDoObjeto.append(this.email);
 
-		return dadosSeparadosPorPontoVirgula.toString();
+		return dadosDoObjeto.toString();
 	}
 
 }

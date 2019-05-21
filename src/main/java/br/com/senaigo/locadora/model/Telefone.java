@@ -1,9 +1,7 @@
 package br.com.senaigo.locadora.model;
 
-import br.com.senaigo.locadora.interfaces.PersisteDados;
 import br.com.senaigo.locadora.utils.Utils;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,5 +59,10 @@ public class Telefone {
 		telefoneRetorno.setDdd(ddd);
 		telefoneRetorno.setNumero(numero);
 		return telefoneRetorno;
+	}
+
+	@Override
+	public String toString() {
+		return "(" + this.ddd + ")" + numero;
 	}
 }

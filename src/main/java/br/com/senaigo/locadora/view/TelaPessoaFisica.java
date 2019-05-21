@@ -632,7 +632,7 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
             cliente.setTelefoneAlternativo(telefoneAlternativoObjeto);
             cliente.setEmail(email);
 
-            String dados = cliente.desmonteObjeto(true);
+            String dados = cliente.desmonteObjeto();
             System.out.println(dados);
 
 

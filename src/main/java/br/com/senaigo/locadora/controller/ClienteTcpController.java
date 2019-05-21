@@ -21,7 +21,7 @@ public class ClienteTcpController {
 	public String execute(Object objeto, Operacao operacao) throws IOException {
 		try {
 			PersisteDados dados = (PersisteDados) objeto;
-			String mensagem = operacao.getValor() + "|" + dados.desmonteObjeto();
+			String mensagem = operacao.getValor() + "#" + dados.desmonteObjeto();
 			System.out.println("Enviando requisição: " + mensagem);
 			conexaoComCliente.enviarMensagem(mensagem);
 			String resposta = conexaoComCliente.receberMensagem();
@@ -34,7 +34,7 @@ public class ClienteTcpController {
 	public String execute(String nomeEntidade, Operacao operacao) throws IOException {
 		//TODO buscar solução melhor que passar String
 		try {
-			String mensagem = operacao.getValor() + "|" + nomeEntidade;
+			String mensagem = operacao.getValor() + "#" + nomeEntidade;
 			System.out.println("Enviando requisição: " + mensagem);
 			conexaoComCliente.enviarMensagem(mensagem);
 			String resposta = conexaoComCliente.receberMensagem();

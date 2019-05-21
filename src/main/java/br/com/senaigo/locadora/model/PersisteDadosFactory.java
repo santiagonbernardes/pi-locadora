@@ -2,7 +2,7 @@ package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 
-public enum  PersisteDadosFactory {
+public enum PersisteDadosFactory {
 	CATEGORIA {
 		@Override
 		PersisteDados obtenhaInstancia() {
@@ -43,12 +43,6 @@ public enum  PersisteDadosFactory {
 		@Override
 		PersisteDados obtenhaInstancia() {
 			return new Motorista();
-		}
-	},
-	TELEFONE {
-		@Override
-		PersisteDados obtenhaInstancia() {
-			return new Telefone();
 		}
 	},
 	VEICULO {

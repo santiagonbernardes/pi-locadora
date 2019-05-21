@@ -47,11 +47,15 @@ public class Marca implements PersisteDados {
 
 	@Override
 	public String desmonteObjeto() {
-		StringBuilder dadosSeparadosPorPontoVirgula = new StringBuilder();
-		dadosSeparadosPorPontoVirgula.append(this.id).append(";");
-		dadosSeparadosPorPontoVirgula.append(this.nome);
+		StringBuilder dadosDoObjeto = new StringBuilder();
 
-		return dadosSeparadosPorPontoVirgula.toString();
+		String nomeDaClasse = this.getClass().getSimpleName();
+
+		dadosDoObjeto.append(nomeDaClasse).append(";");
+		dadosDoObjeto.append(this.id).append(";");
+		dadosDoObjeto.append(this.nome);
+
+		return dadosDoObjeto.toString();
 	}
 
 }
