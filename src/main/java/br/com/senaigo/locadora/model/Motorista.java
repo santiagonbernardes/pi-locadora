@@ -3,9 +3,10 @@ package br.com.senaigo.locadora.model;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 import java.util.Date;
 
-public class Motorista extends PersisteDados {
+public class Motorista implements PersisteDados {
     
     //Atributos
+	private int id;
     private String nome;
     private Date dataNascimento;
     private String cpf;
@@ -17,7 +18,7 @@ public class Motorista extends PersisteDados {
     
     //Construtores
     public Motorista() {
-        super();
+        this.id = 0;
         this.nome = "";
         this.dataNascimento = null;
         this.cpf = "";
@@ -29,7 +30,15 @@ public class Motorista extends PersisteDados {
     }
 
     //Getters e Setters
-    public String getNome() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNome() {
         return nome;
     }
 
@@ -102,7 +111,7 @@ public class Motorista extends PersisteDados {
     }
 
     @Override
-    public String desmonteObjeto(boolean comParametro) {
+    public String desmonteObjeto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

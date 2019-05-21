@@ -6,9 +6,10 @@ import java.util.List;
 
 import static br.com.senaigo.locadora.utils.Utils.*;
 
-public class Veiculo extends PersisteDados {
+public class Veiculo implements PersisteDados {
 
 	//Atributos
+	private int id;
 	private String placa;
 	private long renavam;
 	private int anoFabricacao;
@@ -20,7 +21,7 @@ public class Veiculo extends PersisteDados {
 
 	//Construtores
 	public Veiculo() {
-		super();
+		this.id = 0;
 		this.placa = "";
 		this.renavam = 0;
 		this.anoFabricacao = 0;
@@ -32,6 +33,14 @@ public class Veiculo extends PersisteDados {
 	}
 
 	//Getters e Setters
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getPlaca() {
 		return placa;
 	}
@@ -113,10 +122,8 @@ public class Veiculo extends PersisteDados {
 	}
 
 	@Override
-	public String desmonteObjeto(boolean comParametro) {
+	public String desmonteObjeto() {
 		StringBuilder dadosSeparadosPontoVirgula = new StringBuilder();
-
-		dadosSeparadosPontoVirgula.append(this.obtenhaParametros());
 		dadosSeparadosPontoVirgula.append(this.id).append(";");
 		dadosSeparadosPontoVirgula.append(this.placa).append(";");
 		dadosSeparadosPontoVirgula.append(this.renavam).append(";");
