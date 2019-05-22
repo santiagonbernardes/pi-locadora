@@ -101,11 +101,15 @@ public class Endereco implements PersisteDados {
 	public void monteObjeto(String dadosDoObjeto) {
 		List<String> campos = Utils.obtenhaCampos(dadosDoObjeto);
 
-		this.logradouro = campos.get(0);
-		this.numero = campos.get(1);
-		this.complemento = campos.get(2);
-		this.bairro = campos.get(3);
-		this.cep = campos.get(4);
+		this.id = Utils.convertaParaInt(campos.get(0));
+		this.logradouro = campos.get(1);
+		this.numero = campos.get(2);
+		this.complemento = campos.get(3);
+		this.bairro = campos.get(4);
+		this.cidade = campos.get(5);
+		this.cep = campos.get(6);
+		int valorEstado = Utils.convertaParaInt(campos.get(7));
+		this.estado = EstadosBrasil.valueOf(valorEstado);
 	}
 
 	@Override
