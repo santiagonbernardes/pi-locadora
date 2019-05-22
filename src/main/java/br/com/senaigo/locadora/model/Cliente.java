@@ -137,20 +137,18 @@ public class Cliente implements PersisteDados {
 		this.id = Utils.convertaParaInt(campos.get(0));
 		this.nome = campos.get(1);
 		this.razaoSocial = campos.get(2);
-		this.dataNascimento = LocalDate.parse(campos.get(3));
-		this.cpf = campos.get(4);
-		this.cnpj = campos.get(5);
+		this.nomeFantasia = campos.get(3);
+		this.dataNascimento = DataUtils.convertaStringParaLocalDate(campos.get(4));
+		this.cpf = campos.get(5);
+		this.cnpj = campos.get(6);
+		String dadosEndereco = campos.get(7) + ";" + campos.get(8) + ";" + campos.get(9) + ";" + campos.get(10) + ";"
+				+ campos.get(11) + ";" + campos.get(12) + ";" + campos.get(13) + ";" + campos.get(14);
 		Endereco endereco = (Endereco) PersisteDadosFactory.obtenhaInstancia("Endereco");
-		String dadosEndereco = campos.get(6) + ";" + campos.get(7) + ";" + campos.get(8) + ";" + campos.get(9) + ";" + campos.get(10);
 		endereco.monteObjeto(dadosEndereco);
 		this.endereco = endereco;
-		Telefone telefonePrincipal = (Telefone) PersisteDadosFactory.obtenhaInstancia("Telefone");
-		String dadosTelefonePrincipal = campos.get(11) + ";" + campos.get(12);
-		this.telefonePrincipal = telefonePrincipal;
-		Telefone telefoneAlternativo = (Telefone) PersisteDadosFactory.obtenhaInstancia("Telefone");
-		String dadosTelefoneAlternativo = campos.get(13) + ";" + campos.get(14);
-		this.telefoneAlternativo = telefoneAlternativo;
-		this.email = campos.get(15);
+		this.telefonePrincipal = Telefone.obtenhaInstancia(campos.get(15));
+		this.telefoneAlternativo = Telefone.obtenhaInstancia(campos.get(16));
+		this.email = campos.get(17);
 	}
 
 	@Override

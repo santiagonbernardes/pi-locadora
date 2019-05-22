@@ -14,4 +14,14 @@ public enum Estado {
 	public int getValor() {
 		return valor;
 	}
+
+	public static Estado valueOf(int valor) {
+		Estado estadoEncontrado = null;
+		for(Estado estado : Estado.values()) {
+			if(estado.valor == valor) {
+				estadoEncontrado = estado;
+			}
+		}
+		return estadoEncontrado;
+	}
 }
