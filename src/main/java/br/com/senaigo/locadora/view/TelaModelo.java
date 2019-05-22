@@ -161,7 +161,7 @@ public class TelaModelo extends javax.swing.JInternalFrame {
         });
 
         jPanelMarca.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelMarca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Marca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanelMarca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Modelo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18), new java.awt.Color(0, 0, 0))); // NOI18N
 
         jLabelID.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabelID.setForeground(new java.awt.Color(0, 0, 0));
@@ -452,7 +452,7 @@ public class TelaModelo extends javax.swing.JInternalFrame {
 				tabela.addRow(campos);
 			}
 		} catch (Exception erro) {
-			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Marca: " + erro.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Modelo: " + erro.getMessage());
 		}
 	}
 
