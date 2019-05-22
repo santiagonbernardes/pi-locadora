@@ -364,27 +364,8 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        //TODO validar a entrada
         try {
-            //TODO validar a entrada
-            //Verificar se o campo id está preenchido. Se tiver, chamar o método que irá salvar
-            String nome = jTextFieldNome.getText();
-            String id = jTextFieldID.getText();
-            Categoria categoria = new Categoria();
-
-            categoria.setNome(nome);
-
-            if (id.equals("")) {
-                controller.execute(categoria, Operacao.INCLUIR);
-            } else {
-                categoria.setId(Utils.convertaParaInt(id));
-                controller.execute(categoria, Operacao.ALTERAR);
-            }
-
-            preenchaGrid();
-            jTextFieldNome.setText("");
-            modo = "Navegar";
-            ManipulaInterface();
+            //TODO popular o objeto dentro deste try
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
