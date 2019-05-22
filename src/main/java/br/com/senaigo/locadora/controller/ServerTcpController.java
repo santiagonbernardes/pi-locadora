@@ -31,7 +31,7 @@ public class ServerTcpController {
 				resposta = excluir(requisicaoTratada);
 				break;
 			case LISTAR:
-				resposta = listar(requisicaoComOperacao);
+				resposta = listar(requisicaoTratada);
 				break;
 		}
 
@@ -42,33 +42,26 @@ public class ServerTcpController {
 		String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(requisicao);
 		String requisicaoTratada = ExtratorRegex.removaNomeEntidade(requisicao);
 		Repositorio repositorio = new Repositorio(nomeEntidade);
-		repositorio.incluir(requisicao);
+		repositorio.incluir(requisicaoTratada);
 		return nomeEntidade + " incluído com sucesso.";
-
 	}
 
 	private String listar(String requisicao) throws IOException {
-		StringBuilder listaEmTexto = new StringBuilder();
-		String nomeEntidade = parametros.get(1);
-		Repositorio repositorio = new Repositorio(nomeEntidade);
+		Repositorio repositorio = new Repositorio(requisicao);
 		return repositorio.listar();
 	}
 
 	private String alterar(String requisicao) throws IOException {
-		String nomeEntidade = parametros.get(1);
-		String campoAlterado = parametros.get(2);
-		String id = Utils.obtenhaCampos(campoAlterado).get(0);
-		String regex = "(?<!.)" + id + ";.*";
+		String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(requisicao);
+		String campoAlterado = ExtratorRegex.removaNomeEntidade(requisicao);
 		Repositorio repositorio = new Repositorio(nomeEntidade);
 		String dadosAtuais = repositorio.listar();
-		String dadosNovos = dadosAtuais.replaceFirst(regex, campoAlterado);
-		repositorio.alterar(dadosNovos);
 		return "Dados Alterados com sucesso!";
 	}
 
 	private String excluir(String requisicao) throws IOException {
-		String nomeEntidade = requisicao.get(1);
-		String campoExcluir = requisicao.get(2);
+		String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(requisicao);
+		String campoExcluir = ExtratorRegex.removaNomeEntidade(requisicao);
 		Repositorio repositorio = new Repositorio(nomeEntidade);
 		String dadosAtuais = repositorio.listar();
 		String dadosNovos = dadosAtuais.replaceFirst(campoExcluir + "\n", "");

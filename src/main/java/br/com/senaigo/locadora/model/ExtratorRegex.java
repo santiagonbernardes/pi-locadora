@@ -2,6 +2,8 @@ package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +11,10 @@ public class ExtratorRegex {
 
 	private static final String REGEX_EXTRAIR_OPERACAO = "^\\d+";
 	private static final String REGEX_REMOVER_OPERACAO = "^\\d+#";
+	private static final String REGEX_EXTRAIR_ENTIDADE = "^\\w+";
+	private static final String REGEX_REMOVER_ENTIDADE = "^\\w+;";
+	private static final String REGEX_EXTRAIR_OBJETOS_INTERNOS = "\\w+#\\d+";
+	private static final String REGEX_EXTRAIR_ID_OBJETO_INTERNO = "\\d+$";
 
 
 	public static int extraiaCodigoOperacao(String requisicaoComOperacao) {
@@ -16,9 +22,44 @@ public class ExtratorRegex {
 		return Utils.convertaParaInt(idEncontrada);
 	}
 
+	public static String extraiaIdObjetoInterno(String dadosObjetoInterno) {
+		return extraiaUmResultado(REGEX_EXTRAIR_ID_OBJETO_INTERNO, dadosObjetoInterno);
+	}
+
+	public static String extraiaDadoPorId(String dados, String id) {
+		String regex = monteRegexId(id);
+		return extraiaUmResultado(regex, dados);
+	}
+
+	public static String extraiaNomeEntidade(String requisicaoComNomeEntidade) {
+		return extraiaUmResultado(REGEX_EXTRAIR_ENTIDADE, requisicaoComNomeEntidade);
+	}
+
 
 	public static String removaDadosOperacao(String requisicaoComOperacao) {
-		return requisicaoComOperacao.replaceFirst(REGEX_REMOVER_OPERACAO, "");
+		return remova(REGEX_REMOVER_OPERACAO, requisicaoComOperacao);
+	}
+
+	public static String removaNomeEntidade(String requisicaoComNomeEntidade) {
+		return remova(REGEX_REMOVER_ENTIDADE, requisicaoComNomeEntidade);
+	}
+
+	public static List<String> extraiaObjetosInternos(String dados) {
+		List<String> objetosInternos = new ArrayList<>();
+		Matcher match = obtenhaMatcher(REGEX_EXTRAIR_OBJETOS_INTERNOS, dados);
+
+		while (match.find()) {
+			objetosInternos.add(match.group());
+		}
+		return objetosInternos;
+	}
+
+	private static String monteRegexId(String id) {
+		return "^" + id + ".*";
+	}
+
+	private static String remova(String regex, String requisicao) {
+		return requisicao.replaceFirst(regex, "");
 	}
 
 	private static String extraiaUmResultado(String regex, String requisicao) {
@@ -37,6 +78,4 @@ public class ExtratorRegex {
 		Pattern padrao = Pattern.compile(regex);
 		return padrao.matcher(requisicao);
 	}
-
-
 }

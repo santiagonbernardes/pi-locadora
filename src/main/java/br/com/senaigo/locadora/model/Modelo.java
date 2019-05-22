@@ -59,6 +59,7 @@ public class Modelo implements PersisteDados {
 		dadosDoObjeto.append(nomeDaClasse).append(";");
 		dadosDoObjeto.append(this.id).append(";");
 		dadosDoObjeto.append(this.nome).append(";");
+		dadosDoObjeto.append(this.marca.getClass().getSimpleName()).append("#");
 		dadosDoObjeto.append(this.marca.getId());
 
 		return dadosDoObjeto.toString();

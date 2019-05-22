@@ -137,7 +137,7 @@ public class TelaSelecaoAplicacao extends javax.swing.JFrame {
                 servidor.enviarMensagem(resposta);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+			System.out.println(e.getMessage());;
         }
        
     }//GEN-LAST:event_jButtonServidorActionPerformed

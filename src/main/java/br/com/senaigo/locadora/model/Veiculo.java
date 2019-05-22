@@ -134,8 +134,10 @@ public class Veiculo implements PersisteDados {
 		dadosDoObjeto.append(this.anoFabricacao).append(";");
 		dadosDoObjeto.append(this.valorCompra).append(";");
 		dadosDoObjeto.append(this.kmAtual).append(";");
+		dadosDoObjeto.append(this.categoria.getClass().getSimpleName()).append("#");
 		dadosDoObjeto.append(this.categoria.getId()).append(";");
 		dadosDoObjeto.append(this.estado.getValor()).append(";");
+		dadosDoObjeto.append(this.modelo.getClass().getSimpleName()).append("#");
 		dadosDoObjeto.append(this.modelo.getId());
 
 		return dadosDoObjeto.toString();
