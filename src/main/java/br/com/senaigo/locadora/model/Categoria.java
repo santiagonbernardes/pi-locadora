@@ -1,6 +1,9 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.utils.Utils;
+
+import java.util.List;
 
 public class Categoria implements PersisteDados {
 
@@ -46,7 +49,11 @@ public class Categoria implements PersisteDados {
 	//Métodos Herdados
 	@Override
 	public void monteObjeto(String dadosDoObjeto) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		List<String> campos = Utils.obtenhaCampos(dadosDoObjeto);
+
+		this.id = Utils.convertaParaInt(campos.get(0));
+		this.nome = campos.get(1);
+		this.valorDiarioLocacao = Utils.convertaParaFloat(campos.get(2));
 	}
 
 	@Override

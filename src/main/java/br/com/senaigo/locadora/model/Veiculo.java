@@ -1,6 +1,8 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.utils.Utils;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import java.util.List;
 
@@ -118,7 +120,16 @@ public class Veiculo implements PersisteDados {
 		this.anoFabricacao = convertaParaInt(campos.get(3));
 		this.valorCompra = convertaParaFloat(campos.get(4));
 		this.kmAtual = convertaParaInt(campos.get(5));
-
+		String dadosCategoria = campos.get(6) + ";" + campos.get(7)+ ";" + campos.get(8);
+		Categoria categoria = (Categoria) PersisteDadosFactory.obtenhaInstancia("Categoria");
+		categoria.monteObjeto(dadosCategoria);
+		this.categoria = categoria;
+		int valorEstado = Utils.convertaParaInt(campos.get(9));
+		this.estado = Estado.valueOf(valorEstado);
+		String dadosModelo = campos.get(10) + ";" + campos.get(11) + ";" + campos.get(12) + ";" + campos.get(13);
+		Modelo modelo = (Modelo) PersisteDadosFactory.obtenhaInstancia("Modelo");
+		modelo.monteObjeto(dadosModelo);
+		this.modelo = modelo;
 	}
 
 	@Override
