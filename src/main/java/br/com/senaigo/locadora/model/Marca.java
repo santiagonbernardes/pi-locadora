@@ -38,16 +38,16 @@ public class Marca extends PersisteDados {
 
     @Override
     public String desmonteObjeto(boolean comParametro) {
-        StringBuilder dadosSeparadosPorVirgula = new StringBuilder();
+        StringBuilder dadosSeparadosPorPontoVirgula = new StringBuilder();
 
         if(comParametro) {
-            dadosSeparadosPorVirgula.append(obtenhaParametros());
+            dadosSeparadosPorPontoVirgula.append(obtenhaParametros());
         }
 
-        dadosSeparadosPorVirgula.append(this.id).append(";");
-        dadosSeparadosPorVirgula.append(this.nome);
+        dadosSeparadosPorPontoVirgula.append(this.id).append(";");
+        dadosSeparadosPorPontoVirgula.append(this.nome);
 
-        return dadosSeparadosPorVirgula.toString();
+        return dadosSeparadosPorPontoVirgula.toString();
     }
 
 }

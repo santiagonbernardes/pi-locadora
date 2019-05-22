@@ -1,6 +1,9 @@
 package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
+import br.com.senaigo.locadora.utils.Utils;
+
+import java.util.List;
 
 public class Endereco extends PersisteDados {
     
@@ -67,11 +70,29 @@ public class Endereco extends PersisteDados {
     //Métodos herdados
     @Override
     public void monteObjeto(String dadosDoObjeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> campos = Utils.obtenhaCampos(dadosDoObjeto);
+
+        this.logradouro = campos.get(0);
+        this.numero = campos.get(1);
+        this.complemento = campos.get(2);
+        this.bairro = campos.get(3);
+        this.cep = campos.get(4);
     }
 
     @Override
     public String desmonteObjeto(boolean comParametro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+        StringBuilder dadosSeparadosPorPontoVirgula = new StringBuilder();
+
+        if(comParametro) {
+            dadosSeparadosPorPontoVirgula.append(obtenhaParametros());
+        }
+
+        dadosSeparadosPorPontoVirgula.append(this.logradouro).append(";");
+        dadosSeparadosPorPontoVirgula.append(this.numero).append(";");
+        dadosSeparadosPorPontoVirgula.append(this.complemento).append(";");
+        dadosSeparadosPorPontoVirgula.append(this.bairro).append(";");
+        dadosSeparadosPorPontoVirgula.append(this.cep);
+
+        return dadosSeparadosPorPontoVirgula.toString();
+    }
 }
