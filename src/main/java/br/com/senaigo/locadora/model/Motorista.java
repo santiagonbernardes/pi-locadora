@@ -4,7 +4,6 @@ import br.com.senaigo.locadora.interfaces.PersisteDados;
 import br.com.senaigo.locadora.utils.DataUtils;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Motorista implements PersisteDados {
 
@@ -125,6 +124,7 @@ public class Motorista implements PersisteDados {
 		String dataNascimentoFormatada = DataUtils.convertaLocalDateParaStringFormatada(this.dataNascimento);
 		dadosDoObjeto.append(dataNascimentoFormatada).append(";");
 		dadosDoObjeto.append(this.cpf).append(";");
+		dadosDoObjeto.append(this.endereco.getClass().getSimpleName()).append("#");
 		dadosDoObjeto.append(this.endereco.getId()).append(";");
 		dadosDoObjeto.append(this.telefonePrincipal.toString()).append(";");
 		dadosDoObjeto.append(this.telefoneAlternativo.toString()).append(";");

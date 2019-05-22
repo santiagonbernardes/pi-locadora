@@ -153,6 +153,7 @@ public class Funcionario implements PersisteDados {
 		String dataNascimentoFormatada = DataUtils.convertaLocalDateParaStringFormatada(this.dataNascimento);
 		dadosDoObjeto.append(dataNascimentoFormatada).append(";");
 		dadosDoObjeto.append(this.cpf).append(";");
+		dadosDoObjeto.append(this.endereco.getClass().getSimpleName()).append("#");
 		dadosDoObjeto.append(this.endereco.getId()).append(";");
 		dadosDoObjeto.append(this.telefonePrincipal.toString()).append(";");
 		dadosDoObjeto.append(this.telefoneAlternativo.toString()).append(";");

@@ -168,6 +168,7 @@ public class Cliente implements PersisteDados {
 		dadosDoObjeto.append(dataFormatada).append(";");
 		dadosDoObjeto.append(this.cpf).append(";");
 		dadosDoObjeto.append(this.cnpj).append(";");
+		dadosDoObjeto.append(this.endereco.getClass().getSimpleName()).append("#");
 		dadosDoObjeto.append(this.endereco.getId()).append(";");
 		dadosDoObjeto.append(this.telefonePrincipal.toString()).append(";");
 		dadosDoObjeto.append(this.telefoneAlternativo.toString()).append(";");

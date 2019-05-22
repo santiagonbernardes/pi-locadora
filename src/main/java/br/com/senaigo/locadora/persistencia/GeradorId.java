@@ -1,5 +1,6 @@
 package br.com.senaigo.locadora.persistencia;
 
+import br.com.senaigo.locadora.utils.ArquivoUtils;
 import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.*;
@@ -14,8 +15,7 @@ public class GeradorId {
 
 	//Construtores
 	public GeradorId() throws IOException {
-		//Precisa criar o arquivo no diretório e colocar 0 na primeira vez que rodar senão dá exceção
-		//TODO Verificar uma forma para que caso o arquivo não exista, seja criado e inicializado com 0
+		ArquivoUtils.garantaExistenciaArquivo(caminhoArquivoId);
 		FileReader leitorArquivo = new FileReader(caminhoArquivoId);
 		BufferedReader leitorTexto = new BufferedReader(leitorArquivo);
 		String linha = leitorTexto.readLine();
@@ -34,6 +34,5 @@ public class GeradorId {
 
 		escritorTexto.write(String.valueOf(ultimaIdGerada));
 		escritorTexto.close();
-
 	}
 }
