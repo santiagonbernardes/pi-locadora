@@ -2,8 +2,10 @@ package br.com.senaigo.locadora.model;
 
 import br.com.senaigo.locadora.interfaces.PersisteDados;
 import br.com.senaigo.locadora.utils.DataUtils;
+import br.com.senaigo.locadora.utils.Utils;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Motorista implements PersisteDados {
 
@@ -109,7 +111,21 @@ public class Motorista implements PersisteDados {
 	//Métodos Herdados
 	@Override
 	public void monteObjeto(String dadosDoObjeto) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		List<String> campos = Utils.obtenhaCampos(dadosDoObjeto);
+
+		this.id = Utils.convertaParaInt(campos.get(0));
+		this.nome = campos.get(1);
+		this.dataNascimento = DataUtils.convertaStringParaLocalDate(campos.get(2));
+		this.cpf = campos.get(3);
+		String dadosEndereco = campos.get(4) + ";" + campos.get(5) + ";" + campos.get(6) + ";" + campos.get(7) + ";"
+			+ campos.get(8) + ";" + campos.get(9) + ";" + campos.get(10) + ";" + campos.get(11);
+		Endereco endereco = (Endereco) PersisteDadosFactory.obtenhaInstancia("Endereco");
+		endereco.monteObjeto(dadosEndereco);
+		this.endereco = endereco;
+		this.telefonePrincipal = Telefone.obtenhaInstancia(campos.get(12));
+		this.telefoneAlternativo = Telefone.obtenhaInstancia(campos.get(13));
+		this.email = campos.get(14);
+		this.cnh = campos.get(15);
 	}
 
 	@Override

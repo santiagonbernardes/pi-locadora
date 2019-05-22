@@ -63,6 +63,13 @@ public class Telefone {
 
 	@Override
 	public String toString() {
-		return "(" + this.ddd + ")" + numero;
+		String numeroSemFormatacao = String.valueOf(numero);
+		int tamanho = numeroSemFormatacao.length();
+
+		String digitosAntesHifen = tamanho == 8 ? numeroSemFormatacao.substring(0, 4) : numeroSemFormatacao.substring(0, 5);
+		String digitosAposHifen = tamanho == 8 ? numeroSemFormatacao.substring(4) : numeroSemFormatacao.substring(5);
+		String numeroFormatado = digitosAntesHifen + "-" + digitosAposHifen;
+
+		return "(" + this.ddd + ")" + numeroFormatado;
 	}
 }

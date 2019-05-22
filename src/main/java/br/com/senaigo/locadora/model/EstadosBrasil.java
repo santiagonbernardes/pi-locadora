@@ -44,4 +44,14 @@ public enum EstadosBrasil {
 	public String getNome() {
 		return nome;
 	}
+
+	public static EstadosBrasil valueOf(int valor) {
+		EstadosBrasil estadoEncontrado = null;
+		for(EstadosBrasil estado : EstadosBrasil.values()) {
+			if(estado.valor == valor) {
+				estadoEncontrado = estado;
+			}
+		}
+		return estadoEncontrado;
+	}
 }

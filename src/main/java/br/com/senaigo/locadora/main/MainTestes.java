@@ -35,6 +35,10 @@ public class MainTestes {
 			System.out.println(veiculos.size());
 			List<Cliente> clientes = (List<Cliente>) controller.liste("Cliente");
 			System.out.println(clientes.size());
+			List<Funcionario> funcionarios = (List<Funcionario>) controller.liste("Funcionario");
+			System.out.println(funcionarios.size());
+			List<Motorista> motoristas = (List<Motorista>) controller.liste("Motorista");
+			System.out.println(motoristas);
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
 		}
