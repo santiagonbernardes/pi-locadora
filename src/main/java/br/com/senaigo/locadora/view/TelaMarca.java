@@ -132,6 +132,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         setBorder(null);
 
         jPanelBase.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelBase.setBorder(null);
 
         jButtonNovo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonNovo.setForeground(new java.awt.Color(0, 0, 0));

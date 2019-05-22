@@ -112,6 +112,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuVeiculo.add(jMenuItem3);
 
         jMenuItem2.setText("Categoria");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenuVeiculo.add(jMenuItem2);
 
         jMenuItem4.setText("Carro");
@@ -180,6 +185,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            TelaCategoria tela = new TelaCategoria();
+            jDesktopPanePainelPrincipal.removeAll();
+            form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
+            
+        } catch (Exception erro) {
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,17 +5,98 @@
  */
 package br.com.senaigo.locadora.view;
 
+import br.com.senaigo.locadora.controller.ClienteTcpController;
+import br.com.senaigo.locadora.model.Categoria;
+import br.com.senaigo.locadora.persistencia.Operacao;
+import br.com.senaigo.locadora.utils.Utils;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pfellype
  */
-public class TelaCategoria extends javax.swing.JFrame {
+public class TelaCategoria extends javax.swing.JInternalFrame {
+    private ClienteTcpController controller;
+    private String modo;
+    private List<Categoria> fonteDeDados;
 
     /**
      * Creates new form TelaCategoria
      */
-    public TelaCategoria() {
+    public TelaCategoria() throws IOException {
         initComponents();
+        modo = "Navegar";
+        controller = new ClienteTcpController();
+        ManipulaInterface();
+        preenchaGrid();
+    }
+    
+    public void ManipulaInterface(){
+        switch(modo){
+            case "Navegar":
+                jButtonSalvar.setEnabled(false);
+                jButtonCancelar.setEnabled(false);
+                jTextFieldNome.setEditable(false);
+                jButtonNovo.setEnabled(true);
+                jButtonEditar.setEnabled(false);
+                jButtonExcluir.setEnabled(false);
+//                jButtonArquivo.setEnabled(false);
+//                jTextFieldCaminhoArquivo.setText("");
+//                jLabelIcone.setIcon(null);
+                break;
+                
+            case "Novo":
+                jButtonSalvar.setEnabled(true);
+                jButtonCancelar.setEnabled(true);
+                jTextFieldNome.setEditable(true);
+                jButtonNovo.setEnabled(false);
+                jButtonEditar.setEnabled(false);
+                jButtonExcluir.setEnabled(false);
+//                jButtonArquivo.setEnabled(true);
+//                jTextFieldCaminhoArquivo.setText("");
+//                jLabelIcone.setIcon(null);
+                break;
+               
+            case "Editar":
+                jButtonSalvar.setEnabled(true);
+                jButtonCancelar.setEnabled(true);
+                jTextFieldNome.setEditable(true);
+                jButtonNovo.setEnabled(true);
+                jButtonEditar.setEnabled(false);
+                jButtonExcluir.setEnabled(false);
+//                jButtonArquivo.setEnabled(true);
+//                jTextFieldCaminhoArquivo.setText("");
+                //jLabelIcone.setIcon(null);
+                break;
+                
+            case "Excluir":
+                jButtonSalvar.setEnabled(false);
+                jButtonCancelar.setEnabled(false);
+                jTextFieldNome.setEditable(false);
+                jButtonNovo.setEnabled(true);
+                jButtonEditar.setEnabled(false);
+                jButtonExcluir.setEnabled(false);
+//                jButtonArquivo.setEnabled(false);
+//                jTextFieldCaminhoArquivo.setText("");
+//                jLabelIcone.setIcon(null);
+                break;
+            
+            case "Selecao":
+                jButtonSalvar.setEnabled(false);
+                jButtonCancelar.setEnabled(false);
+                jTextFieldNome.setEditable(false);
+                jButtonNovo.setEnabled(true);
+                jButtonEditar.setEnabled(true);
+                jButtonExcluir.setEnabled(true);
+//                jButtonArquivo.setEnabled(false);
+//                jTextFieldCaminhoArquivo.setText("");
+//                jLabelIcone.setIcon(null);
+                break;
+            default: System.out.println("Modo inválido");
+        }
     }
 
     /**
@@ -27,57 +108,377 @@ public class TelaCategoria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jPanelMarca = new javax.swing.JPanel();
+        jLabelID = new javax.swing.JLabel();
+        jLabelNome = new javax.swing.JLabel();
+        jTextFieldID = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableLista = new javax.swing.JTable();
+        jButtonNovo = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanelMarca.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelMarca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+
+        jLabelID.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelID.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelID.setText("ID:");
+
+        jLabelNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelNome.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelNome.setText("Nome:");
+
+        jTextFieldID.setEditable(false);
+        jTextFieldID.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jButtonSalvar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonSalvar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonCancelar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Marca:");
+
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Modelo:");
+
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Valor:");
+
+        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
+        jPasswordField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanelMarcaLayout = new javax.swing.GroupLayout(jPanelMarca);
+        jPanelMarca.setLayout(jPanelMarcaLayout);
+        jPanelMarcaLayout.setHorizontalGroup(
+            jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMarcaLayout.createSequentialGroup()
+                .addContainerGap(77, Short.MAX_VALUE)
+                .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMarcaLayout.createSequentialGroup()
+                        .addComponent(jLabelNome)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldNome))
+                    .addGroup(jPanelMarcaLayout.createSequentialGroup()
+                        .addComponent(jLabelID)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(jPanelMarcaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelMarcaLayout.setVerticalGroup(
+            jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMarcaLayout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelID)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNome)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonSalvar))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        jTableLista.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTableLista.setForeground(new java.awt.Color(0, 0, 0));
+        jTableLista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableLista.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableLista);
+        if (jTableLista.getColumnModel().getColumnCount() > 0) {
+            jTableLista.getColumnModel().getColumn(0).setPreferredWidth(70);
+            jTableLista.getColumnModel().getColumn(1).setPreferredWidth(870);
+        }
+
+        jButtonNovo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonNovo.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonNovo.setText("Novo");
+        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovoActionPerformed(evt);
+            }
+        });
+
+        jButtonEditar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonEditar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluir.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonExcluir.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelMarca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonNovo)
+                    .addComponent(jButtonEditar)
+                    .addComponent(jButtonExcluir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        //TODO validar a entrada
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCategoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            //TODO validar a entrada
+            //Verificar se o campo id está preenchido. Se tiver, chamar o método que irá salvar
+            String nome = jTextFieldNome.getText();
+            String id = jTextFieldID.getText();
+            Categoria categoria = new Categoria();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCategoria().setVisible(true);
+            categoria.setNome(nome);
+
+            if (id.equals("")) {
+                controller.execute(categoria, Operacao.INCLUIR);
+            } else {
+                categoria.setId(Utils.convertaParaInt(id));
+                controller.execute(categoria, Operacao.ALTERAR);
             }
-        });
+
+            preenchaGrid();
+            jTextFieldNome.setText("");
+            modo = "Navegar";
+            ManipulaInterface();
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        modo = "Navegar";
+        ManipulaInterface();
+        jTextFieldID.setText("");
+        jTextFieldNome.setText("");
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
+        modo="Selecao";
+        ManipulaInterface();
+    }//GEN-LAST:event_jTableListaMouseClicked
+
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        // TODO add your handling code here:
+        jTextFieldID.setText("");
+        jTextFieldNome.setText("");
+
+        modo = "Novo";
+        ManipulaInterface();
+    }//GEN-LAST:event_jButtonNovoActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        int indexDoObjeto = jTableLista.getSelectedRow();
+        Categoria categoria = fonteDeDados.get(indexDoObjeto);
+        jTextFieldID.setText(String.valueOf(categoria.getId()));
+        jTextFieldNome.setText(categoria.getNome());
+        modo = "Editar";
+        ManipulaInterface();
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        try {
+            int indexDoObjeto = jTableLista.getSelectedRow();
+            Categoria categoria = fonteDeDados.get(indexDoObjeto);
+            controller.execute(categoria, Operacao.EXCLUIR);
+            preenchaGrid();
+            modo = "Navegar";
+            ManipulaInterface();
+        } catch (Exception e){
+            //Adicionar tratamento
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+        private void preenchaGrid() {
+		try {
+            atualizeFonteDeDados();
+			DefaultTableModel tabela = obtenhaGrid();
+			tabela.setRowCount(0);
+			for (Categoria categoria : fonteDeDados) {
+				Object[] campos = {
+						categoria.getId(),
+						categoria.getNome()
+				};
+				tabela.addRow(campos);
+			}
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Categoria: " + erro.getMessage());
+		}
+	}
+
+	private void atualizeFonteDeDados() throws IOException {
+        fonteDeDados = (List<Categoria>) controller.liste("Categoria");
+    }
+
+    private DefaultTableModel obtenhaGrid() {
+        return (DefaultTableModel) jTableLista.getModel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonNovo;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelID;
+    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelMarca;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableLista;
+    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 }
