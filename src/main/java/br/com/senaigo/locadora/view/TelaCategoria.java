@@ -116,12 +116,8 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         jTextFieldNome = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLista = new javax.swing.JTable();
         jButtonNovo = new javax.swing.JButton();
@@ -133,14 +129,12 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanelMarca.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelMarca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanelMarca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Categoria", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 18))); // NOI18N
 
         jLabelID.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabelID.setForeground(new java.awt.Color(0, 0, 0));
         jLabelID.setText("ID:");
 
         jLabelNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabelNome.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNome.setText("Nome:");
 
         jTextFieldID.setEditable(false);
@@ -149,7 +143,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         jTextFieldNome.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         jButtonSalvar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonSalvar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +151,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         });
 
         jButtonCancelar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonCancelar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,41 +158,16 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Marca:");
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Modelo:");
-
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Valor:");
-
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanelMarcaLayout = new javax.swing.GroupLayout(jPanelMarca);
         jPanelMarca.setLayout(jPanelMarcaLayout);
         jPanelMarcaLayout.setHorizontalGroup(
             jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+                .addGap(150, 150, 150)
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMarcaLayout.createSequentialGroup()
                         .addComponent(jLabelNome)
@@ -208,21 +175,13 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
                         .addComponent(jTextFieldNome))
                     .addGroup(jPanelMarcaLayout.createSequentialGroup()
                         .addComponent(jLabelID)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
                         .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelMarcaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,12 +196,8 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelID)
                     .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
@@ -255,7 +210,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         );
 
         jTableLista.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTableLista.setForeground(new java.awt.Color(0, 0, 0));
         jTableLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -292,7 +246,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         }
 
         jButtonNovo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonNovo.setForeground(new java.awt.Color(0, 0, 0));
         jButtonNovo.setText("Novo");
         jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,7 +254,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         });
 
         jButtonEditar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonEditar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEditar.setText("Editar");
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,7 +262,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         });
 
         jButtonExcluir.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonExcluir.setForeground(new java.awt.Color(0, 0, 0));
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,7 +296,7 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -366,9 +317,26 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
             //TODO popular o objeto dentro deste try
-
+            String nome = jTextFieldNome.getText();
+            String id = jTextFieldID.getText();
+            Categoria categoria = new Categoria ();
+            
+            categoria.setNome(nome);
+            
+            if (id.equals("")){
+                controller.execute(categoria, Operacao.INCLUIR);
+            } else {
+                categoria.setId(Utils.convertaParaInt(id));
+                controller.execute(categoria, Operacao.ALTERAR);
+            }
+            
+            preenchaGrid();
+            jTextFieldNome.setText("");
+            modo = "Navegar";
+            ManipulaInterface();
+         
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Categoria: " + erro.getMessage());
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -447,16 +415,12 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelMarca;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableLista;
     private javax.swing.JTextField jTextFieldID;

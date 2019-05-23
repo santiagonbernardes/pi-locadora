@@ -6,6 +6,7 @@
 package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.controller.ClienteTcpController;
+import br.com.senaigo.locadora.model.Categoria;
 import br.com.senaigo.locadora.model.Marca;
 import br.com.senaigo.locadora.model.Modelo;
 import br.com.senaigo.locadora.persistencia.Operacao;
@@ -381,6 +382,23 @@ public class TelaModelo extends javax.swing.JInternalFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
             //TODO popular dados aqui
+            String nome = jTextFieldNome.getText();
+            String id = jTextFieldID.getText();
+            Modelo modelo = new Modelo ();
+            
+            modelo.setNome(nome);
+            if (id.equals("")){
+                controller.execute(modelo, Operacao.INCLUIR);
+            } else {
+            modelo.setId(Utils.convertaParaInt(id));
+                controller.execute(modelo, Operacao.ALTERAR);
+            }
+            preenchaGrid();
+            jTextFieldNome.setText("");
+            modo = "Navegar";
+            ManipulaInterface();
+            
+            
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
