@@ -58,4 +58,8 @@ public class Marca implements PersisteDados {
 		return dadosDoObjeto.toString();
 	}
 
+	@Override
+	public String toString() {
+		return this.nome;
+	}
 }

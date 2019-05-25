@@ -10,62 +10,62 @@ import java.util.List;
 
 public class ServerTcpController {
 
-	public String atendaRequisicao(String requisicaoComOperacao) throws Exception {
-		int codigoOperacao = ExtratorRegex.extraiaCodigoOperacao(requisicaoComOperacao);
-		String requisicaoTratada = ExtratorRegex.removaDadosOperacao(requisicaoComOperacao);
-		Operacao operacao = Operacao.valueOf(codigoOperacao);
-		String resposta = "";
+	private Operacao operacao;
+	private String nomeEntidade;
+	private Repositorio repositorio;
+	private String dados;
 
-		if (operacao == null) {
+	public ServerTcpController(String requisicao) throws IOException {
+		int codigoOperacao = ExtratorRegex.extraiaCodigoOperacao(requisicao);
+		String requisicaoSemOperacao = ExtratorRegex.removaDadosOperacao(requisicao);
+		this.operacao = Operacao.valueOf(codigoOperacao);
+		if (this.operacao == null) {
 			throw new IllegalArgumentException("Operacao inválida.");
 		}
+		String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(requisicaoSemOperacao);
+		this.nomeEntidade = nomeEntidade;
+		repositorio = new Repositorio(this.nomeEntidade);
+		String dados = ExtratorRegex.removaNomeEntidade(requisicaoSemOperacao);
+		this.dados = this.operacao == Operacao.LISTAR ? null : dados;
+	}
 
-		switch (operacao) {
+	public String atendaRequisicao() throws Exception {
+		String resposta = "";
+
+		switch (this.operacao) {
 			case INCLUIR:
-				resposta = incluir(requisicaoTratada);
+				resposta = incluir();
 				break;
 			case ALTERAR:
-				resposta = alterar(requisicaoTratada);
+				resposta = alterar();
 				break;
 			case EXCLUIR:
-				resposta = excluir(requisicaoTratada);
+				resposta = excluir();
 				break;
 			case LISTAR:
-				resposta = listar(requisicaoTratada);
+				resposta = listar();
 				break;
 		}
 
 		return resposta;
 	}
 
-	private String incluir(String requisicao) throws IOException {
-		String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(requisicao);
-		String requisicaoTratada = ExtratorRegex.removaNomeEntidade(requisicao);
-		Repositorio repositorio = new Repositorio(nomeEntidade);
-		repositorio.incluir(requisicaoTratada);
-		return nomeEntidade + " incluído com sucesso.";
+	private String incluir() throws IOException {
+		repositorio.incluir(dados);
+		return this.nomeEntidade + " incluído com sucesso.";
 	}
 
-	private String listar(String requisicao) throws IOException {
-		Repositorio repositorio = new Repositorio(requisicao);
+	private String listar() throws IOException {
 		return repositorio.listar();
 	}
 
-	private String alterar(String requisicao) throws IOException {
-		String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(requisicao);
-		String campoAlterado = ExtratorRegex.removaNomeEntidade(requisicao);
-		Repositorio repositorio = new Repositorio(nomeEntidade);
-		String dadosAtuais = repositorio.listar();
-		return "Dados Alterados com sucesso!";
+	private String alterar() throws IOException {
+		repositorio.alterar(dados);
+ 		return this.nomeEntidade + " alterado com sucesso.";
 	}
 
-	private String excluir(String requisicao) throws IOException {
-		String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(requisicao);
-		String campoExcluir = ExtratorRegex.removaNomeEntidade(requisicao);
-		Repositorio repositorio = new Repositorio(nomeEntidade);
-		String dadosAtuais = repositorio.listar();
-		String dadosNovos = dadosAtuais.replaceFirst(campoExcluir + "\n", "");
-		repositorio.alterar(dadosNovos);
-		return "Dados Alterados com sucesso!";
+	private String excluir() throws IOException {
+		repositorio.excluir(dados);
+		return this.nomeEntidade + "excluído com sucesso.";
 	}
 }

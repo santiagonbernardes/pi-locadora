@@ -10,13 +10,11 @@ import br.com.senaigo.locadora.model.Marca;
 import br.com.senaigo.locadora.model.Modelo;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.utils.Utils;
-import java.io.File;
+
 import java.io.IOException;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,15 +25,17 @@ public class TelaModelo extends javax.swing.JInternalFrame {
     
     private ClienteTcpController controller;
     private String modo;
-    private List<Modelo> fonteDeDados;
+    private List<Modelo> fonteDeDadosModelo;
+    private List<Marca> fontedeDadosMarca;
 
     /**
      * Creates new form TelaModelo
      */
     public TelaModelo() throws IOException {
+		controller = new ClienteTcpController();
+        fontedeDadosMarca = controller.liste("Marca");
         initComponents();
         modo = "Navegar";
-        controller = new ClienteTcpController();
         ManipulaInterface();
         preenchaGrid();
     }
@@ -49,8 +49,6 @@ public class TelaModelo extends javax.swing.JInternalFrame {
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(false);
                 jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(false);
-                jTextFieldCaminhoArquivo.setText("");
                 jLabelIcone.setIcon(null);
                 break;
                 
@@ -61,8 +59,6 @@ public class TelaModelo extends javax.swing.JInternalFrame {
                 jButtonNovo.setEnabled(false);
                 jButtonEditar.setEnabled(false);
                 jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(true);
-                jTextFieldCaminhoArquivo.setText("");
                 jLabelIcone.setIcon(null);
                 break;
                
@@ -73,8 +69,6 @@ public class TelaModelo extends javax.swing.JInternalFrame {
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(false);
                 jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(true);
-                jTextFieldCaminhoArquivo.setText("");
                 //jLabelIcone.setIcon(null);
                 break;
                 
@@ -85,8 +79,6 @@ public class TelaModelo extends javax.swing.JInternalFrame {
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(false);
                 jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(false);
-                jTextFieldCaminhoArquivo.setText("");
                 jLabelIcone.setIcon(null);
                 break;
             
@@ -97,8 +89,6 @@ public class TelaModelo extends javax.swing.JInternalFrame {
                 jButtonNovo.setEnabled(true);
                 jButtonEditar.setEnabled(true);
                 jButtonExcluir.setEnabled(true);
-                jButtonArquivo.setEnabled(false);
-                jTextFieldCaminhoArquivo.setText("");
                 jLabelIcone.setIcon(null);
                 break;
             default: System.out.println("Modo inválido");
@@ -126,8 +116,8 @@ public class TelaModelo extends javax.swing.JInternalFrame {
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabelIcone = new javax.swing.JLabel();
-        jTextFieldCaminhoArquivo = new javax.swing.JTextField();
-        jButtonArquivo = new javax.swing.JButton();
+        jLabelMarca = new javax.swing.JLabel();
+        jComboBoxMarca = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLista = new javax.swing.JTable();
 
@@ -196,17 +186,11 @@ public class TelaModelo extends javax.swing.JInternalFrame {
 
         jLabelIcone.setBackground(new java.awt.Color(255, 203, 4));
 
-        jTextFieldCaminhoArquivo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelMarca.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelMarca.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelMarca.setText("Marca:");
 
-        jButtonArquivo.setBackground(new java.awt.Color(255, 255, 255));
-        jButtonArquivo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonArquivo.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonArquivo.setText("Arquivo");
-        jButtonArquivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonArquivoActionPerformed(evt);
-            }
-        });
+        jComboBoxMarca.setModel(new DefaultComboBoxModel(fontedeDadosMarca.toArray()));
 
         javax.swing.GroupLayout jPanelMarcaLayout = new javax.swing.GroupLayout(jPanelMarca);
         jPanelMarca.setLayout(jPanelMarcaLayout);
@@ -226,13 +210,14 @@ public class TelaModelo extends javax.swing.JInternalFrame {
                         .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabelIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldCaminhoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonArquivo)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelMarca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(197, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(217, 217, 217)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,15 +229,14 @@ public class TelaModelo extends javax.swing.JInternalFrame {
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldCaminhoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonArquivo)))
-                    .addGroup(jPanelMarcaLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelID)
-                            .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelMarca)
+                                .addComponent(jComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelID)
+                                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
@@ -358,7 +342,7 @@ public class TelaModelo extends javax.swing.JInternalFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         int indexDoObjeto = jTableLista.getSelectedRow();
-        Modelo modelo = fonteDeDados.get(indexDoObjeto);
+        Modelo modelo = fonteDeDadosModelo.get(indexDoObjeto);
         jTextFieldID.setText(String.valueOf(modelo.getId()));
         jTextFieldNome.setText(modelo.getNome());
         modo = "Editar";
@@ -368,7 +352,7 @@ public class TelaModelo extends javax.swing.JInternalFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         try {
             int indexDoObjeto = jTableLista.getSelectedRow();
-            Modelo modelo = fonteDeDados.get(indexDoObjeto);
+            Modelo modelo = fonteDeDadosModelo.get(indexDoObjeto);
             controller.execute(modelo, Operacao.EXCLUIR);
             preenchaGrid();
             modo = "Navegar";
@@ -381,6 +365,25 @@ public class TelaModelo extends javax.swing.JInternalFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
             //TODO popular dados aqui
+			String id = jTextFieldID.getText();
+			String nome = jTextFieldNome.getText();
+			int posicaoMarca = jComboBoxMarca.getSelectedIndex();
+			Marca marca = fontedeDadosMarca.get(posicaoMarca);
+
+			Modelo modelo = new Modelo();
+			modelo.setNome(nome);
+			modelo.setMarca(marca);
+
+			if(id.equals("")) {
+				controller.execute(modelo, Operacao.INCLUIR);
+			} else {
+				modelo.setId(Utils.convertaParaInt(id));
+				controller.execute(modelo, Operacao.ALTERAR);
+			}
+			preenchaGrid();
+			jTextFieldNome.setText("");
+			modo = "Navegar";
+			ManipulaInterface();
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
@@ -396,25 +399,6 @@ public class TelaModelo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    private void jButtonArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArquivoActionPerformed
-        // TODO add your handling code here:
-        try {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Procurar imagem");
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagem", "jpg", "png");
-            fileChooser.setFileFilter(filtro);
-            int retorno = fileChooser.showOpenDialog(this);
-            if (retorno == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-                jTextFieldCaminhoArquivo.setText(file.getPath());
-                jLabelIcone.setIcon(new ImageIcon(file.getPath()));
-            }
-
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButtonArquivoActionPerformed
-
     private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
         modo="Selecao";
         ManipulaInterface();
@@ -425,7 +409,7 @@ public class TelaModelo extends javax.swing.JInternalFrame {
             atualizeFonteDeDados();
 			DefaultTableModel tabela = obtenhaGrid();
 			tabela.setRowCount(0);
-			for (Modelo modelo : fonteDeDados) {
+			for (Modelo modelo : fonteDeDadosModelo) {
 				Object[] campos = {
 						modelo.getId(),
 						modelo.getNome()
@@ -438,7 +422,7 @@ public class TelaModelo extends javax.swing.JInternalFrame {
 	}
 
 	private void atualizeFonteDeDados() throws IOException {
-        fonteDeDados = (List<Modelo>) controller.liste("Modelo");
+        fonteDeDadosModelo = controller.liste("Modelo");
     }
 
     private DefaultTableModel obtenhaGrid() {
@@ -446,20 +430,20 @@ public class TelaModelo extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonArquivo;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JComboBox<String> jComboBoxMarca;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelIcone;
+    private javax.swing.JLabel jLabelMarca;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JPanel jPanelBase;
     private javax.swing.JPanel jPanelMarca;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableLista;
-    private javax.swing.JTextField jTextFieldCaminhoArquivo;
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables

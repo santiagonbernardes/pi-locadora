@@ -31,13 +31,13 @@ public class MainTestes {
 			controller.execute(motorista, Operacao.INCLUIR);//6
 			controller.execute(veiculo, Operacao.INCLUIR);//7
 
-			List<Veiculo> veiculos = (List<Veiculo>) controller.liste("Veiculo");
+			List<Veiculo> veiculos = controller.liste("Veiculo");
 			System.out.println(veiculos.size());
-			List<Cliente> clientes = (List<Cliente>) controller.liste("Cliente");
+			List<Cliente> clientes = controller.liste("Cliente");
 			System.out.println(clientes.size());
-			List<Funcionario> funcionarios = (List<Funcionario>) controller.liste("Funcionario");
+			List<Funcionario> funcionarios = controller.liste("Funcionario");
 			System.out.println(funcionarios.size());
-			List<Motorista> motoristas = (List<Motorista>) controller.liste("Motorista");
+			List<Motorista> motoristas = controller.liste("Motorista");
 			System.out.println(motoristas);
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());

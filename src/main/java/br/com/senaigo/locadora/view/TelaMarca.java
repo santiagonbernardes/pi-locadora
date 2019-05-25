@@ -13,7 +13,6 @@ import java.io.File;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +25,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
     private ClienteTcpController controller;
     private String modo;
-    private List<Marca> fonteDeDados;
+    private List<Marca> fonteDeDadosMarca;
 
     
     public TelaMarca() throws IOException {
@@ -397,7 +396,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         try {
             int indexDoObjeto = jTableLista.getSelectedRow();
-            Marca marca = fonteDeDados.get(indexDoObjeto);
+            Marca marca = fonteDeDadosMarca.get(indexDoObjeto);
             controller.execute(marca, Operacao.EXCLUIR);
             preenchaGrid();
             modo = "Navegar";
@@ -414,7 +413,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
 		int indexDoObjeto = jTableLista.getSelectedRow();
-		Marca marca = fonteDeDados.get(indexDoObjeto);
+		Marca marca = fonteDeDadosMarca.get(indexDoObjeto);
 		jTextFieldID.setText(String.valueOf(marca.getId()));
 		jTextFieldNome.setText(marca.getNome());
                 modo = "Editar";
@@ -445,7 +444,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             atualizeFonteDeDados();
 			DefaultTableModel tabela = obtenhaGrid();
 			tabela.setRowCount(0);
-			for (Marca marca : fonteDeDados) {
+			for (Marca marca : fonteDeDadosMarca) {
 				Object[] campos = {
 						marca.getId(),
 						marca.getNome()
@@ -458,7 +457,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 	}
 
 	private void atualizeFonteDeDados() throws IOException {
-        fonteDeDados = (List<Marca>) controller.liste("Marca");
+        fonteDeDadosMarca = controller.liste("Marca");
     }
 
     private DefaultTableModel obtenhaGrid() {

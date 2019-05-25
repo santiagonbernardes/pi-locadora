@@ -8,8 +8,7 @@ package br.com.senaigo.locadora.view;
 import br.com.senaigo.locadora.utils.PosicaoFormulario;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -42,13 +41,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuFuncionario = new javax.swing.JMenu();
         jMenuCliente = new javax.swing.JMenu();
         jMenuItemPessoaFisica = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuPessoaJuridica = new javax.swing.JMenuItem();
+        jMenuItemMotorista = new javax.swing.JMenuItem();
         jMenuVeiculo = new javax.swing.JMenu();
         jMenuItemMarca = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuModelo = new javax.swing.JMenuItem();
+        jMenuCategoria = new javax.swing.JMenuItem();
+        jMenuCarro = new javax.swing.JMenuItem();
         jMenuLacacao = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,16 +83,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuCliente.add(jMenuItemPessoaFisica);
 
-        jMenuItem6.setText("Pessoa Jurídica");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jMenuPessoaJuridica.setText("Pessoa Jurídica");
+        jMenuPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jMenuPessoaJuridicaActionPerformed(evt);
             }
         });
-        jMenuCliente.add(jMenuItem6);
+        jMenuCliente.add(jMenuPessoaJuridica);
 
-        jMenuItem7.setText("Motorista");
-        jMenuCliente.add(jMenuItem7);
+        jMenuItemMotorista.setText("Motorista");
+        jMenuItemMotorista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMotoristaActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuItemMotorista);
 
         jMenuBarMenuPrincipal.add(jMenuCliente);
 
@@ -108,19 +112,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuVeiculo.add(jMenuItemMarca);
 
-        jMenuItem3.setText("Modelo");
-        jMenuVeiculo.add(jMenuItem3);
-
-        jMenuItem2.setText("Categoria");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuModelo.setText("Modelo");
+        jMenuModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuModeloActionPerformed(evt);
             }
         });
-        jMenuVeiculo.add(jMenuItem2);
+        jMenuVeiculo.add(jMenuModelo);
 
-        jMenuItem4.setText("Carro");
-        jMenuVeiculo.add(jMenuItem4);
+        jMenuCategoria.setText("Categoria");
+        jMenuCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCategoriaActionPerformed(evt);
+            }
+        });
+        jMenuVeiculo.add(jMenuCategoria);
+
+        jMenuCarro.setText("Carro");
+        jMenuCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCarroActionPerformed(evt);
+            }
+        });
+        jMenuVeiculo.add(jMenuCarro);
 
         jMenuBarMenuPrincipal.add(jMenuVeiculo);
 
@@ -173,7 +187,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemPessoaFisicaActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jMenuPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPessoaJuridicaActionPerformed
         // TODO add your handling code here:
         try {
             jDesktopPanePainelPrincipal.removeAll();
@@ -184,9 +198,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
 
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_jMenuPessoaJuridicaActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCategoriaActionPerformed
         // TODO add your handling code here:
         try {
             TelaCategoria tela = new TelaCategoria();
@@ -195,7 +209,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
             
         } catch (Exception erro) {
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuCategoriaActionPerformed
+
+    private void jMenuItemMotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMotoristaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemMotoristaActionPerformed
+
+    private void jMenuModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModeloActionPerformed
+        // TODO add your handling code here:
+		try {
+			TelaModelo tela = new TelaModelo();
+			jDesktopPanePainelPrincipal.removeAll();
+			form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
+
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro ao abrir tela de modelos. " + erro.getMessage());
+		}
+    }//GEN-LAST:event_jMenuModeloActionPerformed
+
+    private void jMenuCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCarroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCarroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,16 +269,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPanePainelPrincipal;
     private javax.swing.JMenuBar jMenuBarMenuPrincipal;
+    private javax.swing.JMenuItem jMenuCarro;
+    private javax.swing.JMenuItem jMenuCategoria;
     private javax.swing.JMenu jMenuCliente;
     private javax.swing.JMenu jMenuFuncionario;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItemMarca;
+    private javax.swing.JMenuItem jMenuItemMotorista;
     private javax.swing.JMenuItem jMenuItemPessoaFisica;
     private javax.swing.JMenu jMenuLacacao;
+    private javax.swing.JMenuItem jMenuModelo;
+    private javax.swing.JMenuItem jMenuPessoaJuridica;
     private javax.swing.JMenu jMenuVeiculo;
     private javax.swing.JPanel jPanelBase;
     // End of variables declaration//GEN-END:variables

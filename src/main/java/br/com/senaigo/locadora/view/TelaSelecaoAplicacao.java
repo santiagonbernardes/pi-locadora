@@ -132,8 +132,8 @@ public class TelaSelecaoAplicacao extends javax.swing.JFrame {
             while (true) {
                 String requisicao = servidor.receberMensagem();
                 System.out.println("Solicitação do cliente:" + requisicao);
-                ServerTcpController controller = new ServerTcpController();
-                String resposta = controller.atendaRequisicao(requisicao);
+                ServerTcpController controller = new ServerTcpController(requisicao);
+                String resposta = controller.atendaRequisicao();
                 servidor.enviarMensagem(resposta);
             }
         } catch (Exception e) {

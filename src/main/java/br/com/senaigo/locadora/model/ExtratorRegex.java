@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class ExtratorRegex {
 
-	private static final String REGEX_EXTRAIR_OPERACAO = "^\\d+";
+	private static final String REGEX_EXTRAIR_OPERACAO_E_ID_DADOS = "^\\d+";
 	private static final String REGEX_REMOVER_OPERACAO = "^\\d+#";
 	private static final String REGEX_EXTRAIR_ENTIDADE = "^\\w+";
 	private static final String REGEX_REMOVER_ENTIDADE = "^\\w+;";
@@ -18,8 +18,12 @@ public class ExtratorRegex {
 
 
 	public static int extraiaCodigoOperacao(String requisicaoComOperacao) {
-		String idEncontrada = extraiaUmResultado(REGEX_EXTRAIR_OPERACAO, requisicaoComOperacao);
+		String idEncontrada = extraiaUmResultado(REGEX_EXTRAIR_OPERACAO_E_ID_DADOS, requisicaoComOperacao);
 		return Utils.convertaParaInt(idEncontrada);
+	}
+
+	public static String extraiaIdDados(String dados) {
+		return extraiaUmResultado(REGEX_EXTRAIR_OPERACAO_E_ID_DADOS, dados);
 	}
 
 	public static String extraiaIdObjetoInterno(String dadosObjetoInterno) {
@@ -55,7 +59,7 @@ public class ExtratorRegex {
 	}
 
 	private static String monteRegexId(String id) {
-		return "^" + id + ".*";
+		return "^" + id + ".+?$";
 	}
 
 	private static String remova(String regex, String requisicao) {
@@ -75,7 +79,7 @@ public class ExtratorRegex {
 	}
 
 	private static Matcher obtenhaMatcher(String regex, String requisicao) {
-		Pattern padrao = Pattern.compile(regex);
+		Pattern padrao = Pattern.compile(regex, Pattern.MULTILINE);
 		return padrao.matcher(requisicao);
 	}
 }

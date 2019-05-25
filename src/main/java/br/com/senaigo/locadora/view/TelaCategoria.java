@@ -9,6 +9,7 @@ import br.com.senaigo.locadora.controller.ClienteTcpController;
 import br.com.senaigo.locadora.model.Categoria;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.utils.Utils;
+
 import java.io.IOException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaCategoria extends javax.swing.JInternalFrame {
     private ClienteTcpController controller;
     private String modo;
-    private List<Categoria> fonteDeDados;
+    private List<Categoria> fonteDeDadosCategoria;
 
     /**
      * Creates new form TelaCategoria
@@ -116,12 +117,8 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         jTextFieldNome = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jLabelValorLocacao = new javax.swing.JLabel();
+        jTextFieldValorLocacao = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLista = new javax.swing.JTable();
         jButtonNovo = new javax.swing.JButton();
@@ -166,69 +163,39 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Marca:");
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Modelo:");
-
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Valor:");
-
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelValorLocacao.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelValorLocacao.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelValorLocacao.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelValorLocacao.setText("Valor diário da locação:");
 
         javax.swing.GroupLayout jPanelMarcaLayout = new javax.swing.GroupLayout(jPanelMarca);
         jPanelMarca.setLayout(jPanelMarcaLayout);
         jPanelMarcaLayout.setHorizontalGroup(
             jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+                .addContainerGap(302, Short.MAX_VALUE)
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                        .addComponent(jLabelNome)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldNome))
+                        .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelID)
+                            .addComponent(jLabelNome))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelMarcaLayout.createSequentialGroup()
+                                .addComponent(jTextFieldNome)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelMarcaLayout.createSequentialGroup()
+                                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabelValorLocacao)
+                                .addGap(31, 31, 31)
+                                .addComponent(jTextFieldValorLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                        .addComponent(jLabelID)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
-            .addGroup(jPanelMarcaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(178, Short.MAX_VALUE))))
         );
         jPanelMarcaLayout.setVerticalGroup(
             jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,12 +204,8 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelID)
                     .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelValorLocacao)
+                    .addComponent(jTextFieldValorLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanelMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
@@ -366,6 +329,23 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
             //TODO popular o objeto dentro deste try
+			String id = jTextFieldID.getText();
+			String nome = jTextFieldNome.getText();
+			String valorDiaria = jTextFieldValorLocacao.getText();
+                        
+                        Categoria categoria = new Categoria();
+                        categoria.setNome(nome);
+                        categoria.setValorDiarioLocacao(Utils.convertaParaFloat(valorDiaria));
+                        if(id.equals("")) {
+                            controller.execute(categoria, Operacao.INCLUIR);
+                        } else {
+                            categoria.setId(Utils.convertaParaInt(id));
+                            controller.execute(categoria, Operacao.ALTERAR);
+                        }
+                        preenchaGrid();
+                        jTextFieldNome.setText("");
+                        modo = "Navegar";
+                        ManipulaInterface();
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
@@ -396,7 +376,7 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         int indexDoObjeto = jTableLista.getSelectedRow();
-        Categoria categoria = fonteDeDados.get(indexDoObjeto);
+        Categoria categoria = fonteDeDadosCategoria.get(indexDoObjeto);
         jTextFieldID.setText(String.valueOf(categoria.getId()));
         jTextFieldNome.setText(categoria.getNome());
         modo = "Editar";
@@ -406,7 +386,7 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         try {
             int indexDoObjeto = jTableLista.getSelectedRow();
-            Categoria categoria = fonteDeDados.get(indexDoObjeto);
+            Categoria categoria = fonteDeDadosCategoria.get(indexDoObjeto);
             controller.execute(categoria, Operacao.EXCLUIR);
             preenchaGrid();
             modo = "Navegar";
@@ -421,7 +401,7 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
             atualizeFonteDeDados();
 			DefaultTableModel tabela = obtenhaGrid();
 			tabela.setRowCount(0);
-			for (Categoria categoria : fonteDeDados) {
+			for (Categoria categoria : fonteDeDadosCategoria) {
 				Object[] campos = {
 						categoria.getId(),
 						categoria.getNome()
@@ -434,7 +414,7 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 	}
 
 	private void atualizeFonteDeDados() throws IOException {
-        fonteDeDados = (List<Categoria>) controller.liste("Categoria");
+        fonteDeDadosCategoria = controller.liste("Categoria");
     }
 
     private DefaultTableModel obtenhaGrid() {
@@ -447,19 +427,15 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelNome;
+    private javax.swing.JLabel jLabelValorLocacao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelMarca;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableLista;
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldValorLocacao;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,7 @@ public class ClienteTcpController {
 	private ClienteTcp conexaoComCliente;
 
 	public ClienteTcpController() throws IOException {
-		conexaoComCliente = new ClienteTcp("127.0.0.1", 7777);
+		conexaoComCliente = ClienteTcp.obtenhaInstancia();
 	}
 
 	public String execute(Object objeto, Operacao operacao) throws IOException {
@@ -44,17 +44,19 @@ public class ClienteTcpController {
 		}
 	}
 
-	public List<? extends PersisteDados> liste(String nomeEntidade) throws IOException {
+	public <T extends PersisteDados> List<T> liste(String nomeEntidade) throws IOException {
+		List<T> listaDeObjetos = new ArrayList<>();
 		String dados = execute(nomeEntidade, Operacao.LISTAR);
-		List<String> dadosObjetos = Arrays.asList(dados.split("\n"));
-		PersisteDados objeto;
-		List<PersisteDados> listaDeObjetos = new ArrayList<>();
-
-		for (String dadosDeUmObjeto : dadosObjetos) {
-			objeto = PersisteDadosFactory.obtenhaInstancia(nomeEntidade);
-			objeto.monteObjeto(dadosDeUmObjeto);
-			listaDeObjetos.add(objeto);
+		if(!dados.equals("")) {
+			List<String> dadosObjetos = Arrays.asList(dados.split("\n"));
+			T objeto;
+			for (String dadosDeUmObjeto : dadosObjetos) {
+				objeto = (T) PersisteDadosFactory.obtenhaInstancia(nomeEntidade);
+				objeto.monteObjeto(dadosDeUmObjeto);
+				listaDeObjetos.add(objeto);
+			}
 		}
+
 		return listaDeObjetos;
 
 	}

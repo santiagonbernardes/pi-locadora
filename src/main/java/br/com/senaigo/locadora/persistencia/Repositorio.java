@@ -1,6 +1,5 @@
 package br.com.senaigo.locadora.persistencia;
 
-import br.com.senaigo.locadora.interfaces.PersisteDados;
 import br.com.senaigo.locadora.model.ExtratorRegex;
 import br.com.senaigo.locadora.utils.ArquivoUtils;
 
@@ -9,51 +8,40 @@ import java.util.List;
 
 public class Repositorio {
 
-	private final String caminhoParaArquivoEntidade;
-	private final String nomeEntidade;
-	private final GeradorId geradorId;
+	private static final String NOME_PASTA_NA_RAIZ_DO_PROJETO = "Persistência";
+	private final String caminhoParaArquivo;
 
 	public Repositorio(String nomeEntidade) throws IOException {
-		this.caminhoParaArquivoEntidade = obtenhaCaminhoParaArquivo(nomeEntidade);
-		this.nomeEntidade = nomeEntidade;
-		this.geradorId = new GeradorId();
+		this.caminhoParaArquivo = obtenhaCaminhoParaArquivo(nomeEntidade);
+		ArquivoUtils.garantaExistenciaArquivo(this.caminhoParaArquivo);
 	}
 
 	private String obtenhaCaminhoParaArquivo(String nomeEntidade) {
-		return "Persistência/" + nomeEntidade + ".txt";
+		return NOME_PASTA_NA_RAIZ_DO_PROJETO + "/" + nomeEntidade + ".txt";
 	}
 
 	public void incluir(String dadosDoObjeto) throws IOException {
-		ArquivoUtils.garantaExistenciaArquivo(caminhoParaArquivoEntidade);
-		//int id = geradorId.getUltimaIdGerada();
-		//String dadosDoObjetoComIdGerada = dadosDoObjeto.replaceFirst("^\\d+", String.valueOf(id));
-		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivoEntidade, true);
+		GeradorId geradorId = new GeradorId();
+		int id = geradorId.getUltimaIdGerada();
+		String dadosDoObjetoComIdGerada = dadosDoObjeto.replaceFirst("^\\d+", String.valueOf(id));
+		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivo, true);
 		BufferedWriter escritorTexto = new BufferedWriter(escritorArquivo);
-		String dadosDoObjetoComIdQuebraLinha = dadosDoObjeto + "\n";
+		String dadosDoObjetoComIdQuebraLinha = dadosDoObjetoComIdGerada + "\n";
 		escritorTexto.write(dadosDoObjetoComIdQuebraLinha);
 		escritorTexto.close();
 		geradorId.finalize();
 	}
 
 	public String listar() throws IOException {
-		FileReader fr = new FileReader(caminhoParaArquivoEntidade);
-		BufferedReader br  = new BufferedReader(fr);
-		StringBuilder dados = new StringBuilder();
-		String linha = "";
-
-		while((linha = br.readLine()) != null){
-			dados.append(linha).append("\n");
-		}
-		br.close();
-
-		String dadosSemObjetosInternos = dados.toString();
+		String dadosSemObjetosInternos = leiaTodosOsDadosArmazenadosNoRepositorio();
 
 		while (dadosSemObjetosInternos.contains("#")) {
 			List<String> dadosDosObjetosInternos = ExtratorRegex.extraiaObjetosInternos(dadosSemObjetosInternos);
 			for(String referenciaObjetoInterno : dadosDosObjetosInternos) {
 				String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(referenciaObjetoInterno);
 				String id = ExtratorRegex.extraiaIdObjetoInterno(referenciaObjetoInterno);
-				String dadosCompletosObjetoInterno = busquePorId(nomeEntidade, id);
+				Repositorio repositorioAux = new Repositorio(nomeEntidade);
+				String dadosCompletosObjetoInterno = repositorioAux.busquePorId(id);
 				dadosSemObjetosInternos = dadosSemObjetosInternos.replace(referenciaObjetoInterno, dadosCompletosObjetoInterno);
 			}
 		}
@@ -61,15 +49,32 @@ public class Repositorio {
 	}
 
 	public void alterar(String novosDados) throws IOException {
-		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivoEntidade, false);
+		String todosOsDadosSalvos = leiaTodosOsDadosArmazenadosNoRepositorio();
+		String id = ExtratorRegex.extraiaIdDados(novosDados);
+		String dadosAntigos = busquePorId(id);
+		String todosOsDadosSalvosComAlteracoes = todosOsDadosSalvos.replace(dadosAntigos, novosDados);
+		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivo, false);
 		BufferedWriter escritoTexto = new BufferedWriter(escritorArquivo);
-		escritoTexto.write(novosDados);
+		escritoTexto.write(todosOsDadosSalvosComAlteracoes);
 		escritoTexto.close();
 	}
 
-	public String busquePorId(String nomeEntidade, String id) throws IOException {
-		String caminhoArquivo = obtenhaCaminhoParaArquivo(nomeEntidade);
-		FileReader fr = new FileReader(caminhoArquivo);
+	public void excluir(String dadosExcluir) throws IOException {
+		String todosOsDadosSalvos = leiaTodosOsDadosArmazenadosNoRepositorio();
+		String todosOsDadosComExclusoes = todosOsDadosSalvos.replace(dadosExcluir + "\n", "");
+		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivo, false);
+		BufferedWriter escritoTexto = new BufferedWriter(escritorArquivo);
+		escritoTexto.write(todosOsDadosComExclusoes);
+		escritoTexto.close();
+	}
+
+	public String busquePorId(String id) throws IOException {
+		String dadosDoRepositorio = leiaTodosOsDadosArmazenadosNoRepositorio();
+		return ExtratorRegex.extraiaDadoPorId(dadosDoRepositorio, id);
+	}
+
+	private String leiaTodosOsDadosArmazenadosNoRepositorio() throws IOException {
+		FileReader fr = new FileReader(caminhoParaArquivo);
 		BufferedReader br  = new BufferedReader(fr);
 		StringBuilder dados = new StringBuilder();
 		String linha = "";
@@ -78,8 +83,7 @@ public class Repositorio {
 			dados.append(linha).append("\n");
 		}
 		br.close();
-
-		return ExtratorRegex.extraiaDadoPorId(dados.toString(), id);
+		return dados.toString();
 	}
 
 }
