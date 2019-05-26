@@ -290,6 +290,8 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             }
         });
         jTableLista.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableLista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableLista.getTableHeader().setReorderingAllowed(false);
         jTableLista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableListaMouseClicked(evt);
@@ -297,8 +299,10 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTableLista);
         if (jTableLista.getColumnModel().getColumnCount() > 0) {
+            jTableLista.getColumnModel().getColumn(0).setResizable(false);
             jTableLista.getColumnModel().getColumn(0).setPreferredWidth(70);
-            jTableLista.getColumnModel().getColumn(1).setPreferredWidth(870);
+            jTableLista.getColumnModel().getColumn(1).setResizable(false);
+            jTableLista.getColumnModel().getColumn(1).setPreferredWidth(830);
         }
 
         javax.swing.GroupLayout jPanelBaseLayout = new javax.swing.GroupLayout(jPanelBase);
@@ -385,6 +389,8 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
             preenchaGrid();
             jTextFieldNome.setText("");
+            jTextFieldID.setText("");
+            jTextFieldCaminhoArquivo.setText("");
             modo = "Navegar";
             ManipulaInterface();
 
@@ -441,7 +447,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
 	private void preenchaGrid() {
 		try {
-            atualizeFonteDeDados();
+            atualizeFonteDeDadosMarca();
 			DefaultTableModel tabela = obtenhaGrid();
 			tabela.setRowCount(0);
 			for (Marca marca : fonteDeDadosMarca) {
@@ -452,12 +458,17 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 				tabela.addRow(campos);
 			}
 		} catch (Exception erro) {
-			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Marca: " + erro.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR.getDescricao() + " Marca: " + erro.getMessage());
 		}
 	}
 
-	private void atualizeFonteDeDados() throws IOException {
-        fonteDeDadosMarca = controller.liste("Marca");
+	private void atualizeFonteDeDadosMarca() throws IOException {
+    	try {
+			fonteDeDadosMarca = controller.liste("Marca");
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro do preencher fonte de dados de marcas: " + erro.getMessage());
+		}
+
     }
 
     private DefaultTableModel obtenhaGrid() {

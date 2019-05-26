@@ -4,6 +4,7 @@ import br.com.senaigo.locadora.interfaces.PersisteDados;
 import br.com.senaigo.locadora.utils.Utils;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Marca implements PersisteDados {
 
@@ -61,5 +62,23 @@ public class Marca implements PersisteDados {
 	@Override
 	public String toString() {
 		return this.nome;
+	}
+
+	@Override
+	public boolean equals(Object outraMarca) {
+		if (this == outraMarca) {
+			return true;
+		}
+		if (outraMarca == null || this.getClass() != outraMarca.getClass()) {
+			return false;
+		}
+		Marca marca = (Marca) outraMarca;
+		return this.id == marca.id &&
+			this.nome.equals(marca.nome);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.id, this.nome);
 	}
 }

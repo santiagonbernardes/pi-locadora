@@ -20,70 +20,71 @@ public class Repositorio {
 		return NOME_PASTA_NA_RAIZ_DO_PROJETO + "/" + nomeEntidade + ".txt";
 	}
 
-	public void incluir(String dadosDoObjeto) throws IOException {
+	public void incluir(String dadosDoObjeto) throws Exception {
 		GeradorId geradorId = new GeradorId();
 		int id = geradorId.getUltimaIdGerada();
 		String dadosDoObjetoComIdGerada = dadosDoObjeto.replaceFirst("^\\d+", String.valueOf(id));
-		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivo, true);
-		BufferedWriter escritorTexto = new BufferedWriter(escritorArquivo);
 		String dadosDoObjetoComIdQuebraLinha = dadosDoObjetoComIdGerada + "\n";
-		escritorTexto.write(dadosDoObjetoComIdQuebraLinha);
-		escritorTexto.close();
+		escrevaDadosNoRepositorio(dadosDoObjetoComIdQuebraLinha, true);
 		geradorId.finalize();
 	}
 
-	public String listar() throws IOException {
-		String dadosSemObjetosInternos = leiaTodosOsDadosArmazenadosNoRepositorio();
+	public String listar() throws Exception {
+		String dadosDoRepositorio = leiaTodosOsDadosArmazenadosNoRepositorio();
 
-		while (dadosSemObjetosInternos.contains("#")) {
-			List<String> dadosDosObjetosInternos = ExtratorRegex.extraiaObjetosInternos(dadosSemObjetosInternos);
-			for(String referenciaObjetoInterno : dadosDosObjetosInternos) {
-				String nomeEntidade = ExtratorRegex.extraiaNomeEntidade(referenciaObjetoInterno);
-				String id = ExtratorRegex.extraiaIdObjetoInterno(referenciaObjetoInterno);
-				Repositorio repositorioAux = new Repositorio(nomeEntidade);
-				String dadosCompletosObjetoInterno = repositorioAux.busquePorId(id);
-				dadosSemObjetosInternos = dadosSemObjetosInternos.replace(referenciaObjetoInterno, dadosCompletosObjetoInterno);
+		while (dadosDoRepositorio.contains("#")) {
+			List<String> referenciasObjetosInterno = ExtratorRegex.extraiaObjetosInternos(dadosDoRepositorio);
+			for(String referenciaObjetoInterno : referenciasObjetosInterno) {
+				String nomeEntidadeObjetoInterno = ExtratorRegex.extraiaNomeEntidade(referenciaObjetoInterno);
+				String idObjetoInterno = ExtratorRegex.extraiaIdObjetoInterno(referenciaObjetoInterno);
+				Repositorio repositorioObjetoInterno = new Repositorio(nomeEntidadeObjetoInterno);
+				String todosOsDadosDoRepositorioObjetoInterno = repositorioObjetoInterno.listar();
+				String dadosCompletosObjetoInterno = repositorioObjetoInterno.busquePorId(idObjetoInterno, todosOsDadosDoRepositorioObjetoInterno);
+				dadosDoRepositorio = dadosDoRepositorio.replace(referenciaObjetoInterno, dadosCompletosObjetoInterno);
 			}
 		}
-		return dadosSemObjetosInternos;
+		return dadosDoRepositorio;
 	}
 
-	public void alterar(String novosDados) throws IOException {
+	public void alterar(String novosDados) throws Exception {
 		String todosOsDadosSalvos = leiaTodosOsDadosArmazenadosNoRepositorio();
 		String id = ExtratorRegex.extraiaIdDados(novosDados);
-		String dadosAntigos = busquePorId(id);
+		String dadosAntigos = busquePorId(id, todosOsDadosSalvos);
 		String todosOsDadosSalvosComAlteracoes = todosOsDadosSalvos.replace(dadosAntigos, novosDados);
-		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivo, false);
-		BufferedWriter escritoTexto = new BufferedWriter(escritorArquivo);
-		escritoTexto.write(todosOsDadosSalvosComAlteracoes);
-		escritoTexto.close();
+		escrevaDadosNoRepositorio(todosOsDadosSalvosComAlteracoes, false);
 	}
 
-	public void excluir(String dadosExcluir) throws IOException {
+	public void excluir(String dadosExcluir) throws Exception {
 		String todosOsDadosSalvos = leiaTodosOsDadosArmazenadosNoRepositorio();
 		String todosOsDadosComExclusoes = todosOsDadosSalvos.replace(dadosExcluir + "\n", "");
-		FileWriter escritorArquivo = new FileWriter(caminhoParaArquivo, false);
-		BufferedWriter escritoTexto = new BufferedWriter(escritorArquivo);
-		escritoTexto.write(todosOsDadosComExclusoes);
-		escritoTexto.close();
+		escrevaDadosNoRepositorio(todosOsDadosComExclusoes, false);
 	}
 
-	public String busquePorId(String id) throws IOException {
-		String dadosDoRepositorio = leiaTodosOsDadosArmazenadosNoRepositorio();
+	private void escrevaDadosNoRepositorio(String dados, boolean manterDadosAntigos) throws Exception {
+		try (BufferedWriter escritorTexto = new BufferedWriter(new FileWriter(caminhoParaArquivo, manterDadosAntigos))) {
+			escritorTexto.write(dados);
+		} catch (Exception erro) {
+			throw new Exception("Não foi possível escrever os dados no repositório: " + erro.getMessage());
+		}
+	}
+
+	public String busquePorId(String id, String dadosDoRepositorio) {
 		return ExtratorRegex.extraiaDadoPorId(dadosDoRepositorio, id);
 	}
 
-	private String leiaTodosOsDadosArmazenadosNoRepositorio() throws IOException {
-		FileReader fr = new FileReader(caminhoParaArquivo);
-		BufferedReader br  = new BufferedReader(fr);
-		StringBuilder dados = new StringBuilder();
-		String linha = "";
+	private String leiaTodosOsDadosArmazenadosNoRepositorio() throws Exception {
+		try(BufferedReader leitorDados = new BufferedReader(new FileReader(caminhoParaArquivo))) {
+			StringBuilder dados = new StringBuilder();
+			String linha = leitorDados.readLine();
 
-		while((linha = br.readLine()) != null){
-			dados.append(linha).append("\n");
+			while(linha != null) {
+				dados.append(linha).append("\n");
+				linha = leitorDados.readLine();
+			}
+
+			return dados.toString();
+		} catch (Exception erro) {
+			throw new Exception("Não foi possível ler os dados armazenados no repositório. " + erro.getMessage());
 		}
-		br.close();
-		return dados.toString();
 	}
-
 }

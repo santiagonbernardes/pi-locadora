@@ -18,46 +18,57 @@ public class ClienteTcpController {
 		conexaoComCliente = ClienteTcp.obtenhaInstancia();
 	}
 
-	public String execute(Object objeto, Operacao operacao) throws IOException {
+	public String execute(Object objeto, Operacao operacao) throws Exception {
 		try {
 			PersisteDados dados = (PersisteDados) objeto;
-			String mensagem = operacao.getValor() + "#" + dados.desmonteObjeto();
-			System.out.println("Enviando requisição: " + mensagem);
-			conexaoComCliente.enviarMensagem(mensagem);
-			String resposta = conexaoComCliente.receberMensagem();
+			String requisicao = operacao.getValor() + "#" + dados.desmonteObjeto();
+			String resposta = comuniqueComServidor(requisicao);
 			return resposta;
 		} catch (Exception erro) {
-			throw erro;
+			throw new Exception("Não foi possível " + operacao.getDescricao() + objeto.getClass().getSimpleName() + ": " + erro.getMessage());
 		}
 	}
 
-	public String execute(String nomeEntidade, Operacao operacao) throws IOException {
-		//TODO buscar solução melhor que passar String
+	public <T extends PersisteDados> List<T> liste(String nomeEntidade) throws Exception {
 		try {
-			String mensagem = operacao.getValor() + "#" + nomeEntidade;
-			System.out.println("Enviando requisição: " + mensagem);
-			conexaoComCliente.enviarMensagem(mensagem);
-			String resposta = conexaoComCliente.receberMensagem();
-			return resposta;
+			List<T> listaDeObjetos = new ArrayList<>();
+			String dados = execute(nomeEntidade, Operacao.LISTAR);
+			if (!dados.equals("")) {
+				List<String> dadosObjetos = Arrays.asList(dados.split("\n"));
+				T objeto;
+				for (String dadosDeUmObjeto : dadosObjetos) {
+					objeto = (T) PersisteDadosFactory.obtenhaInstancia(nomeEntidade);
+					objeto.monteObjeto(dadosDeUmObjeto);
+					listaDeObjetos.add(objeto);
+				}
+			}
+			return listaDeObjetos;
 		} catch (Exception erro) {
-			throw erro;
+			throw new Exception("Não foi possível listar " + nomeEntidade + ": " + erro.getMessage());
 		}
 	}
 
-	public <T extends PersisteDados> List<T> liste(String nomeEntidade) throws IOException {
-		List<T> listaDeObjetos = new ArrayList<>();
-		String dados = execute(nomeEntidade, Operacao.LISTAR);
-		if(!dados.equals("")) {
-			List<String> dadosObjetos = Arrays.asList(dados.split("\n"));
-			T objeto;
-			for (String dadosDeUmObjeto : dadosObjetos) {
-				objeto = (T) PersisteDadosFactory.obtenhaInstancia(nomeEntidade);
-				objeto.monteObjeto(dadosDeUmObjeto);
-				listaDeObjetos.add(objeto);
-			}
-		}
+	private String execute(String nomeEntidade, Operacao operacao) throws Exception {
+		String requisicao = operacao.getValor() + "#" + nomeEntidade;
+		String resposta = comuniqueComServidor(requisicao);
+		return resposta;
+	}
 
-		return listaDeObjetos;
+	private String comuniqueComServidor(String mensagem) throws Exception {
+		try {
+			System.out.println("Enviando requisição: " + mensagem);
+			conexaoComCliente.enviarMensagem(mensagem);
+			String resposta = conexaoComCliente.receberMensagem();
+
+			if(resposta.startsWith("!")) {
+				String respostaSemExclamacao = resposta.replaceFirst("!", "");
+				throw new Exception(respostaSemExclamacao);
+			}
+
+			return resposta;
+		} catch (IOException erro) {
+			throw new IOException("Houve um erro na comunicação com o servidor causada por " + erro.getMessage());
+		}
 
 	}
 }

@@ -15,12 +15,6 @@ public enum PersisteDadosFactory {
 			return new Cliente();
 		}
 	},
-	ENDERECO {
-		@Override
-		PersisteDados obtenhaInstancia() {
-			return new Endereco();
-		}
-	},
 	FUNCIONARIO {
 		@Override
 		PersisteDados obtenhaInstancia() {

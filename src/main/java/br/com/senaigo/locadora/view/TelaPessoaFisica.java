@@ -5,15 +5,17 @@
  */
 package br.com.senaigo.locadora.view;
 
+import br.com.senaigo.locadora.controller.ClienteTcpController;
 import br.com.senaigo.locadora.interfaces.PersisteDados;
-import br.com.senaigo.locadora.model.Cliente;
-import br.com.senaigo.locadora.model.Endereco;
-import br.com.senaigo.locadora.model.PersisteDadosFactory;
-import br.com.senaigo.locadora.model.Telefone;
+import br.com.senaigo.locadora.model.*;
+import br.com.senaigo.locadora.persistencia.Operacao;
+import br.com.senaigo.locadora.utils.DataUtils;
+import br.com.senaigo.locadora.utils.Utils;
 
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  *
@@ -21,9 +23,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class TelaPessoaFisica extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaPessoaFisica
-     */
+	private ClienteTcpController controller;
+	private List<Cliente> fonteDeDadosCliente;
+	private List<EstadosBrasil> fonteDeDadosEstadosBrasil;
+
     public TelaPessoaFisica() {
         initComponents();
     }
@@ -599,16 +602,17 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try{
+        	String id = jTextFieldID.getText();
             String nome = jTextFieldNome.getText();
-            String cpf = jTextFieldCPF.getText();
-            String dataNascimento = jTextFieldAniversario.getText();
-            String cep = jTextFieldCEP.getText();
-            String logradouro = jTextFieldLogradouro.getText();
-            String complemento = jTextFieldComplemento.getText();
-            String bairro = jTextFieldBairro.getText();
-            String numero = jTextFieldNumero.getText();
-            String cidade = jTextFieldCidade.getText();
-            String uf = (String) jComboBoxUF.getSelectedItem();
+			String dataNascimento = jTextFieldAniversario.getText();
+			String cpf = jTextFieldCPF.getText();
+			String logradouro = jTextFieldLogradouro.getText();
+			String numero = jTextFieldNumero.getText();
+			String complemento = jTextFieldComplemento.getText();
+			String bairro = jTextFieldBairro.getText();
+			String cidade = jTextFieldCidade.getText();
+			String cep = jTextFieldCEP.getText();
+			String uf = (String) jComboBoxUF.getSelectedItem();
             String telefonePrincipal = jTextFieldTelefone.getText();
             String telefoneAlternativo = jTextFieldTelefoneCel.getText();
             String email = jTextFieldEmail.getText();
@@ -616,8 +620,7 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
             Cliente cliente = (Cliente) PersisteDadosFactory.obtenhaInstancia("Cliente");
             cliente.setNome(nome);
             cliente.setCpf(cpf);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-            LocalDate data = LocalDate.parse(dataNascimento, formatter);
+            LocalDate data = DataUtils.convertaStringParaLocalDate(dataNascimento);
             cliente.setDataNascimento(data);
             Endereco endereco = (Endereco) PersisteDadosFactory.obtenhaInstancia("Endereco");
             endereco.setLogradouro(logradouro);
@@ -625,15 +628,20 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
             endereco.setComplemento(complemento);
             endereco.setNumero(numero);
             endereco.setCep(cep);
-            Telefone telefonePrincipalObjeto = Telefone.obtenhaInstancia(telefonePrincipal);
-            Telefone telefoneAlternativoObjeto = Telefone.obtenhaInstancia(telefoneAlternativo);
-            cliente.setEndereco(endereco);
+            endereco.setCidade(cidade);
+			cliente.setEndereco(endereco);
+			Telefone telefonePrincipalObjeto = Telefone.obtenhaInstancia(telefonePrincipal);
+			Telefone telefoneAlternativoObjeto = Telefone.obtenhaInstancia(telefoneAlternativo);
             cliente.setTelefonePrincipal(telefonePrincipalObjeto);
             cliente.setTelefoneAlternativo(telefoneAlternativoObjeto);
             cliente.setEmail(email);
 
-            String dados = cliente.desmonteObjeto();
-            System.out.println(dados);
+            if(id.equals("")) {
+            	controller.execute(cliente, Operacao.INCLUIR);
+			} else {
+            	cliente.setId(Utils.convertaParaInt(id));
+            	controller.execute(cliente, Operacao.ALTERAR);
+			}
 
 
         } catch (Exception erro) {

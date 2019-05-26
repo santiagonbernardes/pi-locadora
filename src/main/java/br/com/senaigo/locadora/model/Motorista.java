@@ -117,15 +117,20 @@ public class Motorista implements PersisteDados {
 		this.nome = campos.get(1);
 		this.dataNascimento = DataUtils.convertaStringParaLocalDate(campos.get(2));
 		this.cpf = campos.get(3);
-		String dadosEndereco = campos.get(4) + ";" + campos.get(5) + ";" + campos.get(6) + ";" + campos.get(7) + ";"
-			+ campos.get(8) + ";" + campos.get(9) + ";" + campos.get(10) + ";" + campos.get(11);
-		Endereco endereco = (Endereco) PersisteDadosFactory.obtenhaInstancia("Endereco");
-		endereco.monteObjeto(dadosEndereco);
+		Endereco endereco = new Endereco();
+		endereco.setLogradouro(campos.get(4));
+		endereco.setNumero(campos.get(5));
+		endereco.setComplemento(campos.get(6));
+		endereco.setBairro(campos.get(7));
+		endereco.setCidade(campos.get(8));
+		endereco.setCep(campos.get(9));
+		EstadosBrasil estado = EstadosBrasil.valueOf(Utils.convertaParaInt(campos.get(10)));
+		endereco.setEstado(estado);
 		this.endereco = endereco;
-		this.telefonePrincipal = Telefone.obtenhaInstancia(campos.get(12));
-		this.telefoneAlternativo = Telefone.obtenhaInstancia(campos.get(13));
-		this.email = campos.get(14);
-		this.cnh = campos.get(15);
+		this.telefonePrincipal = Telefone.obtenhaInstancia(campos.get(11));
+		this.telefoneAlternativo = Telefone.obtenhaInstancia(campos.get(12));
+		this.email = campos.get(13);
+		this.cnh = campos.get(14);
 	}
 
 	@Override
@@ -140,8 +145,13 @@ public class Motorista implements PersisteDados {
 		String dataNascimentoFormatada = DataUtils.convertaLocalDateParaStringFormatada(this.dataNascimento);
 		dadosDoObjeto.append(dataNascimentoFormatada).append(";");
 		dadosDoObjeto.append(this.cpf).append(";");
-		dadosDoObjeto.append(this.endereco.getClass().getSimpleName()).append("#");
-		dadosDoObjeto.append(this.endereco.getId()).append(";");
+		dadosDoObjeto.append(this.endereco.getLogradouro()).append(";");
+		dadosDoObjeto.append(this.endereco.getNumero()).append(";");
+		dadosDoObjeto.append(this.endereco.getComplemento()).append(";");
+		dadosDoObjeto.append(this.endereco.getBairro()).append(";");
+		dadosDoObjeto.append(this.endereco.getCidade()).append(";");
+		dadosDoObjeto.append(this.endereco.getCep()).append(";");
+		dadosDoObjeto.append(this.endereco.getEstado().getValor()).append(";");
 		dadosDoObjeto.append(this.telefonePrincipal.toString()).append(";");
 		dadosDoObjeto.append(this.telefoneAlternativo.toString()).append(";");
 		dadosDoObjeto.append(this.email).append(";");

@@ -5,10 +5,9 @@ import br.com.senaigo.locadora.utils.Utils;
 
 import java.util.List;
 
-public class Endereco implements PersisteDados {
+public class Endereco {
 
 	//Atributos
-	private int id;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -19,7 +18,6 @@ public class Endereco implements PersisteDados {
 
 	//Construtores
 	public Endereco() {
-		this.id = 0;
 		this.logradouro = "";
 		this.numero = "";
 		this.complemento = "";
@@ -30,14 +28,6 @@ public class Endereco implements PersisteDados {
 	}
 
 	//Getters e Setters
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -97,37 +87,5 @@ public class Endereco implements PersisteDados {
 	//Métodos Próprios
 
 	//Métodos herdados
-	@Override
-	public void monteObjeto(String dadosDoObjeto) {
-		List<String> campos = Utils.obtenhaCampos(dadosDoObjeto);
 
-		this.id = Utils.convertaParaInt(campos.get(0));
-		this.logradouro = campos.get(1);
-		this.numero = campos.get(2);
-		this.complemento = campos.get(3);
-		this.bairro = campos.get(4);
-		this.cidade = campos.get(5);
-		this.cep = campos.get(6);
-		int valorEstado = Utils.convertaParaInt(campos.get(7));
-		this.estado = EstadosBrasil.valueOf(valorEstado);
-	}
-
-	@Override
-	public String desmonteObjeto() {
-		StringBuilder dadosDoObjeto = new StringBuilder();
-
-		String nomeDaClasse = this.getClass().getSimpleName();
-
-		dadosDoObjeto.append(nomeDaClasse).append(";");
-		dadosDoObjeto.append(this.id).append(";");
-		dadosDoObjeto.append(this.logradouro).append(";");
-		dadosDoObjeto.append(this.numero).append(";");
-		dadosDoObjeto.append(this.complemento).append(";");
-		dadosDoObjeto.append(this.bairro).append(";");
-		dadosDoObjeto.append(this.cidade).append(";");
-		dadosDoObjeto.append(this.cep).append(";");
-		dadosDoObjeto.append(this.estado.getValor());
-
-		return dadosDoObjeto.toString();
-	}
 }

@@ -141,14 +141,19 @@ public class Cliente implements PersisteDados {
 		this.dataNascimento = DataUtils.convertaStringParaLocalDate(campos.get(4));
 		this.cpf = campos.get(5);
 		this.cnpj = campos.get(6);
-		String dadosEndereco = campos.get(7) + ";" + campos.get(8) + ";" + campos.get(9) + ";" + campos.get(10) + ";"
-				+ campos.get(11) + ";" + campos.get(12) + ";" + campos.get(13) + ";" + campos.get(14);
-		Endereco endereco = (Endereco) PersisteDadosFactory.obtenhaInstancia("Endereco");
-		endereco.monteObjeto(dadosEndereco);
+		Endereco endereco = new Endereco();
+		endereco.setLogradouro(campos.get(7));
+		endereco.setNumero(campos.get(8));
+		endereco.setComplemento(campos.get(9));
+		endereco.setBairro(campos.get(10));
+		endereco.setCidade(campos.get(11));
+		endereco.setCep(campos.get(12));
+		EstadosBrasil estado = EstadosBrasil.valueOf(Utils.convertaParaInt(campos.get(13)));
+		endereco.setEstado(estado);
 		this.endereco = endereco;
-		this.telefonePrincipal = Telefone.obtenhaInstancia(campos.get(15));
-		this.telefoneAlternativo = Telefone.obtenhaInstancia(campos.get(16));
-		this.email = campos.get(17);
+		this.telefonePrincipal = Telefone.obtenhaInstancia(campos.get(14));
+		this.telefoneAlternativo = Telefone.obtenhaInstancia(campos.get(15));
+		this.email = campos.get(16);
 	}
 
 	@Override
@@ -166,8 +171,13 @@ public class Cliente implements PersisteDados {
 		dadosDoObjeto.append(dataFormatada).append(";");
 		dadosDoObjeto.append(this.cpf).append(";");
 		dadosDoObjeto.append(this.cnpj).append(";");
-		dadosDoObjeto.append(this.endereco.getClass().getSimpleName()).append("#");
-		dadosDoObjeto.append(this.endereco.getId()).append(";");
+		dadosDoObjeto.append(this.endereco.getLogradouro()).append(";");
+		dadosDoObjeto.append(this.endereco.getNumero()).append(";");
+		dadosDoObjeto.append(this.endereco.getComplemento()).append(";");
+		dadosDoObjeto.append(this.endereco.getBairro()).append(";");
+		dadosDoObjeto.append(this.endereco.getCidade()).append(";");
+		dadosDoObjeto.append(this.endereco.getCep()).append(";");
+		dadosDoObjeto.append(this.endereco.getEstado().getValor()).append(";");
 		dadosDoObjeto.append(this.telefonePrincipal.toString()).append(";");
 		dadosDoObjeto.append(this.telefoneAlternativo.toString()).append(";");
 		dadosDoObjeto.append(this.email);

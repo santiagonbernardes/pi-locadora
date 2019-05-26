@@ -14,7 +14,6 @@ public class MainTestes {
 		try {
 			Categoria categoria = obtenhaCategoriaTeste();
 			Cliente cliente = obtenhaClienteTeste();
-			Endereco endereco = obtenhaEnderecoTeste();
 			Funcionario funcionario = obtenhaFuncionarioTeste();
 			Marca marca = obtenhaMarcaTeste();
 			Modelo modelo = obtenhaModeloTeste();
@@ -23,13 +22,22 @@ public class MainTestes {
 
 			ClienteTcpController controller = new ClienteTcpController();
 			controller.execute(categoria, Operacao.INCLUIR);//1
+			categoria.setId(1);
 			controller.execute(cliente, Operacao.INCLUIR);//2
-			controller.execute(endereco, Operacao.INCLUIR);//3
-			controller.execute(funcionario, Operacao.INCLUIR);//4
-			controller.execute(marca, Operacao.INCLUIR);//8
+			cliente.setId(2);
+			controller.execute(funcionario, Operacao.INCLUIR);//3
+			funcionario.setId(3);
+			controller.execute(marca, Operacao.INCLUIR);//4
+			marca.setId(4);
+			modelo.setMarca(marca);
 			controller.execute(modelo, Operacao.INCLUIR);//5
+			modelo.setId(5);
 			controller.execute(motorista, Operacao.INCLUIR);//6
+			motorista.setId(6);
+			veiculo.setCategoria(categoria);
+			veiculo.setModelo(modelo);
 			controller.execute(veiculo, Operacao.INCLUIR);//7
+			veiculo.setId(7);
 
 			List<Veiculo> veiculos = controller.liste("Veiculo");
 			System.out.println(veiculos.size());
@@ -47,7 +55,6 @@ public class MainTestes {
 	private static Marca obtenhaMarcaTeste() {
 		Marca marca = new Marca();
 		marca.setNome("Ford");
-		marca.setId(8);
 		return marca;
 	}
 
@@ -55,7 +62,6 @@ public class MainTestes {
 		Categoria categoria = (Categoria) PersisteDadosFactory.obtenhaInstancia("Categoria");
 		categoria.setNome("Econômica");
 		categoria.setValorDiarioLocacao(156.78f);
-		categoria.setId(1);
 		return categoria;
 	}
 
@@ -71,7 +77,6 @@ public class MainTestes {
 		cliente.setDataNascimento(DataUtils.convertaStringParaLocalDate("13/04/1986"));
 		cliente.setEmail("emilson@email.com");
 		cliente.setEndereco(obtenhaEnderecoTeste());
-		cliente.setId(2);
 		return cliente;
 	}
 
@@ -98,7 +103,6 @@ public class MainTestes {
 		endereco.setBairro("Leste Universitário");
 		endereco.setCidade("Goiania");
 		endereco.setEstado(EstadosBrasil.GO);
-		endereco.setId(3);
 		return endereco;
 	}
 
@@ -115,8 +119,6 @@ public class MainTestes {
 		funcionario.setTelefonePrincipal(obtenhaTelefonePrincipalTeste());
 		funcionario.setEndereco(obtenhaEnderecoTeste());
 		funcionario.setCpf("987.654.321-00");
-		funcionario.setId(4);
-
 		return funcionario;
 	}
 
@@ -138,7 +140,6 @@ public class MainTestes {
 		motorista.setTelefonePrincipal(obtenhaTelefonePrincipalTeste());
 		motorista.setDataNascimento(DataUtils.convertaStringParaLocalDate("08/05/1999"));
 		motorista.setCpf("000.000.000-00");
-		motorista.setId(6);
 		return motorista;
 	}
 
@@ -152,7 +153,6 @@ public class MainTestes {
 		veiculo.setRenavam(123545468464516L);
 		veiculo.setCategoria(obtenhaCategoriaTeste());
 		veiculo.setKmAtual(0);
-		veiculo.setId(7);
 		return veiculo;
 	}
 }

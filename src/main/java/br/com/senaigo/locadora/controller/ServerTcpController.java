@@ -3,10 +3,8 @@ package br.com.senaigo.locadora.controller;
 import br.com.senaigo.locadora.model.ExtratorRegex;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.persistencia.Repositorio;
-import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ServerTcpController {
 
@@ -50,22 +48,50 @@ public class ServerTcpController {
 		return resposta;
 	}
 
-	private String incluir() throws IOException {
-		repositorio.incluir(dados);
-		return this.nomeEntidade + " incluído com sucesso.";
+	private String incluir() throws Exception {
+		String resposta = "";
+		try {
+			repositorio.incluir(dados);
+			resposta = this.nomeEntidade + " incluído com sucesso.";
+		} catch (Exception erro) {
+			resposta = obtenhaRespostaComErro(erro);
+		}
+		return resposta;
 	}
 
-	private String listar() throws IOException {
-		return repositorio.listar();
+	private String listar() throws Exception {
+		String resposta = "";
+		try {
+			resposta = repositorio.listar();
+		} catch (Exception erro) {
+			resposta = obtenhaRespostaComErro(erro);
+		}
+		return resposta;
 	}
 
-	private String alterar() throws IOException {
-		repositorio.alterar(dados);
- 		return this.nomeEntidade + " alterado com sucesso.";
+	private String alterar() throws Exception {
+		String resposta = "";
+		try {
+			repositorio.alterar(dados);
+			resposta = this.nomeEntidade + " alterado com sucesso.";
+		} catch (Exception erro) {
+			resposta = obtenhaRespostaComErro(erro);
+		}
+		return resposta;
 	}
 
-	private String excluir() throws IOException {
-		repositorio.excluir(dados);
-		return this.nomeEntidade + "excluído com sucesso.";
+	private String excluir() throws Exception {
+		String resposta = "";
+		try {
+			repositorio.excluir(dados);
+			resposta = this.nomeEntidade + "excluído com sucesso.";
+		} catch (Exception erro) {
+			resposta = obtenhaRespostaComErro(erro);
+		}
+		return resposta;
+	}
+
+	private String obtenhaRespostaComErro(Exception erro) {
+		return "!Não foi possível " + this.operacao.getDescricao() + this.nomeEntidade + ": " + erro.getMessage();
 	}
 }
