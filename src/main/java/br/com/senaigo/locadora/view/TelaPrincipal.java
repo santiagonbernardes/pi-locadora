@@ -73,6 +73,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBarMenuPrincipal.add(jMenuFuncionario);
 
         jMenuCliente.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuCliente.setIcon(new javax.swing.ImageIcon("arquivo/imagens/group_1.png"));
         jMenuCliente.setText("Cliente");
 
         jMenuItemPessoaFisica.setText("Pessoa Física");
@@ -102,6 +103,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBarMenuPrincipal.add(jMenuCliente);
 
         jMenuVeiculo.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuVeiculo.setIcon(new javax.swing.ImageIcon("arquivo/imagens/veiculo.png"));
         jMenuVeiculo.setText("Veículo");
 
         jMenuItemMarca.setText("Marca");
@@ -128,6 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuVeiculo.add(jMenuCategoria);
 
+        jMenuCarro.setIcon(new javax.swing.ImageIcon("arquivo/imagens/car.png"));
         jMenuCarro.setText("Carro");
         jMenuCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +142,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBarMenuPrincipal.add(jMenuVeiculo);
 
         jMenuLacacao.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuLacacao.setIcon(new javax.swing.ImageIcon("arquivo/imagens/chave.png"));
         jMenuLacacao.setText("Locação");
         jMenuBarMenuPrincipal.add(jMenuLacacao);
 
@@ -229,6 +233,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCarroActionPerformed
         // TODO add your handling code here:
+        try {
+			TelaCarro tela = new TelaCarro();
+			jDesktopPanePainelPrincipal.removeAll();
+			form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
+
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro ao abrir tela de carro. " + erro.getMessage());
+		}
     }//GEN-LAST:event_jMenuCarroActionPerformed
 
     /**
