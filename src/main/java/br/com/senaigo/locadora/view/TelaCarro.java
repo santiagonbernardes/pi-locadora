@@ -11,6 +11,8 @@ import br.com.senaigo.locadora.model.Estado;
 import br.com.senaigo.locadora.model.Modelo;
 import br.com.senaigo.locadora.model.Veiculo;
 import br.com.senaigo.locadora.persistencia.Operacao;
+import br.com.senaigo.locadora.utils.Utils;
+
 import java.io.IOException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -40,7 +42,6 @@ public class TelaCarro extends javax.swing.JInternalFrame {
     
     private void inicializeFontesDeDadosCombo() {
         try {
-            fonteDeDadosVeiculo = controller.liste("Veiculo");
             fonteDeDadosModelo = controller.liste("Modelo");
             fonteDeDadosCategoria = controller.liste("Categoria");            
         } catch (Exception e) {
@@ -73,7 +74,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
     
     private void atualizeFonteDeDadosVeiculo() {
 		try {
-			fonteDeDadosModelo = controller.liste("Veiculo");
+			fonteDeDadosVeiculo = controller.liste("Veiculo");
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Erro do preencher fonte de dados de veículo: " + erro.getMessage());
 		}
@@ -467,6 +468,51 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
+		try {
+			String id = jTextFieldID.getText();
+			String placa = jTextFieldPlaca.getText();
+			String renavam = jTextFieldRENAVAM.getText();
+			String ano = jTextFieldAno.getText();
+			String valorCompra = jTextFieldValorCompra.getText();
+			String quilometragem = jTextFieldQuilometragem.getText();
+			int posicaoCategoria = jComboBoxCategoria.getSelectedIndex();
+			int posicaoEstado = jComboBoxEstado.getSelectedIndex() + 1;
+			int posicaoModelo = jComboBoxModelo.getSelectedIndex();
+
+			Veiculo veiculo = new Veiculo();
+			veiculo.setPlaca(placa);
+			veiculo.setRenavam(Utils.convertaParaLong(renavam));
+			veiculo.setAnoFabricacao(Utils.convertaParaInt(ano));
+			veiculo.setValorCompra(Utils.convertaParaFloat(valorCompra));
+			veiculo.setKmAtual(Utils.convertaParaInt(quilometragem));
+			Categoria categoria = fonteDeDadosCategoria.get(posicaoCategoria);
+			veiculo.setCategoria(categoria);
+			Estado estado = Estado.valueOf(posicaoEstado);
+			veiculo.setEstado(estado);
+			Modelo modelo = fonteDeDadosModelo.get(posicaoModelo);
+			veiculo.setModelo(modelo);
+
+			if(id.equals("")) {
+				controller.execute(veiculo, Operacao.INCLUIR);
+			} else {
+				veiculo.setId(Utils.convertaParaInt(id));
+				controller.execute(veiculo, Operacao.ALTERAR);
+			}
+
+			preenchaGrid();
+			jTextFieldAno.setText("");
+			jTextFieldID.setText("");
+			jTextFieldPlaca.setText("");
+			jTextFieldQuilometragem.setText("");
+			jTextFieldRENAVAM.setText("");
+			jTextFieldValorCompra.setText("");
+			jComboBoxCategoria.setSelectedIndex(-1);
+			jComboBoxEstado.setSelectedIndex(-1);
+			jComboBoxModelo.setSelectedIndex(-1);
+
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
+		}
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
