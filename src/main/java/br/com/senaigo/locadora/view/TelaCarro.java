@@ -5,18 +5,80 @@
  */
 package br.com.senaigo.locadora.view;
 
+import br.com.senaigo.locadora.controller.ClienteTcpController;
+import br.com.senaigo.locadora.model.Categoria;
+import br.com.senaigo.locadora.model.Estado;
+import br.com.senaigo.locadora.model.Modelo;
+import br.com.senaigo.locadora.model.Veiculo;
+import br.com.senaigo.locadora.persistencia.Operacao;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pfellype
  */
 public class TelaCarro extends javax.swing.JInternalFrame {
+    
+    private ClienteTcpController controller;
+    private List<Veiculo> fonteDeDadosVeiculo;
+    private List<Categoria> fonteDeDadosCategoria;
+    private List<Modelo> fonteDeDadosModelo;    
 
     /**
      * Creates new form TelaCarro
      */
-    public TelaCarro() {
+    public TelaCarro() throws IOException {
+        controller = new ClienteTcpController();
+        inicializeFontesDeDadosCombo();
         initComponents();
+        preenchaGrid();
     }
+    
+    private void inicializeFontesDeDadosCombo() {
+        try {
+            fonteDeDadosVeiculo = controller.liste("Veiculo");
+            fonteDeDadosModelo = controller.liste("Modelo");
+            fonteDeDadosCategoria = controller.liste("Categoria");            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao inicializar fontes de dados: " + e.getMessage());
+        }
+    }
+    
+    private void preenchaGrid() {
+		try {
+			atualizeFonteDeDadosVeiculo();
+			DefaultTableModel tabela = obtenhaGrid();
+			tabela.setRowCount(0);
+			for (Veiculo veiculo : fonteDeDadosVeiculo) {
+				Object[] campos = {
+					veiculo.getId(),
+					veiculo.getPlaca(),
+					veiculo.getCategoria().getNome(),
+                                        veiculo.getEstado().getDescricao()
+				};
+				tabela.addRow(campos);
+			}
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Veiculo: " + erro.getMessage());
+		}
+	}
+    
+    private DefaultTableModel obtenhaGrid() {
+		return (DefaultTableModel) jTableLista.getModel();
+	}
+    
+    private void atualizeFonteDeDadosVeiculo() {
+		try {
+			fonteDeDadosModelo = controller.liste("Veiculo");
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, "Erro do preencher fonte de dados de veículo: " + erro.getMessage());
+		}
+	}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,11 +177,11 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 
         jComboBoxCategoria.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jComboBoxCategoria.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCategoria.setModel(new DefaultComboBoxModel(fonteDeDadosCategoria.toArray()));
 
         jComboBoxEstado.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jComboBoxEstado.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEstado.setModel(new DefaultComboBoxModel(Estado.values()));
 
         jLabelMarca.setBackground(new java.awt.Color(255, 255, 255));
         jLabelMarca.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -137,7 +199,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 
         jComboBoxModelo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jComboBoxModelo.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxModelo.setModel(new DefaultComboBoxModel(fonteDeDadosModelo.toArray()));
 
         jLabelID.setBackground(new java.awt.Color(255, 255, 255));
         jLabelID.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -151,11 +213,21 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jButtonSalvar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonSalvar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonCancelar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonCancelar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCarroLayout = new javax.swing.GroupLayout(jPanelCarro);
         jPanelCarro.setLayout(jPanelCarroLayout);
@@ -271,16 +343,31 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jButtonNovo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonNovo.setForeground(new java.awt.Color(0, 0, 0));
         jButtonNovo.setText("Novo");
+        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovoActionPerformed(evt);
+            }
+        });
 
         jButtonEditar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonEditar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonEditar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jButtonExcluir.setBackground(new java.awt.Color(255, 255, 255));
         jButtonExcluir.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonExcluir.setForeground(new java.awt.Color(0, 0, 0));
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
         jPanelBotoes.setLayout(jPanelBotoesLayout);
@@ -373,6 +460,26 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNovoActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
