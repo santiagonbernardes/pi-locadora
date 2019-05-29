@@ -75,5 +75,8 @@ public class Modelo implements PersisteDados {
 		return dadosDoObjeto.toString();
 	}
 
-
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }
