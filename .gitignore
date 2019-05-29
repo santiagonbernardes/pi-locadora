@@ -23,6 +23,7 @@
 /.idea/
 *.iml
 .editorconfig
+nbactions.xml
 
 #Arquivos usados em desenvolvimento
 /Persistência/*
