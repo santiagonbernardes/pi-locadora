@@ -6,33 +6,33 @@ public enum Estado {
 	RETIRADO_DA_FROTA(3, "Retirado da Frota");
 
 	private int valor;
-        private String descricao;
+	private String descricao;
 
 	Estado(int valor, String descricao) {
 		this.valor = valor;
-                this.descricao = descricao;
+		this.descricao = descricao;
 	}
 
 	public int getValor() {
 		return valor;
 	}
 
-        public String getDescricao() {
-            return descricao;
-        }     
+	public String getDescricao() {
+		return descricao;
+	}
 
 	public static Estado valueOf(int valor) {
 		Estado estadoEncontrado = null;
-		for(Estado estado : Estado.values()) {
-			if(estado.valor == valor) {
+		for (Estado estado : Estado.values()) {
+			if (estado.valor == valor) {
 				estadoEncontrado = estado;
 			}
 		}
 		return estadoEncontrado;
 	}
 
-        @Override
-        public String toString() {
-            return this.descricao;
-        }
+	@Override
+	public String toString() {
+		return this.descricao;
+	}
 }
