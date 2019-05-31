@@ -106,9 +106,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jLabelEstado = new javax.swing.JLabel();
         jComboBoxCategoria = new javax.swing.JComboBox<>();
         jComboBoxEstado = new javax.swing.JComboBox<>();
-        jLabelMarca = new javax.swing.JLabel();
         jLabelModelo = new javax.swing.JLabel();
-        jComboBoxMarca = new javax.swing.JComboBox<>();
         jComboBoxModelo = new javax.swing.JComboBox<>();
         jLabelID = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
@@ -118,8 +116,11 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jButtonNovo = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPaneTabela = new javax.swing.JScrollPane();
         jTableLista = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(255, 244, 0));
+        setBorder(null);
 
         jPanelBase.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -184,19 +185,10 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jComboBoxEstado.setForeground(new java.awt.Color(0, 0, 0));
         jComboBoxEstado.setModel(new DefaultComboBoxModel(Estado.values()));
 
-        jLabelMarca.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelMarca.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabelMarca.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelMarca.setText("Marca:");
-
         jLabelModelo.setBackground(new java.awt.Color(255, 255, 255));
         jLabelModelo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabelModelo.setForeground(new java.awt.Color(0, 0, 0));
         jLabelModelo.setText("Modelo:");
-
-        jComboBoxMarca.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jComboBoxMarca.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBoxModelo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jComboBoxModelo.setForeground(new java.awt.Color(0, 0, 0));
@@ -207,6 +199,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jLabelID.setForeground(new java.awt.Color(0, 0, 0));
         jLabelID.setText("ID:");
 
+        jTextFieldID.setEditable(false);
         jTextFieldID.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldID.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -235,13 +228,13 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jPanelCarroLayout.setHorizontalGroup(
             jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCarroLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCarroLayout.createSequentialGroup()
                         .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelCategoria)
                             .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                         .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelEstado)
                             .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -257,36 +250,31 @@ public class TelaCarro extends javax.swing.JInternalFrame {
                         .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelRENAVAM)
                             .addComponent(jTextFieldRENAVAM, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCarroLayout.createSequentialGroup()
-                        .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelMarca)
-                            .addComponent(jComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                        .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelCarroLayout.createSequentialGroup()
-                                .addComponent(jLabelModelo)
-                                .addGap(189, 189, 189))
-                            .addComponent(jComboBoxModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelCarroLayout.createSequentialGroup()
                         .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelAno))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelValorCompra)
-                            .addComponent(jTextFieldValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextFieldQuilometragem, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelQuilometragem, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextFieldValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelCarroLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelModelo)
+                            .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTextFieldQuilometragem, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelQuilometragem, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(jPanelCarroLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalvar)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCancelar)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCarroLayout.setVerticalGroup(
@@ -322,13 +310,11 @@ public class TelaCarro extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelModelo)
-                    .addComponent(jLabelMarca)
                     .addComponent(jLabelEstado)
                     .addComponent(jLabelCategoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
@@ -375,18 +361,16 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jPanelBotoesLayout.setHorizontalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonNovo)
-                .addGap(524, 524, 524)
-                .addComponent(jButtonEditar)
+                .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonExcluir)
-                .addContainerGap())
+                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanelBotoesLayout.setVerticalGroup(
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNovo)
                     .addComponent(jButtonEditar)
@@ -400,11 +384,11 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Placa", "Categoria", "Estado"
+                "ID", "Placa", "Estado", "Renavam", "Categoria", "Modelo", "Ano"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -412,7 +396,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
             }
         });
         jTableLista.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTableLista);
+        jScrollPaneTabela.setViewportView(jTableLista);
         if (jTableLista.getColumnModel().getColumnCount() > 0) {
             jTableLista.getColumnModel().getColumn(0).setResizable(false);
             jTableLista.getColumnModel().getColumn(0).setPreferredWidth(70);
@@ -420,8 +404,9 @@ public class TelaCarro extends javax.swing.JInternalFrame {
             jTableLista.getColumnModel().getColumn(1).setPreferredWidth(200);
             jTableLista.getColumnModel().getColumn(2).setResizable(false);
             jTableLista.getColumnModel().getColumn(2).setPreferredWidth(400);
-            jTableLista.getColumnModel().getColumn(3).setResizable(false);
-            jTableLista.getColumnModel().getColumn(3).setPreferredWidth(400);
+            jTableLista.getColumnModel().getColumn(4).setResizable(false);
+            jTableLista.getColumnModel().getColumn(4).setPreferredWidth(400);
+            jTableLista.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanelBaseLayout = new javax.swing.GroupLayout(jPanelBase);
@@ -429,22 +414,22 @@ public class TelaCarro extends javax.swing.JInternalFrame {
         jPanelBaseLayout.setHorizontalGroup(
             jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBaseLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                    .addComponent(jScrollPaneTabela)
+                    .addComponent(jPanelCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelBaseLayout.setVerticalGroup(
             jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBaseLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -536,13 +521,11 @@ public class TelaCarro extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JComboBox<String> jComboBoxEstado;
-    private javax.swing.JComboBox<String> jComboBoxMarca;
     private javax.swing.JComboBox<String> jComboBoxModelo;
     private javax.swing.JLabel jLabelAno;
     private javax.swing.JLabel jLabelCategoria;
     private javax.swing.JLabel jLabelEstado;
     private javax.swing.JLabel jLabelID;
-    private javax.swing.JLabel jLabelMarca;
     private javax.swing.JLabel jLabelModelo;
     private javax.swing.JLabel jLabelPlaca;
     private javax.swing.JLabel jLabelQuilometragem;
@@ -551,7 +534,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanelBase;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelCarro;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPaneTabela;
     private javax.swing.JTable jTableLista;
     private javax.swing.JTextField jTextFieldAno;
     private javax.swing.JTextField jTextFieldID;
