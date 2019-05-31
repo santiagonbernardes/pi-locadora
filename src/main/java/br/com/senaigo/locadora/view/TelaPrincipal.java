@@ -166,16 +166,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItemMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMarcaActionPerformed
         // TODO add your handling code here:
         try {
-//            jDesktopPanePainelPrincipal.removeAll();
-//            TelaMarca marca = new TelaMarca();
-//            jDesktopPanePainelPrincipal.add(marca);
-//            marca.setVisible(true);
-//            marca.setMaximum(true);
-            TelaMarca tela = new TelaMarca();
             jDesktopPanePainelPrincipal.removeAll();
-            form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
-            
-        } catch (Exception erro) {
+            TelaMarca marca = new TelaMarca();
+            jDesktopPanePainelPrincipal.add(marca);
+            marca.setVisible(true);
+            marca.setMaximum(true);
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_jMenuItemMarcaActionPerformed
 
@@ -207,11 +203,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCategoriaActionPerformed
         // TODO add your handling code here:
         try {
-            TelaCategoria tela = new TelaCategoria();
             jDesktopPanePainelPrincipal.removeAll();
-            form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
-            
-        } catch (Exception erro) {
+            TelaCategoria categoria = new TelaCategoria();
+            jDesktopPanePainelPrincipal.add(categoria);
+            categoria.setVisible(true);
+            categoria.setMaximum(true);
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_jMenuCategoriaActionPerformed
 
@@ -221,26 +218,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModeloActionPerformed
         // TODO add your handling code here:
-		try {
-			TelaModelo tela = new TelaModelo();
-			jDesktopPanePainelPrincipal.removeAll();
-			form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
-
-		} catch (Exception erro) {
-			JOptionPane.showMessageDialog(null, "Erro ao abrir tela de modelos. " + erro.getMessage());
-		}
+        try {
+            jDesktopPanePainelPrincipal.removeAll();
+            TelaModelo modelo = new TelaModelo();
+            jDesktopPanePainelPrincipal.add(modelo);
+            modelo.setVisible(true);
+            modelo.setMaximum(true);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jMenuModeloActionPerformed
 
     private void jMenuCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCarroActionPerformed
         // TODO add your handling code here:
         try {
-			TelaCarro tela = new TelaCarro();
-			jDesktopPanePainelPrincipal.removeAll();
-			form.abrirFormulario(tela, jDesktopPanePainelPrincipal);
-
-		} catch (Exception erro) {
-			JOptionPane.showMessageDialog(null, "Erro ao abrir tela de carro. " + erro.getMessage());
-		}
+            jDesktopPanePainelPrincipal.removeAll();
+            TelaCarro carro = new TelaCarro();
+            jDesktopPanePainelPrincipal.add(carro);
+            carro.setVisible(true);
+            carro.setMaximum(true);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jMenuCarroActionPerformed
 
     /**
