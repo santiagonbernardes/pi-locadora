@@ -1,17 +1,15 @@
 package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.controller.ClienteTcpController;
-import br.com.senaigo.locadora.model.Categoria;
-import br.com.senaigo.locadora.model.Estado;
-import br.com.senaigo.locadora.model.Modelo;
-import br.com.senaigo.locadora.model.Veiculo;
+import br.com.senaigo.locadora.model.*;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaCarro extends javax.swing.JInternalFrame {
@@ -20,13 +18,19 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 	private List<Veiculo> fonteDeDadosVeiculo;
 	private List<Categoria> fonteDeDadosCategoria;
 	private List<Modelo> fonteDeDadosModelo;
+	private FormularioPadrao formulario;
 
 	public TelaCarro() throws IOException {
 		controller = new ClienteTcpController();
 		inicializeFontesDeDadosCombo();
 		initComponents();
+		List<JTextField> camposFormularioSemId = Arrays.asList(jTextFieldPlaca, jTextFieldValorCompra, jTextFieldAno, jTextFieldQuilometragem,
+			jTextFieldRenavam);
+		List<JComboBox> comboBoxesFormulario = Arrays.asList(jComboBoxCategoria, jComboBoxEstado, jComboBoxModelo);
+		formulario = new FormularioPadrao(jButtonSalvar, jButtonEditar,
+			jButtonCancelar, jButtonNovo, jTableLista, jTextFieldID, camposFormularioSemId, comboBoxesFormulario);
 		preenchaGrid();
-		configureTelaParaNavegacao();
+		formulario.configureFormularioParaNavegacao();
 	}
 
 	private void inicializeFontesDeDadosCombo() {
@@ -36,106 +40,6 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Erro ao inicializar fontes de dados: " + e.getMessage());
 		}
-	}
-
-	private void configureTelaParaNavegacao() {
-		jTableLista.clearSelection();
-		desativeTodosBotoes();
-		desativeTodasComboBox();
-		desativeTodosOsCamposDeTexto();
-		limpeCamposDeTexto();
-		limpeComboBoxes();
-		jButtonNovo.setEnabled(true);
-	}
-
-	private void configureTelaParaEntradaDeDados() {
-		jTableLista.clearSelection();
-		limpeCamposDeTexto();
-		limpeComboBoxes();
-		desativeTodosBotoes();
-		ativeTodosCamposDeTextoMenosCampoId();
-		ativeTodasComboBoxes();
-		jButtonSalvar.setEnabled(true);
-		jButtonCancelar.setEnabled(true);
-	}
-
-	private void desativeTodosOsCamposDeTexto() {
-		jTextFieldAno.setEditable(false);
-		jTextFieldID.setEditable(false);
-		jTextFieldPlaca.setEditable(false);
-		jTextFieldQuilometragem.setEditable(false);
-		jTextFieldRenavam.setEditable(false);
-		jTextFieldValorCompra.setEditable(false);
-	}
-
-	private void desativeTodasComboBox() {
-		jComboBoxCategoria.setEnabled(false);
-		jComboBoxEstado.setEnabled(false);
-		jComboBoxModelo.setEnabled(false);
-	}
-
-	private void desativeTodosBotoes() {
-		jButtonNovo.setEnabled(false);
-		jButtonCancelar.setEnabled(false);
-		jButtonEditar.setEnabled(false);
-		jButtonExcluir.setEnabled(false);
-		jButtonSalvar.setEnabled(false);
-	}
-
-	private void ativeTodosCamposDeTextoMenosCampoId() {
-		jTextFieldAno.setEditable(true);
-		jTextFieldID.setEditable(false);
-		jTextFieldPlaca.setEditable(true);
-		jTextFieldQuilometragem.setEditable(true);
-		jTextFieldRenavam.setEditable(true);
-		jTextFieldValorCompra.setEditable(true);
-	}
-
-	private void ativeTodasComboBoxes() {
-		limpeComboBoxes();
-		jComboBoxModelo.setEnabled(true);
-		jComboBoxEstado.setEnabled(true);
-		jComboBoxCategoria.setEnabled(true);
-	}
-
-	private void limpeCamposDeTexto() {
-		jTextFieldAno.setText("");
-		jTextFieldID.setText("");
-		jTextFieldPlaca.setText("");
-		jTextFieldQuilometragem.setText("");
-		jTextFieldRenavam.setText("");
-		jTextFieldValorCompra.setText("");
-	}
-
-	private void limpeComboBoxes() {
-		jComboBoxModelo.setSelectedIndex(-1);
-		jComboBoxEstado.setSelectedIndex(-1);
-		jComboBoxCategoria.setSelectedIndex(-1);
-	}
-
-	private boolean confirmeApagarFormulario() {
-		boolean podeModificarComponentes = true;
-
-		if (!isTodosOsCamposVazio()) {
-			int opcaoDoUsuario = JOptionPane.showConfirmDialog(null,
-				"As informações do formulário serão perdidas, deseja continuar?",
-				"Rent System", JOptionPane.YES_NO_OPTION);
-
-			podeModificarComponentes = opcaoDoUsuario == JOptionPane.YES_OPTION;
-		}
-
-		return podeModificarComponentes;
-	}
-
-	private boolean isTodosOsCamposVazio() {
-		return jTextFieldQuilometragem.getText().isEmpty() &&
-			jTextFieldValorCompra.getText().isEmpty() &&
-			jTextFieldAno.getText().isEmpty() &&
-			jTextFieldPlaca.getText().isEmpty() &&
-			jTextFieldRenavam.getText().isEmpty() &&
-			jComboBoxCategoria.getSelectedIndex() == -1 &&
-			jComboBoxEstado.getSelectedIndex() == -1 &&
-			jComboBoxModelo.getSelectedIndex() == -1;
 	}
 
 	private void preenchaGrid() {
@@ -539,7 +443,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-		configureTelaParaEntradaDeDados();
+		formulario.configureFormularioParaEntradaDeDados();
 	}//GEN-LAST:event_jButtonNovoActionPerformed
 
 	private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -572,26 +476,26 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 			}
 
 			preenchaGrid();
-			configureTelaParaNavegacao();
+			formulario.configureFormularioParaNavegacao();
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
 		}
 	}//GEN-LAST:event_jButtonSalvarActionPerformed
 
 	private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-		boolean podeModificarComponentes = confirmeApagarFormulario();
-		if(podeModificarComponentes) {
-			configureTelaParaNavegacao();
+		boolean podeModificarComponentes = formulario.confirmeApagarFormulario();
+		if (podeModificarComponentes) {
+			formulario.configureFormularioParaNavegacao();
 		}
 
 	}//GEN-LAST:event_jButtonCancelarActionPerformed
 
 	private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-		boolean podeModificarComponentes = confirmeApagarFormulario();
+		boolean podeModificarComponentes = formulario.confirmeApagarFormulario();
 
-		if(podeModificarComponentes) {
+		if (podeModificarComponentes) {
 			int indexDoVeiculo = jTableLista.getSelectedRow();
-			configureTelaParaEntradaDeDados();
+			formulario.configureFormularioParaEntradaDeDados();
 			Veiculo veiculo = fonteDeDadosVeiculo.get(indexDoVeiculo);
 			jTextFieldID.setText(String.valueOf(veiculo.getId()));
 			jTextFieldPlaca.setText(veiculo.getPlaca());
@@ -602,13 +506,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 			jComboBoxCategoria.setSelectedItem(veiculo.getCategoria());
 			jComboBoxEstado.setSelectedItem(veiculo.getEstado());
 			jComboBoxModelo.setSelectedItem(veiculo.getModelo());
-		} else {
-			jButtonEditar.setEnabled(false);
-			jButtonExcluir.setEnabled(false);
-			jTableLista.clearSelection();
 		}
-
-
 	}//GEN-LAST:event_jButtonEditarActionPerformed
 
 	private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
@@ -616,12 +514,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 	}//GEN-LAST:event_jButtonExcluirActionPerformed
 
 	private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
-		boolean itemSelecionadoNaLista = jTableLista.getSelectedRowCount() == 1;
-		if (itemSelecionadoNaLista) {
-			jButtonEditar.setEnabled(true);
-			jButtonExcluir.setEnabled(true);
-		}
-
+		formulario.configureConformeInteracaoComGrid();
 	}//GEN-LAST:event_jTableListaMouseClicked
 
 

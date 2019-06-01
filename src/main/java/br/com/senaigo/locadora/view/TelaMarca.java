@@ -6,12 +6,14 @@
 package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.controller.ClienteTcpController;
+import br.com.senaigo.locadora.model.FormularioPadrao;
 import br.com.senaigo.locadora.model.Marca;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.utils.Utils;
 import java.io.File;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,82 +26,20 @@ import javax.swing.table.DefaultTableModel;
 public class TelaMarca extends javax.swing.JInternalFrame {
 
     private ClienteTcpController controller;
-    private String modo;
     private List<Marca> fonteDeDadosMarca;
+    private FormularioPadrao formulario;
 
     
     public TelaMarca() throws IOException {
-        initComponents();
-        modo = "Navegar";
-        controller = new ClienteTcpController();
-        ManipulaInterface();
-        preenchaGrid();
-    }
-    
-    public void ManipulaInterface(){
-        switch(modo){
-            case "Navegar":
-                jButtonSalvar.setEnabled(false);
-                jButtonCancelar.setEnabled(false);
-                jTextFieldNome.setEditable(false);
-                jButtonNovo.setEnabled(true);
-                jButtonEditar.setEnabled(false);
-                jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(false);
-                jTextFieldCaminhoArquivo.setText("");
-                jLabelIcone.setIcon(null);
-                break;
-                
-            case "Novo":
-                jButtonSalvar.setEnabled(true);
-                jButtonCancelar.setEnabled(true);
-                jTextFieldNome.setEditable(true);
-                jButtonNovo.setEnabled(false);
-                jButtonEditar.setEnabled(false);
-                jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(true);
-                jTextFieldCaminhoArquivo.setText("");
-                jLabelIcone.setIcon(null);
-                break;
-               
-            case "Editar":
-                jButtonSalvar.setEnabled(true);
-                jButtonCancelar.setEnabled(true);
-                jTextFieldNome.setEditable(true);
-                jButtonNovo.setEnabled(true);
-                jButtonEditar.setEnabled(false);
-                jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(true);
-                jTextFieldCaminhoArquivo.setText("");
-                //jLabelIcone.setIcon(null);
-                break;
-                
-            case "Excluir":
-                jButtonSalvar.setEnabled(false);
-                jButtonCancelar.setEnabled(false);
-                jTextFieldNome.setEditable(false);
-                jButtonNovo.setEnabled(true);
-                jButtonEditar.setEnabled(false);
-                jButtonExcluir.setEnabled(false);
-                jButtonArquivo.setEnabled(false);
-                jTextFieldCaminhoArquivo.setText("");
-                jLabelIcone.setIcon(null);
-                break;
-            
-            case "Selecao":
-                jButtonSalvar.setEnabled(false);
-                jButtonCancelar.setEnabled(false);
-                jTextFieldNome.setEditable(false);
-                jButtonNovo.setEnabled(true);
-                jButtonEditar.setEnabled(true);
-                jButtonExcluir.setEnabled(true);
-                jButtonArquivo.setEnabled(false);
-                jTextFieldCaminhoArquivo.setText("");
-                jLabelIcone.setIcon(null);
-                break;
-            default: System.out.println("Modo inválido");
-        }
-    }
+		controller = new ClienteTcpController();
+		initComponents();
+        List<JTextField> camposFormularioSemId = Arrays.asList(jTextFieldCaminhoArquivo, jTextFieldNome);
+		formulario = new FormularioPadrao(jButtonSalvar, jButtonEditar, jButtonCancelar, jButtonNovo, jTableLista,
+			jTextFieldID, camposFormularioSemId);
+		preenchaGrid();
+		formulario.configureFormularioParaNavegacao();
+	}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -364,21 +304,14 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        // TODO add your handling code here:
-        jTextFieldID.setText("");
-        jTextFieldNome.setText("");
-        
-        modo = "Novo";
-        ManipulaInterface();
+        formulario.configureFormularioParaEntradaDeDados();
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
-        modo = "Navegar";
-        ManipulaInterface();
-        jTextFieldID.setText("");
-        jTextFieldNome.setText("");
-        
+		boolean podeModificarComponentes = formulario.confirmeApagarFormulario();
+		if (podeModificarComponentes) {
+			formulario.configureFormularioParaNavegacao();
+		}
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -400,11 +333,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             }
 
             preenchaGrid();
-            jTextFieldNome.setText("");
-            jTextFieldID.setText("");
-            jTextFieldCaminhoArquivo.setText("");
-            modo = "Navegar";
-            ManipulaInterface();
+            formulario.configureFormularioParaNavegacao();
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.INCLUIR + " Marca: " + erro.getMessage());
@@ -412,30 +341,23 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        try {
-            int indexDoObjeto = jTableLista.getSelectedRow();
-            Marca marca = fonteDeDadosMarca.get(indexDoObjeto);
-            controller.execute(marca, Operacao.EXCLUIR);
-            preenchaGrid();
-            modo = "Navegar";
-            ManipulaInterface();
-        } catch (Exception e){
-            //Adicionar tratamento
-        }
+
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jTableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaMouseClicked
-		modo="Selecao";
-		ManipulaInterface();
+		formulario.configureConformeInteracaoComGrid();
     }//GEN-LAST:event_jTableListaMouseClicked
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-		int indexDoObjeto = jTableLista.getSelectedRow();
-		Marca marca = fonteDeDadosMarca.get(indexDoObjeto);
-		jTextFieldID.setText(String.valueOf(marca.getId()));
-		jTextFieldNome.setText(marca.getNome());
-                modo = "Editar";
-                ManipulaInterface();
+		boolean podeModificarComponentes = formulario.confirmeApagarFormulario();
+
+		if (podeModificarComponentes) {
+			int indexDaMarca = jTableLista.getSelectedRow();
+			formulario.configureFormularioParaEntradaDeDados();
+			Marca marca = fonteDeDadosMarca.get(indexDaMarca);
+			jTextFieldID.setText(String.valueOf(marca.getId()));
+			jTextFieldNome.setText(marca.getNome());
+		}
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonArquivoActionPerformed
