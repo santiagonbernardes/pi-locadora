@@ -6,13 +6,15 @@
 package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.controller.ClienteTcpController;
-import br.com.senaigo.locadora.model.FormularioPadrao;
+import br.com.senaigo.locadora.interfaces.FormularioPadrao;
+import br.com.senaigo.locadora.model.ControleFormularioPadrao;
 import br.com.senaigo.locadora.model.Marca;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.utils.Utils;
 import java.io.File;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
@@ -23,19 +25,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author pfellype
  */
-public class TelaMarca extends javax.swing.JInternalFrame {
+public class TelaMarca extends javax.swing.JInternalFrame implements FormularioPadrao {
 
     private ClienteTcpController controller;
     private List<Marca> fonteDeDadosMarca;
-    private FormularioPadrao formulario;
+    private ControleFormularioPadrao formulario;
 
     
     public TelaMarca() throws IOException {
 		controller = new ClienteTcpController();
 		initComponents();
-        List<JTextField> camposFormularioSemId = Arrays.asList(jTextFieldCaminhoArquivo, jTextFieldNome);
-		formulario = new FormularioPadrao(jButtonSalvar, jButtonEditar, jButtonCancelar, jButtonNovo, jTableLista,
-			jTextFieldID, camposFormularioSemId);
+		formulario = new ControleFormularioPadrao(this);
 		preenchaGrid();
 		formulario.configureFormularioParaNavegacao();
 	}
@@ -365,7 +365,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 	private void preenchaGrid() {
 		try {
             atualizeFonteDeDadosMarca();
-			DefaultTableModel tabela = obtenhaGrid();
+			DefaultTableModel tabela = (DefaultTableModel) jTableLista.getModel();;
 			tabela.setRowCount(0);
 			for (Marca marca : fonteDeDadosMarca) {
 				Object[] campos = {
@@ -388,12 +388,53 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
     }
 
-    private DefaultTableModel obtenhaGrid() {
-        return (DefaultTableModel) jTableLista.getModel();
+	@Override
+	public JButton obtenhaBotaoSalvar() {
+		return this.jButtonSalvar;
+	}
+
+	@Override
+	public JButton obtenhaBotaoEditar() {
+		return this.jButtonEditar;
+	}
+
+	@Override
+	public JButton obtenhaBotaoCancelar() {
+		return this.jButtonCancelar;
+	}
+
+	@Override
+	public JButton obtenhaBotaoNovo() {
+		return this.jButtonNovo;
+	}
+
+	@Override
+	public JTable obtenhaGrid() {
+        return this.jTableLista;
     }
 
+	@Override
+	public JTextField obtenhaCampoId() {
+		return this.jTextFieldID;
+	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+	@Override
+	public List<JTextField> obtenhaCamposDoFormularioSemCampoId() {
+    	List<JTextField> camposDoFormularioSemCampoId = new ArrayList<>();
+    	camposDoFormularioSemCampoId.add(this.jTextFieldNome);
+    	camposDoFormularioSemCampoId.add(this.jTextFieldCaminhoArquivo);
+
+		return camposDoFormularioSemCampoId;
+	}
+
+	@Override
+	public List<JComboBox> obtenhaComboBoxesDoFormulario() {
+    	List<JComboBox> comboBoxesDoFormulario = new ArrayList<>();
+		return comboBoxesDoFormulario;
+	}
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonArquivo;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditar;

@@ -1,34 +1,31 @@
 package br.com.senaigo.locadora.view;
 
 import br.com.senaigo.locadora.controller.ClienteTcpController;
+import br.com.senaigo.locadora.interfaces.FormularioPadrao;
 import br.com.senaigo.locadora.model.*;
 import br.com.senaigo.locadora.persistencia.Operacao;
 import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class TelaCarro extends javax.swing.JInternalFrame {
+public class TelaCarro extends javax.swing.JInternalFrame implements FormularioPadrao {
 
 	private final ClienteTcpController controller;
 	private List<Veiculo> fonteDeDadosVeiculo;
 	private List<Categoria> fonteDeDadosCategoria;
 	private List<Modelo> fonteDeDadosModelo;
-	private FormularioPadrao formulario;
+	private ControleFormularioPadrao formulario;
 
 	public TelaCarro() throws IOException {
 		controller = new ClienteTcpController();
 		inicializeFontesDeDadosCombo();
 		initComponents();
-		List<JTextField> camposFormularioSemId = Arrays.asList(jTextFieldPlaca, jTextFieldValorCompra, jTextFieldAno, jTextFieldQuilometragem,
-			jTextFieldRenavam);
-		List<JComboBox> comboBoxesFormulario = Arrays.asList(jComboBoxCategoria, jComboBoxEstado, jComboBoxModelo);
-		formulario = new FormularioPadrao(jButtonSalvar, jButtonEditar,
-			jButtonCancelar, jButtonNovo, jTableLista, jTextFieldID, camposFormularioSemId, comboBoxesFormulario);
+		formulario = new ControleFormularioPadrao(this);
 		preenchaGrid();
 		formulario.configureFormularioParaNavegacao();
 	}
@@ -45,7 +42,7 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 	private void preenchaGrid() {
 		try {
 			atualizeFonteDeDadosVeiculo();
-			DefaultTableModel tabela = obtenhaGrid();
+			DefaultTableModel tabela = (DefaultTableModel) jTableLista.getModel();
 			tabela.setRowCount(0);
 			for (Veiculo veiculo : fonteDeDadosVeiculo) {
 				Object[] campos = {
@@ -66,8 +63,54 @@ public class TelaCarro extends javax.swing.JInternalFrame {
 		}
 	}
 
-	private DefaultTableModel obtenhaGrid() {
-		return (DefaultTableModel) jTableLista.getModel();
+	@Override
+	public JButton obtenhaBotaoSalvar() {
+		return this.jButtonSalvar;
+	}
+
+	@Override
+	public JButton obtenhaBotaoEditar() {
+		return this.jButtonEditar;
+	}
+
+	@Override
+	public JButton obtenhaBotaoCancelar() {
+		return this.jButtonCancelar;
+	}
+
+	@Override
+	public JButton obtenhaBotaoNovo() {
+		return this.jButtonNovo;
+	}
+
+	@Override
+	public JTable obtenhaGrid() {
+		return this.jTableLista;
+	}
+
+	@Override
+	public JTextField obtenhaCampoId() {
+		return this.jTextFieldID;
+	}
+
+	@Override
+	public List<JTextField> obtenhaCamposDoFormularioSemCampoId() {
+		List<JTextField> camposDoFormularioSemCampoId = new ArrayList<>();
+		camposDoFormularioSemCampoId.add(this.jTextFieldAno);
+		camposDoFormularioSemCampoId.add(this.jTextFieldPlaca);
+		camposDoFormularioSemCampoId.add(this.jTextFieldQuilometragem);
+		camposDoFormularioSemCampoId.add(this.jTextFieldRenavam);
+		camposDoFormularioSemCampoId.add(this.jTextFieldValorCompra);
+		return camposDoFormularioSemCampoId;
+	}
+
+	@Override
+	public List<JComboBox> obtenhaComboBoxesDoFormulario() {
+		List<JComboBox> comboBoxesDoFormulario = new ArrayList<>();
+		comboBoxesDoFormulario.add(this.jComboBoxCategoria);
+		comboBoxesDoFormulario.add(this.jComboBoxEstado);
+		comboBoxesDoFormulario.add(this.jComboBoxModelo);
+		return comboBoxesDoFormulario;
 	}
 
 	private void atualizeFonteDeDadosVeiculo() {

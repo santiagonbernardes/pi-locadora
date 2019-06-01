@@ -1,10 +1,12 @@
 package br.com.senaigo.locadora.model;
 
+import br.com.senaigo.locadora.interfaces.FormularioPadrao;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormularioPadrao {
+public class ControleFormularioPadrao {
 
 	private JButton botaoSalvar;
 	private JButton botaoEditar;
@@ -15,28 +17,15 @@ public class FormularioPadrao {
 	private List<JTextField> camposDoFormularioSemCampoId;
 	private List<JComboBox> comboBoxesDoFormulario;
 
-	public FormularioPadrao(JButton botaoSalvar, JButton botaoEditar, JButton botaoCancelar, JButton botaoNovo,
-							JTable grid, JTextField campoId, List<JTextField> camposDoFormularioSemCampoId, List<JComboBox> comboBoxesDoFormulario) {
-		this.botaoSalvar = botaoSalvar;
-		this.botaoEditar = botaoEditar;
-		this.botaoCancelar = botaoCancelar;
-		this.botaoNovo = botaoNovo;
-		this.grid = grid;
-		this.campoId = campoId;
-		this.camposDoFormularioSemCampoId = camposDoFormularioSemCampoId;
-		this.comboBoxesDoFormulario = comboBoxesDoFormulario;
-	}
-
-	public FormularioPadrao(JButton botaoSalvar, JButton botaoEditar, JButton botaoCancelar, JButton botaoNovo, JTable grid,
-							JTextField campoId, List<JTextField> camposDoFormularioSemCampoId) {
-		this.botaoSalvar = botaoSalvar;
-		this.botaoEditar = botaoEditar;
-		this.botaoCancelar = botaoCancelar;
-		this.botaoNovo = botaoNovo;
-		this.grid = grid;
-		this.campoId = campoId;
-		this.camposDoFormularioSemCampoId = camposDoFormularioSemCampoId;
-		this.comboBoxesDoFormulario = new ArrayList<>();
+	public ControleFormularioPadrao(FormularioPadrao formulario) {
+		this.botaoSalvar = formulario.obtenhaBotaoSalvar();
+		this.botaoEditar = formulario.obtenhaBotaoEditar();
+		this.botaoCancelar = formulario.obtenhaBotaoCancelar();
+		this.botaoNovo = formulario.obtenhaBotaoNovo();
+		this.grid = formulario.obtenhaGrid();
+		this.campoId = formulario.obtenhaCampoId();
+		this.camposDoFormularioSemCampoId = formulario.obtenhaCamposDoFormularioSemCampoId();
+		this.comboBoxesDoFormulario = formulario.obtenhaComboBoxesDoFormulario();
 	}
 
 	public void configureFormularioParaNavegacao() {
