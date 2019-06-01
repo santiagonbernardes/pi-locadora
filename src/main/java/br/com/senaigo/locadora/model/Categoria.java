@@ -74,6 +74,33 @@ public class Categoria implements PersisteDados {
     public String toString() {
         return this.nome;
     }
-        
-        
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		Categoria categoria = (Categoria) o;
+
+		if (id != categoria.id) {
+			return false;
+		}
+		if (Float.compare(categoria.valorDiarioLocacao, valorDiarioLocacao) != 0) {
+			return false;
+		}
+		return nome.equals(categoria.nome);
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id;
+		result = 31 * result + nome.hashCode();
+		result = 31 * result + (valorDiarioLocacao != +0.0f ? Float.floatToIntBits(valorDiarioLocacao) : 0);
+		return result;
+	}
 }

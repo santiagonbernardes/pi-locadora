@@ -79,4 +79,33 @@ public class Modelo implements PersisteDados {
     public String toString() {
         return this.nome;
     }
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		Modelo modelo = (Modelo) o;
+
+		if (id != modelo.id) {
+			return false;
+		}
+		if (!nome.equals(modelo.nome)) {
+			return false;
+		}
+		return marca.equals(modelo.marca);
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id;
+		result = 31 * result + nome.hashCode();
+		result = 31 * result + marca.hashCode();
+		return result;
+	}
 }
