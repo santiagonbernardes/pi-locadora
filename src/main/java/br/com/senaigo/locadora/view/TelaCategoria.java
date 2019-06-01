@@ -43,7 +43,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 				jTextFieldNome.setEditable(false);
 				jButtonNovo.setEnabled(true);
 				jButtonEditar.setEnabled(false);
-				jButtonExcluir.setEnabled(false);
 				jTextFieldValorLocacao.setEditable(false);
 //                jButtonArquivo.setEnabled(false);
 //                jTextFieldCaminhoArquivo.setText("");
@@ -56,7 +55,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 				jTextFieldNome.setEditable(true);
 				jButtonNovo.setEnabled(false);
 				jButtonEditar.setEnabled(false);
-				jButtonExcluir.setEnabled(false);
 				jTextFieldValorLocacao.setEditable(true);
 //                jButtonArquivo.setEnabled(true);
 //                jTextFieldCaminhoArquivo.setText("");
@@ -69,7 +67,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 				jTextFieldNome.setEditable(true);
 				jButtonNovo.setEnabled(true);
 				jButtonEditar.setEnabled(false);
-				jButtonExcluir.setEnabled(false);
 				jTextFieldValorLocacao.setEditable(true);
 //                jButtonArquivo.setEnabled(true);
 //                jTextFieldCaminhoArquivo.setText("");
@@ -82,7 +79,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 				jTextFieldNome.setEditable(false);
 				jButtonNovo.setEnabled(true);
 				jButtonEditar.setEnabled(false);
-				jButtonExcluir.setEnabled(false);
 				jTextFieldValorLocacao.setEditable(false);
 //                jButtonArquivo.setEnabled(false);
 //                jTextFieldCaminhoArquivo.setText("");
@@ -95,7 +91,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 				jTextFieldNome.setEditable(false);
 				jButtonNovo.setEnabled(true);
 				jButtonEditar.setEnabled(true);
-				jButtonExcluir.setEnabled(true);
 //                jButtonArquivo.setEnabled(false);
 //                jTextFieldCaminhoArquivo.setText("");
 //                jLabelIcone.setIcon(null);
@@ -129,7 +124,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
         jTableLista = new javax.swing.JTable();
         jButtonNovo = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
-        jButtonExcluir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 244, 0));
         setBorder(null);
@@ -285,15 +279,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonExcluir.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonExcluir.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonExcluir.setText("Excluir");
-        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelBaseLayout = new javax.swing.GroupLayout(jPanelBase);
         jPanelBase.setLayout(jPanelBaseLayout);
         jPanelBaseLayout.setHorizontalGroup(
@@ -308,9 +293,7 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
                     .addGroup(jPanelBaseLayout.createSequentialGroup()
                         .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -322,8 +305,7 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNovo)
-                    .addComponent(jButtonEditar)
-                    .addComponent(jButtonExcluir))
+                    .addComponent(jButtonEditar))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBaseLayout.createSequentialGroup()
@@ -407,19 +389,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
 		ManipulaInterface();
 	}//GEN-LAST:event_jButtonEditarActionPerformed
 
-	private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-		try {
-			int indexDoObjeto = jTableLista.getSelectedRow();
-			Categoria categoria = fonteDeDadosCategoria.get(indexDoObjeto);
-			controller.execute(categoria, Operacao.EXCLUIR);
-			preenchaGrid();
-			modo = "Navegar";
-			ManipulaInterface();
-		} catch (Exception e) {
-			//Adicionar tratamento
-		}
-	}//GEN-LAST:event_jButtonExcluirActionPerformed
-
 	private void preenchaGrid() {
 		try {
 			atualizeFonteDeDados();
@@ -453,7 +422,6 @@ public class TelaCategoria extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabelID;

@@ -75,7 +75,6 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
         jPanelBotoes = new javax.swing.JPanel();
         jButtonEditar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jButtonApagar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jButtonNovo = new javax.swing.JButton();
         jScrollPaneTabela = new javax.swing.JScrollPane();
@@ -395,16 +394,6 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonApagar.setBackground(new java.awt.Color(255, 255, 255));
-        jButtonApagar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jButtonApagar.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonApagar.setText("Apagar");
-        jButtonApagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonApagarActionPerformed(evt);
-            }
-        });
-
         jButtonSalvar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonSalvar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jButtonSalvar.setForeground(new java.awt.Color(0, 0, 0));
@@ -431,12 +420,10 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
             jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
                 .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                 .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -447,7 +434,6 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
                 .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonApagar)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonNovo)))
         );
@@ -563,10 +549,6 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButtonApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonApagarActionPerformed
-
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -581,7 +563,6 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonApagar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonNovo;
