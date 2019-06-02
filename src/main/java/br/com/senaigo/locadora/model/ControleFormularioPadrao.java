@@ -98,6 +98,9 @@ public class ControleFormularioPadrao {
 	private void limpeTodosOsCamposDeTexto() {
 		for(JTextField campoDeTexto : camposDoFormularioSemCampoId) {
 			campoDeTexto.setText("");
+                        if (campoDeTexto instanceof JFormattedTextField) {
+                            ((JFormattedTextField) campoDeTexto).setValue(null);
+                        }
 		}
 		campoId.setText("");
 	}
