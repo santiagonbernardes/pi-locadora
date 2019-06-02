@@ -12,6 +12,7 @@ public class ServerTcpController {
 	private String nomeEntidade;
 	private Repositorio repositorio;
 	private String dados;
+	private String imagem;
 
 	public ServerTcpController(String requisicao) throws IOException {
 		int codigoOperacao = ExtratorRegex.extraiaCodigoOperacao(requisicao);

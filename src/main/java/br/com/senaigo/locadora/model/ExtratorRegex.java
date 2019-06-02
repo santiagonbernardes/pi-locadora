@@ -15,6 +15,8 @@ public class ExtratorRegex {
 	private static final String REGEX_REMOVER_ENTIDADE = "^\\w+;";
 	private static final String REGEX_EXTRAIR_OBJETOS_INTERNOS = "\\w+#\\d+";
 	private static final String REGEX_EXTRAIR_ID_OBJETO_INTERNO = "\\d+$";
+	private static final String REGEX_EXTRAIR_IMAGEM = "(?<=Imagem#).+?((?=$|;))";
+	private static final String REGEX_REMOVER_IMAGEM = ";Imagem#.+?(?=$|;)";
 
 
 	public static int extraiaCodigoOperacao(String requisicaoComOperacao) {
@@ -56,6 +58,14 @@ public class ExtratorRegex {
 			objetosInternos.add(match.group());
 		}
 		return objetosInternos;
+	}
+
+	public static String extraiaImagem(String requisicao) {
+		return extraiaUmResultado(REGEX_EXTRAIR_IMAGEM, requisicao);
+	}
+
+	public static String removaImagem(String requisicaoComImagem) {
+		return remova(REGEX_REMOVER_IMAGEM, requisicaoComImagem);
 	}
 
 	private static String monteRegexId(String id) {
