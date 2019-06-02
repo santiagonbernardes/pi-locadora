@@ -8,10 +8,10 @@ public class DataUtils {
 	private static final DateTimeFormatter FORMATADOR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public static LocalDate convertaStringParaLocalDate(String dataFormatada) {
-		return LocalDate.parse(dataFormatada, FORMATADOR);
+		return dataFormatada.isEmpty() ? null : LocalDate.parse(dataFormatada, FORMATADOR);
 	}
 
 	public static String convertaLocalDateParaStringFormatada(LocalDate data) {
-		return data.format(FORMATADOR);
+		return data == null ? "" : data.format(FORMATADOR);
 	}
 }

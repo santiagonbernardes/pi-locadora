@@ -20,7 +20,7 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame implements Form
 	private final ClienteTcpController controller;
 	private List<Cliente> fonteDeDadosPessoaFisica;
 	private List<EstadosBrasil> fonteDeDadosEstadosBrasil;
-	ControleFormularioPadrao formulario;
+	private ControleFormularioPadrao formulario;
 
 	public TelaPessoaFisica() throws IOException {
 		controller = new ClienteTcpController();
@@ -72,7 +72,6 @@ public class TelaPessoaFisica extends javax.swing.JInternalFrame implements Form
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Erro ao " + Operacao.LISTAR + " Modelo: " + erro.getMessage());
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
