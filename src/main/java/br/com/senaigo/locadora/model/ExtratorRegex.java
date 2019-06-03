@@ -1,7 +1,5 @@
 package br.com.senaigo.locadora.model;
 
-import br.com.senaigo.locadora.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,7 +17,7 @@ public class ExtratorRegex {
 
 	public static int extraiaCodigoOperacao(String requisicaoComOperacao) {
 		String idEncontrada = extraiaUmResultado(REGEX_EXTRAIR_OPERACAO_E_ID_DADOS, requisicaoComOperacao);
-		return Utils.convertaParaInt(idEncontrada);
+		return Integer.valueOf(idEncontrada);
 	}
 
 	public static String extraiaIdDados(String dados) {

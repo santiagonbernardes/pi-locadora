@@ -1,10 +1,7 @@
 package br.com.senaigo.locadora.persistencia;
 
 import br.com.senaigo.locadora.utils.ArquivoUtils;
-import br.com.senaigo.locadora.utils.Utils;
-
 import java.io.*;
-import java.util.List;
 
 public class GeradorId {
 
@@ -19,7 +16,7 @@ public class GeradorId {
 		FileReader leitorArquivo = new FileReader(caminhoArquivoId);
 		BufferedReader leitorTexto = new BufferedReader(leitorArquivo);
 		String linha = leitorTexto.readLine();
-		this.ultimaIdGerada = linha == null ? 0 : Utils.convertaParaInt(linha);
+		this.ultimaIdGerada = linha == null ? 0 : Integer.valueOf(linha);
 		leitorTexto.close();
 	}
 
