@@ -11,13 +11,11 @@ public class Marca implements PersisteDados {
 	//Atributos
 	private int id;
 	private String nome;
-	private String logo;
 
 	//Construtores
 	public Marca() {
 		this.id = 0;
 		this.nome = "";
-		this.logo = "";
 	}
 
 	//Getters e Setters
@@ -37,14 +35,6 @@ public class Marca implements PersisteDados {
 		this.nome = nome;
 	}
 
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-
 	//Métodos Próprios
 
 	//Métodos Herdados
@@ -54,7 +44,6 @@ public class Marca implements PersisteDados {
 
 		this.id = Utils.convertaParaInt(campos.get(0));
 		this.nome = campos.get(1);
-		this.logo = campos.get(2);
 	}
 
 	@Override
@@ -65,8 +54,7 @@ public class Marca implements PersisteDados {
 
 		dadosDoObjeto.append(nomeDaClasse).append(";");
 		dadosDoObjeto.append(this.id).append(";");
-		dadosDoObjeto.append(this.nome).append(";");
-		dadosDoObjeto.append("Imagem#").append(this.logo);
+		dadosDoObjeto.append(this.nome);
 
 		return dadosDoObjeto.toString();
 	}

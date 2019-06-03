@@ -4,20 +4,19 @@ import br.com.senaigo.locadora.utils.ArquivoUtils;
 import br.com.senaigo.locadora.utils.Utils;
 
 import java.io.*;
+import java.util.List;
 
 public class GeradorId {
 
 	//Atributos
-	private static final String DIRETORIO = "Persistência/Id/";
-	private static final String CAMINHO_ARQUIVO_ID = DIRETORIO + "Id.txt";
+	private final String caminhoArquivoId = "Persistência/Id.txt";
 	private int ultimaIdGerada;
 
 
 	//Construtores
 	public GeradorId() throws IOException {
-		ArquivoUtils.garantaExistenciaArquivo(DIRETORIO, true);
-		ArquivoUtils.garantaExistenciaArquivo(CAMINHO_ARQUIVO_ID, false);
-		FileReader leitorArquivo = new FileReader(CAMINHO_ARQUIVO_ID);
+		ArquivoUtils.garantaExistenciaArquivo(caminhoArquivoId);
+		FileReader leitorArquivo = new FileReader(caminhoArquivoId);
 		BufferedReader leitorTexto = new BufferedReader(leitorArquivo);
 		String linha = leitorTexto.readLine();
 		this.ultimaIdGerada = linha == null ? 0 : Utils.convertaParaInt(linha);
@@ -30,7 +29,7 @@ public class GeradorId {
 	}
 
 	public void finalize() throws IOException {
-		FileWriter escritorArquivo = new FileWriter(CAMINHO_ARQUIVO_ID, false);
+		FileWriter escritorArquivo = new FileWriter(caminhoArquivoId, false);
 		BufferedWriter escritorTexto = new BufferedWriter(escritorArquivo);
 
 		escritorTexto.write(String.valueOf(ultimaIdGerada));
