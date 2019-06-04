@@ -11,4 +11,11 @@ public class ArquivoUtils {
 			file.createNewFile();
 		}
 	}
+
+	public static void garantaExistenciaDeDiretorio(String caminhoParaDiretorio) {
+		File file = new File(caminhoParaDiretorio);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+	}
 }

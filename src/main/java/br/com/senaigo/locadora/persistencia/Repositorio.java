@@ -13,6 +13,7 @@ public class Repositorio {
 
 	public Repositorio(String nomeEntidade) throws IOException {
 		this.caminhoParaArquivo = obtenhaCaminhoParaArquivo(nomeEntidade);
+		ArquivoUtils.garantaExistenciaDeDiretorio(NOME_PASTA_NA_RAIZ_DO_PROJETO);
 		ArquivoUtils.garantaExistenciaArquivo(this.caminhoParaArquivo);
 	}
 

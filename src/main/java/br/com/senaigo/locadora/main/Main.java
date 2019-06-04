@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		try {
 			ServidorTcp servidor = new ServidorTcp(7777);
 			System.out.println("Servidor online.");
+			servidor.aguardeConexaoComCliente();
 			while (true) {
 				String requisicao = servidor.receberMensagem();
-				System.out.println("Solicitação do cliente:" + requisicao);
 				ServerTcpController controller = new ServerTcpController(requisicao);
 				String resposta = controller.atendaRequisicao();
 				servidor.enviarMensagem(resposta);
