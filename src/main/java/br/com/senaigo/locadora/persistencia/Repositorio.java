@@ -21,13 +21,14 @@ public class Repositorio {
 		return NOME_PASTA_NA_RAIZ_DO_PROJETO + "/" + nomeEntidade + ".txt";
 	}
 
-	public void incluir(String dadosDoObjeto) throws Exception {
+	public String incluir(String dadosDoObjeto) throws Exception {
 		GeradorId geradorId = new GeradorId();
 		int id = geradorId.getUltimaIdGerada();
 		String dadosDoObjetoComIdGerada = dadosDoObjeto.replaceFirst("^\\d+", String.valueOf(id));
 		String dadosDoObjetoComIdQuebraLinha = dadosDoObjetoComIdGerada + "\n";
 		escrevaDadosNoRepositorio(dadosDoObjetoComIdQuebraLinha, true);
 		geradorId.finalize();
+		return String.valueOf(id);
 	}
 
 	public String listar() throws Exception {

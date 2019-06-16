@@ -51,8 +51,7 @@ public class ServerTcpController {
 	private String incluir() throws Exception {
 		String resposta = "";
 		try {
-			repositorio.incluir(dados);
-			resposta = this.nomeEntidade + " incluído com sucesso.";
+			resposta = repositorio.incluir(dados);
 		} catch (Exception erro) {
 			resposta = obtenhaRespostaComErro(erro);
 		}
