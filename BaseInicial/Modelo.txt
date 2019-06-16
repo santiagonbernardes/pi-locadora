@@ -1,0 +1,7 @@
+18;Uno;Marca#10
+19;Palio;Marca#10
+20;Gol;Marca#11
+21;Polo;Marca#11
+22;Corolla;Marca#12
+23;Etios;Marca#12
+29;XF R-Sport;Marca#28

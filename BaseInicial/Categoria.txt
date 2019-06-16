@@ -1,0 +1,5 @@
+13;Econômico;66.00
+14;Econ com ar;69.00
+15;Intermediário;81.00
+16;Executivo;113.00
+17;Prime;322.00

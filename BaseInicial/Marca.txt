@@ -1,0 +1,4 @@
+10;Fiat;Repositório/Marcas/JH5L3YR30Y.png
+11;Volkswagen;Repositório/Marcas/IJD6W806QI.png
+12;Toyota;Repositório/Marcas/1QWUDADYTB.png
+28;Jaguar;Repositório/Marcas/N071XSA2HE.png

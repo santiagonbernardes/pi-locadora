@@ -1,0 +1,2 @@
+32;Cliente#1;Veiculo#24;Motorista#7;16/06/2019;17/10/2019;;0;0;31/12/2019;Repositório/Locações/SNT2P94FX1.png;1;16236.00;0.00
+33;Cliente#4;Veiculo#25;Motorista#8;16/06/2019;23/05/2020;;0;0;31/12/2021;Repositório/Locações/6G8TWWL54T.png;1;47196.00;0.00

@@ -1,0 +1,6 @@
+1;Diego Erick Martins;;;25/03/1950;732.937.417-20;;Primeira Travessa André Luís;329;Ed. Pelourinho;Pernambués;Salvador;41130-751;5;(71)3871-0893;(71)99365-6949;diegoerickmartins@commscope.com
+2;Alícia Alessandra da Rosa;;;24/03/1987;185.841.791-00;;Rua Diamante;976;Qd. 3, Lt, 8;Santa Luzia;Contagem;32017-500;13;(31)2590-9833;(31)99857-0951;aliciaalessandradarosa@corp.globo.com
+3;Stella Simone Ferreira;;;17/12/1995;391.861.813-78;;Av Carlos Almeida de Souza;482;;Jardim Felicidade;Macapá;68909-055;3;(96)3970-0615;(96)99355-4543;stellasimoneferreira@vitaonline.com.br
+4;;Renan e Roberto Consultoria Financeira Ltda;Financeira do Renan;;;59.677.290/0001-55;Avenida Central;688;Sala 25;Jardim Brasília Sul;Luziânia;72823-260;9;(61)3602-9418;(61)98157-8879;fabricacao@renanerobertoconsultoriafinanceiraltda.com.br
+5;;João e Mariana Pizzaria ME;Pizza John;;;20.807.235/0001-05;Rua do Astronauta;608;Ed. das Empresas;Vila Amaral;Santana de Parnaíba;06528-275;25;(11)3684-1692;(11)98223-2055;pesquisa@joaoemarianapizzariame.com.br
+6;;Betina e Evelyn Transportes Ltda;Betina Transportes;;;01.858.741/0001-70;Rua E 1 A;754;;Parque das Laranjeiras;Goiânia;74855-275;9;(62)2831-1325;(62)98330-1042;contabilidade@betinaeevelyntransportesltda.com.br
